@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="81px" viewBox="0 0 60 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 3</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="125.8606%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#3F69A5" offset="0%"></stop>
+            <stop stop-color="#97B8D1" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#CFE7FD" offset="0%"></stop>
+            <stop stop-color="#A2C2E9" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="125.8606%" y2="50%" id="linearGradient-3">
+            <stop stop-color="#9D4D3F" offset="0%"></stop>
+            <stop stop-color="#EBBB6B" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="125.8606%" y2="50%" id="linearGradient-4">
+            <stop stop-color="#D3543F" offset="0%"></stop>
+            <stop stop-color="#FFD082" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="202.72662%" y2="50%" id="linearGradient-5">
+            <stop stop-color="#537AB3" offset="0%"></stop>
+            <stop stop-color="#DAEBF9" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-6">
+            <stop stop-color="#B0C4E2" offset="0%"></stop>
+            <stop stop-color="#BBD3EA" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="50%" x2="202.72662%" y2="50%" id="linearGradient-7">
+            <stop stop-color="#5785C9" offset="0%"></stop>
+            <stop stop-color="#D7ECFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="27.4313393%" y1="55.5919917%" x2="115.576612%" y2="39.5206662%" id="linearGradient-8">
+            <stop stop-color="#A9DAFC" offset="0%"></stop>
+            <stop stop-color="#DAF3EF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="设备插画" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-569.000000, -106.000000)">
+            <g id="编组-3" transform="translate(569.021964, 106.613484)">
+                <g id="编组-23备份-10" transform="translate(15.803820, 43.397358)">
+                    <path d="M2.44563125e-09,9.99904601 L27.7660461,9.99904601 L27.7660461,29.9238312 C27.7660461,33.5557489 21.5504049,36.5 13.883023,36.5 C6.21564113,36.5 0,33.5557489 0,29.9238312 L0,29.9238312 L2.44563125e-09,9.99904601 Z" id="形状结合" fill="url(#linearGradient-1)"></path>
+                    <ellipse id="椭圆形" fill="url(#linearGradient-2)" cx="13.883023" cy="6.5761688" rx="13.883023" ry="6.5761688"></ellipse>
+                </g>
+                <g id="编组-23备份" transform="translate(0.000000, 13.185013)">
+                    <path d="M5.22959454e-09,14.0621886 L59.3736853,14.0621886 L59.3736853,30.8432829 C59.3736853,38.6096153 46.0824331,44.9054716 29.6868427,44.9054716 C13.2912522,44.9054716 0,38.6096153 0,30.8432829 L0,30.8432829 L5.22959454e-09,14.0621886 Z" id="形状结合" fill="url(#linearGradient-3)"></path>
+                    <ellipse id="椭圆形" fill="url(#linearGradient-4)" cx="29.6868427" cy="14.0621886" rx="29.6868427" ry="14.0621886"></ellipse>
+                </g>
+                <g id="编组-2" transform="translate(3.325025, 0.000000)">
+                    <g id="编组-13备份-2" transform="translate(5.209952, 8.579135)">
+                        <polygon id="路径-63" fill="url(#linearGradient-5)" points="22.2082042 19.3493832 6.77169192e-13 13.6634317 6.77169192e-13 22.9457227 22.2082042 30.4208647"></polygon>
+                        <polygon id="矩形备份-30" fill="url(#linearGradient-6)" points="22.2082042 19.415073 42.0646355 3.29336076 42.0646355 11.3092316 22.2082042 30.4208647"></polygon>
+                        <polygon id="路径-64" fill="url(#linearGradient-7)" points="1.86804508e-14 13.6634317 22.2082042 19.415073 42.0646355 3.29336076 23.4417787 1.14728005e-12"></polygon>
+                    </g>
+                    <g id="编组" transform="translate(-0.000000, 0.000000)">
+                        <path d="M27.4943114,3.4987282 L49.091,7.8077282 L52.7236353,6.15065756 L52.7236353,8.57913532 L52.669,8.5787282 L27.4367828,30.0645006 L3.15544362e-30,21.9703429 L-3.73034936e-14,19.5877656 L3.546,19.5877282 L27.4943114,3.4987282 Z" id="形状结合" fill="#7AA3DE"></path>
+                        <polygon id="路径-20" fill="url(#linearGradient-8)" points="-1.93712591e-14 19.5877656 27.4367828 27.6819233 52.7236353 6.15065756 29.4387012 0"></polygon>
+                        <polygon id="路径-20备份-2" fill="#1354A8" points="2.34406673 19.126389 27.341198 26.5008223 50.3795686 6.9408684 29.338001 1.18110109"></polygon>
+                        <polygon id="矩形备份" fill="#789DCD" transform="translate(19.948749, 18.879127) rotate(-74.000000) translate(-19.948749, -18.879127) " points="19.4193535 5.87891189 20.4196715 6.70814327 20.4813167 31.8793414 19.4161808 31.1737104"></polygon>
+                        <polygon id="矩形备份-5" fill="#789DCD" transform="translate(27.212755, 13.407998) rotate(-130.000000) translate(-27.212755, -13.407998) " points="27.2117026 -1.62276172 28.3995195 -2.38896239 27.1090795 28.4538573 26.0259907 29.2049575"></polygon>
+                        <polygon id="矩形备份-2" fill="#789DCD" transform="translate(25.492483, 14.606789) rotate(-74.000000) translate(-25.492483, -14.606789) " points="24.9571287 2.18385566 25.9389951 3.01093971 26.0278365 27.0297222 24.9757952 26.3605944"></polygon>
+                        <polygon id="矩形备份-3" fill="#789DCD" transform="translate(30.960903, 10.582941) rotate(-74.000000) translate(-30.960903, -10.582941) " points="30.42399 -1.53702409 31.4058565 -0.70994004 31.4978169 22.7029055 30.4443151 22.0084163"></polygon>
+                        <polygon id="矩形备份-4" fill="#789DCD" transform="translate(36.471028, 6.498507) rotate(-74.000000) translate(-36.471028, -6.498507) " points="35.9388087 -5.07687676 36.9206751 -4.24979271 37.0032467 18.0738901 35.9561326 17.361047"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

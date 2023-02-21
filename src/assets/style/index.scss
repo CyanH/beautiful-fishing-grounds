@@ -1,0 +1,74 @@
+html {
+  font-family: 'Source Han Sans';
+  color: #fff;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mars3d-contextmenu-ul > li > a {
+  font-size: 14px;
+}
+
+.mars3d-tooltip {
+  font-size: 14px;
+}
+
+.num {
+  font-family: 'DIN';
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('http://14.23.111.138:92/lfsc/assets/DINCond-Bold.otf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans';
+  src: url('http://14.23.111.138:92/lfsc/assets/SourceHanSansCN-Normal.otf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PingFangSC';
+  src: url('http://14.23.111.138:92/lfsc/assets/PingFang Bold.ttf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PuHuiTi';
+  src: url('http://14.23.111.138:92/lfsc/assets/Alibaba-PuHuiTi-Bold.ttf');
+  font-weight: 800;
+  font-style: normal;
+}
