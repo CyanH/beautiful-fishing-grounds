@@ -1,27 +1,21 @@
 ﻿{
   "map3d": {
-    "templateValues": {
-      "dataServer": "//data.mars3d.cn",
-      "gltfServerUrl": "//data.mars3d.cn/gltf"
-    },
     "scene": {
-      "center": { "lat": 22.981109, "lng": 112.605718, "alt": 6297.5, "heading": 2.6, "pitch": -65.9 },
+      "center": { "lat": 22.072426, "lng": 112.322334, "alt": 117693.8, "heading": 5, "pitch": -46.9 },
       "scene3DOnly": false,
       "shadows": false,
       "removeDblClick": true,
-      "sceneMode": 3,
-      "showSun": true,
-      "showMoon": true,
-      "showSkyBox": true,
-      "showSkyAtmosphere": true,
-      "fog": true,
-      "fxaa": true,
+
+      "showMoon": false,
+      "showSkyBox": false,
+      "showSkyAtmosphere": false,
+      "fog": false,
+      "fxaa": false,
+      "orderIndependentTranslucency": false,
       "globe": {
-        "depthTestAgainstTerrain": false,
-        "baseColor": "#546a53",
-        "showGroundAtmosphere": true,
-        "enableLighting": false
+        "show": false
       },
+      "contextOptions": { "webgl": { "alpha": true } },
       "cameraController": {
         "zoomFactor": 3.0,
         "minimumZoomDistance": 1,
@@ -53,25 +47,6 @@
       "distanceLegend": false,
       "locationBar": false
     },
-    "terrain": {
-      "url": "//data.mars3d.cn/terrain",
-      "show": true
-    },
-    "basemaps": [
-      { "id": 10, "name": "地图底图", "type": "group" },
-      {
-        "id": 2021,
-        "pid": 10,
-        "name": "天地图影像",
-        "icon": "img/basemaps/tdt_img.png",
-        "type": "group",
-        "layers": [
-          { "name": "底图", "type": "tdt", "layer": "img_d", "key": ["11160a2dd1bfffbf4740d1f44d920aff"] },
-          { "name": "注记", "type": "tdt", "layer": "img_z", "key": ["11160a2dd1bfffbf4740d1f44d920aff"] }
-        ],
-        "show": true
-      }
-    ],
-    "layers": [{ "id": 20, "name": "辅助图层", "type": "group" }]
+    "basemaps": []
   }
 }

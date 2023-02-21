@@ -33,8 +33,6 @@ const initMap = async () => {
     commonStore.setMap(rawMap);
   });
 };
-
-
 </script>
 
 <style lang="scss" scoped>

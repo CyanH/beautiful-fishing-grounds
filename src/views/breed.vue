@@ -1,5 +1,6 @@
 <template>
-  <data-bar></data-bar>
+  <left-drawer />
+  <!-- <data-bar></data-bar> -->
   <map-view></map-view>
 
   <component :is="currentComponent"></component>
@@ -12,6 +13,8 @@ import mapView from './breed/map.vue';
 import emitter from '@/utils/eventbus';
 import { defineAsyncComponent, markRaw, onUnmounted, ref } from 'vue';
 
+
+const leftDrawer = markRaw(defineAsyncComponent(() => import('./breed/leftDrawer.vue')));
 const rightDrawer = markRaw(defineAsyncComponent(() => import('./breed/rightDrawer.vue')));
 const baseDrawer = markRaw(defineAsyncComponent(() => import('./breed/baseDrawer.vue')));
 const pondDrawer = markRaw(defineAsyncComponent(() => import('./breed/pondDrawer.vue')));

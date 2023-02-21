@@ -3,15 +3,16 @@
   <data-bar></data-bar>
   <component :is="currentComponent"></component>
 
-  <!-- <model-view></model-view> -->
+  <map-view></map-view>
 </template>
 
 <script setup lang="ts">
 import emitter from '@/utils/eventbus';
 import dataBar from './industrialPark/dataBar.vue';
 import { defineAsyncComponent, markRaw, onMounted, onUnmounted, ref } from 'vue';
+import mapView from './industrialPark/map.vue';
 
-const leftDrawer = markRaw(defineAsyncComponent(()=>import('./industrialPark/leftDrawer.vue')))
+const leftDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/leftDrawer.vue')));
 const allDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/allDrawer.vue')));
 const parkDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/parkDrawer.vue'))); //园区概况
 const subjectMain = markRaw(defineAsyncComponent(() => import('./industrialPark/subjectMain.vue'))); //实施主体

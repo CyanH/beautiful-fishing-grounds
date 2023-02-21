@@ -29,11 +29,49 @@
             <img src="@/assets/image/arrow.png" class="swiper-button-next img-next" />
           </div>
         </div>
+        <div class="esc">
+          <div class="esc_con">
+            <img src="@/assets/image/esc.png" alt="">
+            <div class="one1">
+              产值 <span class="num">16.2</span> (亿元)
+            </div>
+            <div class="one2 one2_all">
+              <div class="b_5">加工产量(万吨)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">5</span>
+              </div>
+            </div>
+            <div class="one3 one2_all">
+              <div class="b_5">水产冷库(个)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">4</span>
+              </div>
+            </div>
+            <div class="one4 one2_all">
+              <div class="b_5">年加工能力(万吨)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">5</span>
+              </div>
+            </div>
+            <div class="one5 one2_all">
+              <div class="b_5">仓储能力(吨/次)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">3.56</span>
+              </div>
+            </div>
+            <div class="title">二三产</div>
+          </div>
+        </div>
       </div>
 
-      <div class="middle">
+      <div class="bottom_all">
+        <div class="middle">
         <v-title title="养殖面积" />
-        <div class="flex-around" style="padding-top: 8px">
+        <div class="flex-around nr">
           <div class="box">
             <img src="@/assets/image/industrialPark/pie.png" class="pie" />
             <div class="box-content">
@@ -69,14 +107,18 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item, index) in state.breedList">
               <div class="card">
-                <div class="title">
+                <!-- <div class="title">
                   <span class="num">{{ index + 1 }}</span>
                   <span>{{ item.breedName }}</span>
-                </div>
+                </div> -->
                 <div class="content flex">
                   <img :src="item.img" style="margin-right: 10px" />
-                  <canvas :id="'qrCode' + index" width="98" height="98" style="margin-right: 10px"></canvas>
-                  <div class="desc">{{ item.note }}</div>
+                  <div class="right">
+                    <div class="titles">{{ item.breedName }}</div>
+                    <div class="desc">{{ item.note }}</div>
+                  </div>
+                  <!-- <canvas :id="'qrCode' + index" width="98" height="98" style="margin-right: 10px"></canvas>
+                  <div class="desc">{{ item.note }}</div> -->
                 </div>
               </div>
             </div>
@@ -88,6 +130,7 @@
           <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
           <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
         </div>
+      </div>
       </div>
     </v-card>
   </v-drawer>
@@ -110,7 +153,7 @@ const state = reactive({
   breedList: [
     {
       breedName: '罗氏沼虾',
-      img: getImgUrl(''),
+      img: getImgUrl('qy_1'),
       note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
     },
   ],
@@ -140,7 +183,8 @@ const clickImage = (index: number, indexs: number) => {
 
 <style lang="scss" scoped>
 .top {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  height: 455px;
   .content {
     padding-top: 12px;
     font-size: 14px;
@@ -148,13 +192,180 @@ const clickImage = (index: number, indexs: number) => {
     line-height: 18px;
     text-indent: 2em;
   }
+  .esc{
+    // height: calc(100% - 250px);
+    height: 200px;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .esc_con{
+      width: 50%;
+      // height: 100%;
+      height: 200px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        width: 100%;
+        height: 80%;
+      }
+      .one1{
+        position: absolute;
+        top: -8px;
+        font-size: 16px;
+        .num{
+          color: #ffb400;
+          font-size: 20px;
+        }
+      }
+      .one2_all{
+        position: absolute;
+        .b_5{
+          margin-bottom: 5px;
+        }
+        .xian{
+          width: 100%;
+          height: 4px;
+          background-color: aqua;
+          border-radius: 4px;
+        }
+        .num{
+          color: #ffb400;
+          font-size: 20px;
+        }
+      }
+      .one2{
+        font-size: 16px;
+        left: -90px;
+        top: 29%;
+        text-align: right;
+      }
+      .one3{
+        font-size: 16px;
+        top: 29%;
+        right: -79px;
+      }
+      .one4{
+        font-size: 16px;
+        left: -110px;
+        bottom: 6.5%;
+        text-align: right;
+      }
+      .one5{
+        font-size: 16px;
+        right: -100px;
+        bottom: 6.5%;
+      }
+      .title{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 14px;
+        color: #70f3fc;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.bottom{
+  height: 170px;
+  margin-top: 8px;
+  .swiper-container {
+    height: calc(100% - 53px);
+    margin-top: 8px;
+
+    .swiper-slide {
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      height: 100%;
+      // background: url('@/assets/image/digital/bg.png') center no-repeat;
+      // background-size: 100% 100%;
+
+      .title {
+        position: relative;
+        top: 5px;
+        left: 20px;
+        font-size: 16px;
+        .num {
+          font-size: 18px;
+          margin-right: 8px;
+        }
+      }
+
+      .content {
+        height: calc(100%);
+        padding: 5px 10px 0;
+        box-sizing: border-box;
+
+        img {
+          width: 98px;
+          height: 98px;
+          flex-shrink: 0;
+        }
+
+        .desc {
+          height: 98px;
+          font-size: 13px;
+          line-height: 1.3;
+          letter-spacing: 2px;
+          color: #fff;
+          overflow-y: auto;
+
+          &::-webkit-scrollbar {
+            width: 4px;
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #00ffcc;
+          }
+          &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.1);
+          }
+        }
+        .right{
+          width: calc(100% - 98px);
+          padding-top: 20px;
+          .titles{
+            margin-bottom: 8px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+.bottom_all{
+  width: 100%;
+  height: calc(100% - 455px);
 }
 
 .middle {
+  height: calc(100% - 180px);
+  .nr{
+    padding-top: 8px;
+    height: calc(100% - 40px);
+    width: 100%;
+  }
   .box {
     position: relative;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .pie {
-      width: 182px;
+      // width: 180px;
+      // width: 60%;
+      height: 90%;
     }
 
     .box-content {
@@ -167,7 +378,8 @@ const clickImage = (index: number, indexs: number) => {
       font-size: 12px;
 
       .num {
-        font-size: 24px;
+        // font-size: 24px;
+        font-size: 20px;
       }
     }
   }
