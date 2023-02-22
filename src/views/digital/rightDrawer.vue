@@ -72,8 +72,8 @@
             <img class="img" :src="getImgUrl(item.icon)" alt="">
             <div class="right">
               <div class="top">{{ item.name }}</div>
-              <div class="num">
-                <span class="wd">{{ item.value }}</span>
+              <div class="nums">
+                <span class="wd num">{{ item.value }}</span>
                 <span class="dw">{{ item.unit }}</span>
               </div>
             </div>
@@ -216,7 +216,7 @@ const state = reactive({
       icon: 'gz',
       name: '光照',
       value: 64.5,
-      unit: 'lx',
+      unit: 'lux',
       k: [
         {
           flag: true
@@ -608,13 +608,14 @@ const getImgUrl = (url: string) => {
           color: rgba(255,255,255,0.8);
           margin-bottom: 4px;
         } 
-        .num{
+        .nums{
           color: #70F3FC;
-          font-family: DIN;
+          
           font-weight: bold;
           .wd{
             font-size: 32px;
             margin-right: 4px;
+            font-family: DIN;
           }
           .dw{
             font-size: 14px;
