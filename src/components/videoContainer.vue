@@ -98,8 +98,20 @@ const deviceSerial = ref('');
 
 const getVideo = (token: string, url: string, code: string) => {
   let dom = videoEle.value as HTMLDivElement;
-  offset.width = dom.offsetWidth;
-  offset.height = dom.offsetHeight;
+  let width = 0;
+  let height = 0;
+  if(dom.offsetWidth && dom.offsetHeight){
+    width = dom.offsetWidth
+    height = dom.offsetHeight;
+    offset.width = dom.offsetWidth;
+    offset.height = dom.offsetHeight;
+  }else{
+    width = offset.width
+    height = offset.height
+  }
+  
+  console.log(dom);
+  
   deviceSerial.value = code;
   if (dom) {
     player = new EZUIKit.EZUIKitPlayer({
@@ -108,6 +120,8 @@ const getVideo = (token: string, url: string, code: string) => {
       url: url,
       width: dom.offsetWidth,
       height: dom.offsetHeight,
+      // width: width,
+      // height: height,
     });
   }
 };

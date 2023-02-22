@@ -6,7 +6,7 @@ export function loadXmChart(myChart: echarts.ECharts,data: any) {
     series: [
         {
             type: 'liquidFill', //水位图
-            radius: '70%', //显示比例
+            radius: '80%', //显示比例
             center: ['50%', '50%'], //中心点
             amplitude: 5, //水波振幅
             data: [data / 100], // data个数代表波浪数

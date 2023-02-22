@@ -376,8 +376,8 @@ const createQrCode = () => {
     width: 100%;
     height: 150px;
     position: relative;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     .swiper-container {
       height: 100%;
       .swiper-slide {
@@ -440,8 +440,8 @@ const createQrCode = () => {
   }
   .zhwl{
     width: 100%;
-    height: calc(100% - 208px);
-    padding-top: 8px;
+    height: calc(100% - 238px);
+    padding-top: 16px;
     .zhwl_top{
       width: 100%;
       height: 50px;

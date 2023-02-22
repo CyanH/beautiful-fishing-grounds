@@ -9,7 +9,7 @@
           <div class="flex" v-show="!hasPlayer" style="height: 100%">
             <div class="noVideo">
               <img src="@/assets/image/noVideo.png" />
-              <div class="text">暂无视频1</div>
+              <div class="text">暂无视频</div>
             </div>
           </div>
 
@@ -89,25 +89,40 @@
       </div>
       <v-title title="智能养殖分布" />
       <div class="zdyz">
-        <div class="zdyz_left"></div>
+        <div class="zdyz_left">
+          <div class="chart" ref="zdyz"></div>
+        </div>
         <div class="zdyz_right">
-          <div class="jc jc1">
-            监测点 <span class="s1">21</span> <span>个</span>
-          </div>
-          <div class="jc jc2">
-            报警 <span class="s1">5</span> <span>个</span>
+          <div class="zdyz_zhongj">
+            <div class="hang">
+              <div class="dian dian1"></div>
+              <div class="ww">监测点</div>
+              <div class="val val1">
+                <span class="s1 num">21</span>
+                <span class="s2">个</span>
+              </div>
+            </div>
+            <div class="hang">
+              <div class="dian dian2"></div>
+              <div class="ww">报警</div>
+              <div class="val val2">
+                <span class="s1 num">5</span>
+                <span class="s2">个</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </v-card>
   </v-drawer>
+
   <div class="warn">
     <img src="@/assets/image/xia.png" class="fish" />
-    <img src="@/assets/image/breed/bg.png" class="bg" />
-    <div class="title">预警信息</div>
+    <img src="@/assets/image/yj_di.png" class="bg" />
+    <div class="title">智能预警</div>
     <div class="content">
       <vue3-seamless-scroll :list="state.warnList" :step="0.3" :hover="true" :limitScrollNum="5">
-        <div v-for="(item, index) in state.warnList">
+        <div v-for="(item, index) in state.warnList" class="">
           <div class="flex">
             <img src="@/assets/image/breed/warn.png" class="tip" />
             <span class="desc">{{ item.exceptionInfo }}</span>
@@ -127,6 +142,7 @@ import { getRealTime, plantInspect, configRecords } from '@/api/breed';
 import { loadChart } from './chart/lineChart';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 import { parseTime } from '@/utils/parseTime';
+import { znyz } from './chart/znyz'
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
@@ -140,6 +156,10 @@ const gmActive = ref(0);
 const equipActive = ref(0);
 const hasPlayer = ref(false);
 const videoEle = ref<HTMLDivElement | null>(null);
+
+let myChar_zdyz: echarts.ECharts;
+let zdyz = ref<HTMLDivElement | null>(null);
+
 const state = reactive({
   yzgmTotal: 0,
   yzgmList: [] as any[],
@@ -178,8 +198,8 @@ onMounted(() => {
   nextTick(() => {
     new Swiper('.breed-swiper-right', {
       navigation: {
-        nextEl: '.breed-next-right',
-        prevEl: '.breed-prev-right',
+        nextEl: '.breed-next',
+        prevEl: '.breed-prev',
         hideOnClick: true,
       },
       autoplay: {
@@ -198,6 +218,11 @@ onMounted(() => {
   // });
 
   getData();
+  myChar_zdyz = echarts.init(zdyz.value as HTMLDivElement);
+  window.addEventListener('resize', () => {
+    myChar_zdyz.resize();
+  });
+  znyz(myChar_zdyz)
 });
 
 const getData = () => {
@@ -302,9 +327,12 @@ const getData = () => {
   //   state.waterData = arr;
   // });
 
-  // getRealTime().then((res: any) => {
-  //   state.videoData = res.content;
-  // });
+  getRealTime().then((res: any) => {
+    state.videoData = res.content;
+    nextTick(() => {
+      setVideo(state.videoData[state.chooseIndex]);
+    });
+  });
 
   // plantInspect().then((res: any) => {
   //   state.list = res.content;
@@ -602,37 +630,7 @@ onUnmounted(() => {
     }
   }
 
-  .video-container {
-    width: 100%;
-    height: 100%;
-    padding: 0 25px 10px;
-    box-sizing: border-box;
-    position: relative;
-
-    .video-name {
-      position: absolute;
-      left: 25px;
-      bottom: 10px;
-      z-index: 9;
-      font-size: 16px;
-      padding: 6px 12px;
-      background: rgba(17, 16, 45, 0.6);
-    }
-
-    .noVideo {
-      width: 100%;
-      img {
-        width: 60%;
-        margin: auto;
-      }
-
-      .text {
-        color: #b9b9b9;
-        text-align: center;
-        font-size: 14px;
-      }
-    }
-  }
+  
 }
 
 .bottom {
@@ -699,10 +697,12 @@ onUnmounted(() => {
   bottom: 150px;
   z-index: 10;
   .fish {
-    width: 80px;
+    // width: 80px;
+    height: 80px;
     position: absolute;
-    bottom: -50px;
-    left: -5px;
+    bottom: -40px;
+    left: 0px;
+    transform: rotateY(180deg);
   }
 
   .bg {
@@ -722,9 +722,8 @@ onUnmounted(() => {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 85%;
-    height: 68%;
     overflow-y: hidden;
-
+    height: 70px;
     .tip {
       width: 26px;
       margin-right: 15px;
@@ -750,7 +749,39 @@ onUnmounted(() => {
 
 .video{
   width: 100%;
-  height: 20%;
+  height: 25%;
+  .video-container {
+    width: 100%;
+    height: calc(100% - 8px);
+    // padding: 0 25px 10px;
+    padding: 0px 20px;
+    padding-top: 8px;
+    box-sizing: border-box;
+    position: relative;
+    .video-name {
+      position: absolute;
+      left: 25px;
+      bottom: 10px;
+      z-index: 9;
+      font-size: 16px;
+      padding: 6px 12px;
+      background: rgba(17, 16, 45, 0.6);
+    }
+
+    .noVideo {
+      width: 100%;
+      img {
+        width: 60%;
+        margin: auto;
+      }
+
+      .text {
+        color: #b9b9b9;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+  }
 }
 .yzjs{
   height: 170px;
@@ -801,7 +832,7 @@ onUnmounted(() => {
 .xbyf{
   width: 100%;
   height: 190px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   .swiper-container {
     height: 100%;
     margin-top: 8px;
@@ -896,37 +927,62 @@ onUnmounted(() => {
 }
 .zdyz{
   width: 100%;
-  height: calc(80% - 480px);
+  height: calc(75% - 488px);
   display: flex;
   padding-top: 10px;
   .zdyz_left{
     width: 60%;
     height: 100%;
+    .chart{
+      width: 100%;
+      height: 100%;
+    }
   }
   .zdyz_right{
     width: 40%;
     height: calc(100% - 12px);
-    .jc{
+    display: flex;
+    align-items: center;
+    .zdyz_zhongj{
       width: 100%;
       height: 50%;
-      display: flex;
-      justify-content: center;
-      font-size: 18px;
-      span{
-        color: #00f6ff;
+      .hang{
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        padding-left: 8px;
+        font-size: 16px;
+        .ww{
+          width: 70px;
+        }
+        .val{
+          // margin-left: 8px;
+          .s1{
+            font-size: 24px;
+            margin-right: 6px;
+          }
+        }
+        .val1{
+          color: #70f3fc;
+        }
+        .val2{
+          color: #70f3fc;
+        }
+        .dian{
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          margin-right: 16px;
+        }
+        .dian1{
+          background-color: #197dc7;
+        }
+        .dian2{
+          background-color: #c65e25;
+        }
       }
-      .s1{
-        font-size: 24px;
-        margin-left: 8px;
-        margin-right: 8px;
-      }
-    }
-    .jc1{
-      align-items: flex-end;
-      padding-bottom: 12px;
-    }
-    .jc2{
-      padding-top: 12px;
     }
   }
 }

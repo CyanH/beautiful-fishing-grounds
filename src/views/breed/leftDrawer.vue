@@ -4,7 +4,7 @@
       <div class="top">
         <v-title title="养殖记录" />
         <div class="top_o1">
-          <div class="swiper-container breed-swiper">
+          <div class="swiper-container breed-swiper-yzjl">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item, index) in state.breedList">
                 <div class="card">
@@ -33,10 +33,10 @@
             </div>
 
             <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-prev" />
+            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-yzjl-prev" />
 
             <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
+            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-yzjl-next" />
           </div>
         </div>
       </div>
@@ -176,10 +176,10 @@ const state = reactive({
 
 onMounted(() => {
   nextTick(() => {
-    new Swiper('.breed-swiper', {
+    new Swiper('.breed-swiper-yzjl', {
       navigation: {
-        nextEl: '.img-next',
-        prevEl: '.img-prev',
+        nextEl: '.breed-yzjl-prev',
+        prevEl: '.breed-yzjl-prev',
         hideOnClick: true,
       },
       autoplay: {
