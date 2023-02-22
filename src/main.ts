@@ -19,6 +19,7 @@ import SvgIcon from './components/SvgIcon.vue';
 import DrawerView from './components/DrawerView.vue';
 import CardView from './components/CardView.vue';
 import CardTitle from './components/CardTitle.vue';
+import VideoContainer from './components/VideoContainer.vue';
 
 if (process.env.NODE_ENV === 'production') {
   document.oncontextmenu = (event) => {
@@ -47,4 +48,5 @@ app.component('svg-icon', SvgIcon);
 app.component('v-drawer', DrawerView);
 app.component('v-card', CardView);
 app.component('v-title', CardTitle);
+app.component('video-container', VideoContainer);
 app.mount('#app');
