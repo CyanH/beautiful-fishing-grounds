@@ -1,20 +1,9 @@
 <template>
   <v-drawer direction="right" hasArrow>
     <v-card>
-      <v-title title="养殖环境" />
-      <div class="flex container">
-        <div v-for="item in state.weatherData" class="bar flex">
-          <img :src="getImgUrl(item.icon)" class="icon" />
-          <div>
-            <div class="name">{{ item.name }}</div>
-            <div style="padding-top: 6px">
-              <span class="num">{{ item.value }}</span>
-              <span class="unit">{{ item.unit }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <v-title title="气象监测" />
+      <div>预警等级</div>
+      <div class="lineBox"></div>
       <v-title title="水质环境" />
       <div class="flex container">
         <div v-for="item in state.waterData" class="bar flex">
