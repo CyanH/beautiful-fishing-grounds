@@ -14,8 +14,7 @@ const commonStore = useCommonStore();
 onMounted(() => {
   mars3d.Util.fetchJson({ url: 'config/breedConfig.json' }).then((data: any) => {
     commonStore.map?.setOptions(data.map3d);
-    commonStore.map!.basemap;
-    window.map = commonStore.map;
+    commonStore.map!.basemap = 2021;
     createLayer();
   });
 });

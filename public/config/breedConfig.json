@@ -17,11 +17,13 @@
       "fog": true,
       "fxaa": true,
       "globe": {
+        "show": true,
         "depthTestAgainstTerrain": false,
         "baseColor": "#546a53",
         "showGroundAtmosphere": true,
         "enableLighting": false
       },
+      "contextOptions": { "webgl": { "alpha": false } },
       "cameraController": {
         "zoomFactor": 3.0,
         "minimumZoomDistance": 1,

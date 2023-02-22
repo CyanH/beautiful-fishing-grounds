@@ -18,8 +18,6 @@ const parkDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/p
 const subjectMain = markRaw(defineAsyncComponent(() => import('./industrialPark/subjectMain.vue'))); //实施主体
 const breedBaseMain = markRaw(defineAsyncComponent(() => import('./industrialPark/breedBaseMain.vue'))); //养殖基地
 const projectMain = markRaw(defineAsyncComponent(() => import('./industrialPark/projectMain.vue'))); //养殖基地
-const farmMain = markRaw(defineAsyncComponent(() => import('./industrialPark/farmMain.vue'))); //联农带农
-const eventDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/eventDrawer.vue'))); //园区大事记
 const overallDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/overallDrawer.vue')));
 const subjectDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/subjectDrawer.vue')));
 const breedBase = markRaw(defineAsyncComponent(() => import('./industrialPark/breedBaseDrawer.vue')));
@@ -28,16 +26,12 @@ let currentComponent = ref(allDrawer);
 
 onMounted(() => {
   emitter.on('setRightDrawer', (name) => {
-    if (name === 'event') {
-      currentComponent.value = eventDrawer;
-    } else if (name === 'subjectMain') {
+    if (name === 'subjectMain') {
       currentComponent.value = subjectMain;
     } else if (name === 'breedBaseMain') {
       currentComponent.value = breedBaseMain;
     } else if (name === 'projectMain') {
       currentComponent.value = projectMain;
-    } else if (name === 'farmMain') {
-      currentComponent.value = farmMain;
     } else if (name === 'overall') {
       currentComponent.value = overallDrawer;
     } else if (name === 'subject') {
