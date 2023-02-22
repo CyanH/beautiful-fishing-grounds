@@ -9,7 +9,7 @@
           <div class="flex" v-show="!hasPlayer" style="height: 100%">
             <div class="noVideo">
               <img src="@/assets/image/noVideo.png" />
-              <div class="text">暂无视频</div>
+              <div class="text">暂无视频1</div>
             </div>
           </div>
 
