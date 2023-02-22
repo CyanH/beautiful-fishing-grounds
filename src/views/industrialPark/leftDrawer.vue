@@ -31,10 +31,8 @@
         </div>
         <div class="esc">
           <div class="esc_con">
-            <img src="@/assets/image/esc.png" alt="">
-            <div class="one1">
-              产值 <span class="num">16.2</span> (亿元)
-            </div>
+            <img src="@/assets/image/industrialPark/esc.png" alt="" />
+            <div class="one1">产值 <span class="num">16.2</span> (亿元)</div>
             <div class="one2 one2_all">
               <div class="b_5">加工产量(万吨)</div>
               <div class="xian"></div>
@@ -70,67 +68,61 @@
 
       <div class="bottom_all">
         <div class="middle">
-        <v-title title="养殖面积" />
-        <div class="flex-around nr">
-          <div class="box">
-            <img src="@/assets/image/industrialPark/pie.png" class="pie" />
-            <div class="box-content">
-              <div class="num">9960</div>
-              <div>总面积</div>
+          <v-title title="养殖面积" />
+          <div class="flex-around nr">
+            <div class="box">
+              <img src="@/assets/image/industrialPark/pie.png" class="pie" />
+              <div class="box-content">
+                <div class="num">9960</div>
+                <div>总面积</div>
+              </div>
             </div>
-          </div>
-          <div>
-            <div class="flex" style="margin-bottom: 15px">
-              <span class="icon" style="background-color: #30d8fb" />
+            <div>
+              <div class="flex" style="margin-bottom: 15px">
+                <span class="icon" style="background-color: #30d8fb" />
 
-              <div class="name">白土镇</div>
-              <div class="value"><span class="num">7185</span><span style="margin-left: 3px">亩</span></div>
-            </div>
-            <div class="flex" style="margin-bottom: 15px">
-              <span class="icon" style="background-color: #1ae496" />
+                <div class="name">白土镇</div>
+                <div class="value"><span class="num">7185</span><span style="margin-left: 3px">亩</span></div>
+              </div>
+              <div class="flex" style="margin-bottom: 15px">
+                <span class="icon" style="background-color: #1ae496" />
 
-              <div class="name">莲塘镇</div>
-              <div class="value"><span class="num">1425</span><span style="margin-left: 3px">亩</span></div>
-            </div>
-            <div class="flex">
-              <span class="icon" style="background-color: #ff5e6a" />
-              <div class="name">蛟塘镇</div>
-              <div class="value"><span class="num">1350</span><span style="margin-left: 3px">亩</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom">
-        <v-title title="养殖品种" />
-        <div class="swiper-container breed-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(item, index) in state.breedList">
-              <div class="card">
-                <!-- <div class="title">
-                  <span class="num">{{ index + 1 }}</span>
-                  <span>{{ item.breedName }}</span>
-                </div> -->
-                <div class="content flex">
-                  <img :src="item.img" style="margin-right: 10px" />
-                  <div class="right">
-                    <div class="titles">{{ item.breedName }}</div>
-                    <div class="desc">{{ item.note }}</div>
-                  </div>
-                  <!-- <canvas :id="'qrCode' + index" width="98" height="98" style="margin-right: 10px"></canvas>
-                  <div class="desc">{{ item.note }}</div> -->
-                </div>
+                <div class="name">莲塘镇</div>
+                <div class="value"><span class="num">1425</span><span style="margin-left: 3px">亩</span></div>
+              </div>
+              <div class="flex">
+                <span class="icon" style="background-color: #ff5e6a" />
+                <div class="name">蛟塘镇</div>
+                <div class="value"><span class="num">1350</span><span style="margin-left: 3px">亩</span></div>
               </div>
             </div>
           </div>
-
-          <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-          <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-prev" />
-
-          <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-          <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
         </div>
-      </div>
+
+        <div class="bottom">
+          <v-title title="养殖品种" />
+          <div class="swiper-container breed-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="item in state.breedList">
+                <div class="card">
+                  <div class="content flex">
+                    <img :src="item.img" style="margin-right: 10px" />
+                    <div class="right">
+                      <div class="titles">{{ item.breedName }}</div>
+                      <div class="desc">{{ item.note }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-prev" />
+
+            <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
+            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
+          </div>
+        </div>
       </div>
     </v-card>
   </v-drawer>
@@ -153,7 +145,7 @@ const state = reactive({
   breedList: [
     {
       breedName: '罗氏沼虾',
-      img: getImgUrl('qy_1'),
+      img: getImgUrl('lszx'),
       note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
     },
   ],
@@ -192,14 +184,14 @@ const clickImage = (index: number, indexs: number) => {
     line-height: 18px;
     text-indent: 2em;
   }
-  .esc{
+  .esc {
     // height: calc(100% - 250px);
     height: 200px;
     margin-top: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    .esc_con{
+    .esc_con {
       width: 50%;
       // height: 100%;
       height: 200px;
@@ -207,62 +199,62 @@ const clickImage = (index: number, indexs: number) => {
       display: flex;
       align-items: center;
       justify-content: center;
-      img{
+      img {
         width: 100%;
         height: 80%;
       }
-      .one1{
+      .one1 {
         position: absolute;
         top: -8px;
         font-size: 16px;
-        .num{
+        .num {
           color: #ffb400;
           font-size: 20px;
         }
       }
-      .one2_all{
+      .one2_all {
         position: absolute;
-        .b_5{
+        .b_5 {
           margin-bottom: 5px;
         }
-        .xian{
+        .xian {
           width: 100%;
           height: 4px;
           background-color: aqua;
           border-radius: 4px;
         }
-        .num{
+        .num {
           color: #ffb400;
           font-size: 20px;
         }
       }
-      .one2{
+      .one2 {
         font-size: 16px;
         left: -90px;
         top: 29%;
         text-align: right;
       }
-      .one3{
+      .one3 {
         font-size: 16px;
         top: 29%;
         right: -79px;
       }
-      .one4{
+      .one4 {
         font-size: 16px;
         left: -110px;
         bottom: 6.5%;
         text-align: right;
       }
-      .one5{
+      .one5 {
         font-size: 16px;
         right: -100px;
         bottom: 6.5%;
       }
-      .title{
+      .title {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         font-size: 14px;
         color: #70f3fc;
         font-weight: bold;
@@ -270,7 +262,7 @@ const clickImage = (index: number, indexs: number) => {
     }
   }
 }
-.bottom{
+.bottom {
   height: 170px;
   margin-top: 8px;
   .swiper-container {
@@ -331,10 +323,10 @@ const clickImage = (index: number, indexs: number) => {
             background: rgba(0, 0, 0, 0.1);
           }
         }
-        .right{
+        .right {
           width: calc(100% - 98px);
           padding-top: 20px;
-          .titles{
+          .titles {
             margin-bottom: 8px;
             font-size: 16px;
           }
@@ -343,14 +335,14 @@ const clickImage = (index: number, indexs: number) => {
     }
   }
 }
-.bottom_all{
+.bottom_all {
   width: 100%;
   height: calc(100% - 455px);
 }
 
 .middle {
   height: calc(100% - 180px);
-  .nr{
+  .nr {
     padding-top: 8px;
     height: calc(100% - 40px);
     width: 100%;

@@ -11,11 +11,11 @@
       <div class="top">
         <v-title title="宣传视频"></v-title>
         <div class="video">
-          <video controls autoplay src="@/assets/image/xcsp.mp4"></video>
+          <video controls autoplay src="@/assets/image/industrialPark/xcsp.mp4"></video>
         </div>
         <div class="esc">
           <div class="esc_con">
-            <img src="@/assets/image/r_esc.png" alt="">
+            <img src="@/assets/image/industrialPark/r_esc.png" alt="" />
             <div class="one1 one2_all">
               <div class="b_5">产值(亿元)</div>
               <div class="xian"></div>
@@ -75,7 +75,6 @@
                   </div>
                   <div class="content flex">
                     <img :src="item.img" style="margin-right: 10px" />
-                    <canvas :id="'qrCode' + index" width="98" height="98" style="margin-right: 10px"></canvas>
                     <div class="desc">{{ item.note }}</div>
                   </div>
                 </div>
@@ -94,7 +93,9 @@
             <div class="zhwl_div" v-for="item in state.zhwl">
               <div class="name">{{ item.name }}</div>
               <div class="val">
-                <span>{{ item.value }}</span>({{ item.danwe }})</div>
+                <span>{{ item.value }}</span
+                >({{ item.danwe }})
+              </div>
             </div>
           </div>
           <div class="line"></div>
@@ -114,15 +115,10 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
-import targetView from './parkDrawer/target.vue';
-import incomeMiddle from './parkDrawer/incomeMiddle.vue';
-import productMiddle from './parkDrawer/productMiddle.vue';
-import bottomView from './parkDrawer/bottom.vue';
-import QRCode from 'qrcode';
-import { reactive,onMounted,nextTick,ref } from 'vue';
+import { reactive, onMounted, nextTick, ref } from 'vue';
 // 项目
 import { loadXmChart } from './chart/zhwlChart';
-import { RightChart } from './chart/zhwlRight'
+import { RightChart } from './chart/zhwlRight';
 // 轮播图
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
@@ -164,12 +160,12 @@ const state = reactive({
   breedList: [
     {
       breedName: '盐焗罗氏沼虾',
-      img: getImgUrl('qy_1.png'),
+      img: getImgUrl('yjlsx.webp'),
       note: '盐焗罗氏沼虾，新鲜罗氏沼虾晒干，水煮盐炯。去虾线，鲜甜美味。经过加工处理、装罐加入调味料、密封、杀菌等工艺',
     },
     {
       breedName: '油焖罗氏沼虾',
-      img: getImgUrl('qy_1.png'),
+      img: getImgUrl('ymlsx.png'),
       note: '油焖罗氏沼虾的做法简单，营养丰富，可以调理身体，促进发育，还可以防治高血压和心肌梗塞，孕产妇吃了还可以催乳，儿童吃了对抵抗力和身体发育都有很好的帮助，而且这道油焖罗氏沼虾外观红亮，味道飘香。',
     },
   ],
@@ -177,19 +173,19 @@ const state = reactive({
     {
       name: '覆盖农户',
       value: 10,
-      danwe: '家'
+      danwe: '家',
     },
     {
       name: '监测数据',
       value: 964400,
-      danwe: '条'
+      danwe: '条',
     },
     {
       name: '今日预警',
       value: 0,
-      danwe: '条'
+      danwe: '条',
     },
-  ]
+  ],
 });
 onMounted(() => {
   nextTick(() => {
@@ -209,24 +205,9 @@ onMounted(() => {
       },
     });
   });
-  createQrCode()
-})
-const createQrCode = () => {
-  state.breedList.map((res:any,index:number) => {
-    let dom = document.getElementById('qrCode' + index) as HTMLCanvasElement;
-    let text = 'https://www.gd-jintu.com/lfscservice/lfsc/scan?syjlDetailId=0';
-    QRCode.toDataURL(text, {
-      errorCorrectionLevel: 'H',
-      width: 98,
-    }).then((url: string) => {
-      const ctx = dom.getContext('2d') as CanvasRenderingContext2D;
-      const image = new Image();
-      image.src = url;
-      setTimeout(() => {
-        ctx.drawImage(image, 0, 0, 98, 98);
-      }, 100);
-    });
-  })
+  createChart();
+});
+const createChart = () => {
   // 项目进度
   myChar_xm = echarts.init(chartEle_xm.value as HTMLDivElement);
   myChar_right = echarts.init(chartEle_right.value as HTMLDivElement);
@@ -236,8 +217,7 @@ const createQrCode = () => {
   });
   loadXmChart(myChar_xm, 77);
   RightChart(myChar_right);
-}
-
+};
 </script>
 
 <style lang="scss" scoped>
@@ -274,28 +254,29 @@ const createQrCode = () => {
     margin-right: 15px;
   }
 }
-.top{
+.top {
   width: 100%;
   height: calc(49% - 24px);
   padding-bottom: 24px;
-  .video{
+  .video {
     width: 100%;
     height: calc(100% - 212px);
     margin-top: 8px;
     text-align: center;
-    video{
+    video {
       width: 100%;
       height: 100%;
+      object-fit: fill;
     }
   }
-  .esc{
+  .esc {
     // height: calc(100% - 250px);
     height: 200px;
     // margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    .esc_con{
+    .esc_con {
       width: 50%;
       // height: 100%;
       height: 200px;
@@ -303,65 +284,65 @@ const createQrCode = () => {
       display: flex;
       align-items: center;
       justify-content: center;
-      img{
+      img {
         width: 100%;
         height: 80%;
       }
-      .one1{
+      .one1 {
         font-size: 16px;
         left: -70px;
         top: 14px;
         text-align: right;
       }
-      .one2{
+      .one2 {
         font-size: 16px;
         right: -105px;
         top: 13px;
       }
-      .one3{
+      .one3 {
         font-size: 16px;
         left: -70px;
         top: 38%;
         text-align: right;
       }
-      .one4{
+      .one4 {
         font-size: 16px;
         right: -90px;
         top: 37.5%;
       }
-      .one5{
+      .one5 {
         font-size: 16px;
         left: -85px;
         bottom: 13px;
         text-align: right;
       }
-      .one6{
+      .one6 {
         font-size: 16px;
         right: -105px;
         bottom: 13px;
       }
-      .one2_all{
+      .one2_all {
         position: absolute;
-        .b_5{
+        .b_5 {
           margin-bottom: 5px;
         }
-        .xian{
+        .xian {
           width: 100%;
           height: 4px;
           background-color: aqua;
           border-radius: 4px;
         }
-        .num{
+        .num {
           color: #ffb400;
           font-size: 20px;
         }
       }
-      
-      .title{
+
+      .title {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         font-size: 14px;
         color: #70f3fc;
         font-weight: bold;
@@ -369,7 +350,7 @@ const createQrCode = () => {
     }
   }
 }
-.bottom{
+.bottom {
   width: 100%;
   height: 51%;
   .chanping {
@@ -438,7 +419,7 @@ const createQrCode = () => {
       }
     }
   }
-  .zhwl{
+  .zhwl {
     width: 100%;
     height: calc(100% - 238px);
     padding-top: 16px;
@@ -448,41 +429,40 @@ const createQrCode = () => {
       display: flex;
       align-items: center;
       justify-content: center;
-      .zhwl_div{
+      .zhwl_div {
         width: 33%;
         height: 50px;
         text-align: center;
-        .name{
+        .name {
           font-size: 16px;
           margin-bottom: 4px;
         }
-        .val{
+        .val {
           font-size: 12px;
           color: #00f6ff;
-          span{
+          span {
             font-size: 20px;
             padding-right: 4px;
-            
           }
         }
       }
     }
-    .zhwl_bottom{
+    .zhwl_bottom {
       width: 100%;
       height: calc(100% - 75px);
       display: flex;
-      .left{
+      .left {
         width: 60%;
         height: 100%;
-        .chart{
+        .chart {
           width: 100%;
           height: 100%;
         }
       }
-      .right{
+      .right {
         width: 40%;
         height: 100%;
-        .chart{
+        .chart {
           width: 100%;
           height: 100%;
         }
