@@ -7,30 +7,33 @@ import { onMounted, onUnmounted } from 'vue';
 import mapImg from '@/assets/image/industrialPark/map.png';
 
 const commonStore = useCommonStore();
+const graphicLayer = new mars3d.layer.GraphicLayer();
+let wall: mars3d.layer.GeoJsonLayer;
+let lineLayer: mars3d.layer.GeoJsonLayer;
 
 onMounted(() => {
-  createLayer();
+  mars3d.Util.fetchJson({ url: 'config/config.json' }).then((data: any) => {
+    commonStore.map?.setOptions(data.map3d);
+    createLayer();
+  });
 });
 
 //初始化地图
 const createLayer = () => {
-  //基地
-
   // 添加对象
   addAnhui();
 };
 
 onUnmounted(() => {
-  //   commonStore.map?.removeLayer(graphicLayer);
+  commonStore.map?.removeLayer(graphicLayer);
+  commonStore.map?.removeLayer(wall);
+  commonStore.map?.removeLayer(lineLayer);
 });
 
 const diffHeight = 2000;
 function addAnhui() {
-  const graphicLayer = new mars3d.layer.GraphicLayer({
-    zIndex: 1,
-  });
   // 安徽省卫星底图
-  const anhuiImg = new mars3d.graphic.RectanglePrimitive({
+  const imageGraphic = new mars3d.graphic.RectanglePrimitive({
     positions: [
       [112.18035, 22.77240718],
       [112.82898324999999, 23.43693033],
@@ -43,10 +46,10 @@ function addAnhui() {
       },
     },
   });
-  graphicLayer.addGraphic(anhuiImg);
+  graphicLayer.addGraphic(imageGraphic);
   commonStore.map?.addLayer(graphicLayer);
 
-  const anhuiWall = new mars3d.layer.GeoJsonLayer({
+  wall = new mars3d.layer.GeoJsonLayer({
     name: '安徽省边界墙',
     url: 'data/441283.json',
     symbol: {
@@ -60,9 +63,9 @@ function addAnhui() {
       },
     },
   });
-  commonStore.map?.addLayer(anhuiWall);
+  commonStore.map?.addLayer(wall);
 
-  const shiLayer = new mars3d.layer.GeoJsonLayer({
+  lineLayer = new mars3d.layer.GeoJsonLayer({
     name: '高要区边界线',
     url: 'data/cityName.json',
     zIndex: 9,
@@ -92,7 +95,7 @@ function addAnhui() {
       styleField: 'name',
     },
   });
-  commonStore.map?.addLayer(shiLayer);
+  commonStore.map?.addLayer(lineLayer);
 }
 </script>
 

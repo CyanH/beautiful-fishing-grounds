@@ -12,7 +12,12 @@ const pondLayer = new mars3d.layer.GraphicLayer();
 const commonStore = useCommonStore();
 
 onMounted(() => {
-  createLayer();
+  mars3d.Util.fetchJson({ url: 'config/breedConfig.json' }).then((data: any) => {
+    commonStore.map?.setOptions(data.map3d);
+    commonStore.map!.basemap;
+    window.map = commonStore.map;
+    createLayer();
+  });
 });
 
 //初始化地图

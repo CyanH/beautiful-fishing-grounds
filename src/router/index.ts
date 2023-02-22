@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
+    path: '/',
+    redirect: { path: '/index' },
+  },
+  {
     path: '/index',
     name: 'index',
     component: () => import('@/views/industrialPark.vue'), //产业园一张图
