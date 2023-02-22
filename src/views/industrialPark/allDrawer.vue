@@ -407,7 +407,7 @@ const createChart = () => {
             &::-webkit-scrollbar-thumb {
               border-radius: 10px;
               box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-              background: #00ffcc;
+              background: #324686;
             }
             &::-webkit-scrollbar-track {
               box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);

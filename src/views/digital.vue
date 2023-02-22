@@ -2,6 +2,7 @@
   <video-view :form="state.form"></video-view>
   <left-drawer :form="state.form"></left-drawer>
   <component :is="currentComponent" :form="state.form"></component>
+  <img class="img_title" src="@/assets/image/qj/title.png" alt="">
 </template>
 
 <script setup lang="ts">
@@ -42,3 +43,11 @@ onUnmounted(() => {
   resetDrawerShow();
 });
 </script>
+<style scoped lang="scss">
+.img_title{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translate(-50%,-50%);
+}
+</style>

@@ -5,7 +5,7 @@
       <router-view />
     </div>
     <div id="marsMap" class="mars3d-container" v-show="route.path !== '/digital'"></div>
-    <footer-view />
+    <!-- <footer-view /> -->
   </div>
 </template>
 

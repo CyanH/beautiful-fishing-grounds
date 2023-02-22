@@ -1,5 +1,16 @@
 <template>
   <div class="header">
+    <div class="dhl">
+      <div 
+        class="chooseList" 
+        v-for="item,index in chooseList" 
+        :key="index"
+        @click="handleChoose(item, index)"
+        :class="['chooseList',chooseIndex === index ? 'chooseList_true' : 'chooseList_false']"
+      >
+        {{ item.name }}
+      </div>
+    </div>
     <div class="date">
       <span class="mr">{{ date }}</span>
       <span class="mr">{{ week }}</span>
@@ -14,12 +25,44 @@
 import { onMounted, ref } from 'vue';
 import { parseTime } from '@/utils/parseTime';
 import { getWeather } from '@/api/common';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const date = ref(parseTime(new Date(), '{y}年{m}月{d}日'));
 const week = ref(parseTime(new Date(), '{a}'));
 const time = ref(parseTime(new Date(), '{h}:{m}:{s}'));
 const weather = ref('');
 const degree = ref(25);
+
+const chooseList = [
+  {
+    icon: 'cyyq',
+    name: '产业园区',
+    url: '/index',
+    bg: 'cyyq_not',
+    chooseBg: 'cyyq_c',
+  },
+  {
+    icon: 'zhyz',
+    name: '智慧养殖',
+    url: '/breed',
+    bg: 'zhyz_not',
+    chooseBg: 'zhyz_c',
+  },
+  {
+    icon: 'szsw',
+    name: '数字塘口',
+    url: '/digital',
+    bg: 'szsw_not',
+    chooseBg: 'szsw_c',
+  },
+];
+let chooseIndex = ref(0);
+const handleChoose = (item: any, index: number) => {
+  chooseIndex.value = index;
+  router.push(item.url);
+};
 
 onMounted(() => {
   setInterval(() => {
@@ -48,6 +91,38 @@ onMounted(() => {
   background-size: 100% 100%;
   margin: auto;
   z-index: 9;
+  // 导航栏
+  .dhl{
+    position: absolute;
+    top: 39px;
+    transform: translateY(-50%);
+    left: 0.5%;
+    display: flex;
+    .chooseList{
+      width: 122px;
+      opacity: 0.8;
+      border-radius: 0px 0px 20px 0px;
+      margin-right: 4px;
+      text-align: center;
+      font-size: 16px;
+      color: #E7EEFD;
+      cursor: pointer;
+    }
+    .chooseList_false{
+      height: 46px;
+      line-height: 46px;
+      background-image: linear-gradient(90deg, rgba(0,15,64,0.1) 10%, #0840A6 90%);
+      font-family: Source Han Sans CN;
+      font-weight: 400;
+    }
+    .chooseList_true{
+      height: 52px;
+      line-height: 52px;
+      background: linear-gradient(90deg, rgba(2,21,82,0.1) 10%, #0D62FF 90%);
+      font-family: Source Han Sans CN;
+      font-weight: 800;
+    }
+  }
   .date {
     position: absolute;
     top: 35px;
