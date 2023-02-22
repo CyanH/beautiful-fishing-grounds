@@ -4,7 +4,7 @@
     <div class="content">
       <router-view />
     </div>
-    <div id="marsMap" class="mars3d-container"></div>
+    <div id="marsMap" class="mars3d-container" v-show="route.path !== '/digital'"></div>
     <footer-view />
   </div>
 </template>
@@ -15,10 +15,12 @@ import { defineAsyncComponent, markRaw, onMounted } from 'vue';
 import { useCommonStore } from './store';
 import headerView from './common/header.vue';
 import { getDefaultContextMenu } from '@/utils/getDefaultContextMenu';
+import { useRoute } from 'vue-router';
 
 const footerView = markRaw(defineAsyncComponent(() => import('./common/footer.vue')));
 const configUrl = 'config/config.json';
 const commonStore = useCommonStore();
+const route = useRoute();
 
 onMounted(() => {
   initMap();
