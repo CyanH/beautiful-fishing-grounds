@@ -93,7 +93,7 @@
             <div class="zhwl_div" v-for="item in state.zhwl">
               <div class="name">{{ item.name }}</div>
               <div class="val">
-                <span>{{ item.value }}</span
+                <span class="num">{{ item.value }}</span
                 >({{ item.danwe }})
               </div>
             </div>
@@ -215,7 +215,7 @@ const createChart = () => {
     myChar_xm.resize();
     myChar_right.resize();
   });
-  loadXmChart(myChar_xm, 77);
+  loadXmChart(myChar_xm, 80);
   RightChart(myChar_right);
 };
 </script>
@@ -441,7 +441,7 @@ const createChart = () => {
           font-size: 12px;
           color: #00f6ff;
           span {
-            font-size: 20px;
+            font-size: 26px;
             padding-right: 4px;
           }
         }
