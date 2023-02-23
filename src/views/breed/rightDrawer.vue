@@ -115,34 +115,13 @@
       </div>
     </v-card>
   </v-drawer>
-
-  <div class="warn">
-    <img src="@/assets/image/xia.png" class="fish" />
-    <img src="@/assets/image/breed/bg.png" class="bg" />
-    <div class="title">智能预警</div>
-    <div class="content">
-      <vue3-seamless-scroll :list="state.warnList" :step="0.3" :hover="true" :limitScrollNum="5">
-        <div v-for="(item, index) in state.warnList" class="">
-          <div class="flex">
-            <img src="@/assets/image/breed/warn.png" class="tip" />
-            <span class="desc">{{ item.exceptionInfo }}</span>
-          </div>
-          <div class="line"></div>
-        </div>
-      </vue3-seamless-scroll>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
-import { nextTick, onMounted, onUnmounted, reactive, ref } from 'vue';
-import { plantBaseBreeding, waterNewDataAll, weatherNewDataAll } from '@/api/industrial';
-import { getRealTime, plantInspect, configRecords } from '@/api/breed';
-import { loadChart } from './chart/lineChart';
-import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
-import { parseTime } from '@/utils/parseTime';
-import { znyz } from './chart/znyz'
+import { nextTick, onMounted, reactive, ref } from 'vue';
+import { getRealTime } from '@/api/breed';
+import { znyz } from './chart/znyz';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
@@ -150,10 +129,7 @@ Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 const getImgUrl = (url: string) => {
   return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
 };
-let myChart: echarts.ECharts;
-const chartEle = ref<HTMLDivElement | null>(null);
-const gmActive = ref(0);
-const equipActive = ref(0);
+
 const hasPlayer = ref(false);
 const videoEle = ref<HTMLDivElement | null>(null);
 
@@ -161,19 +137,15 @@ let myChar_zdyz: echarts.ECharts;
 let zdyz = ref<HTMLDivElement | null>(null);
 
 const state = reactive({
-  yzgmTotal: 0,
-  yzgmList: [] as any[],
-  weatherData: [] as any[],
-  waterData: [] as any[],
   chooseIndex: 0,
   videoData: [] as any[],
   list: [] as any[],
-  warnList: [] as any[],
+
   breedList: {
-      breedName: '罗氏沼虾',
-      img: getImgUrl('qy_1'),
-      note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
-    },
+    breedName: '罗氏沼虾',
+    img: getImgUrl('qy_1'),
+    note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
+  },
   new_List: [
     {
       name: '小瓜虫病',
@@ -181,7 +153,8 @@ const state = reactive({
       mouth: '11',
       type: 1,
       img: getImgUrl('qy_1'),
-      symptom: '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。'
+      symptom:
+        '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。',
     },
     {
       name: '小瓜虫病',
@@ -189,9 +162,10 @@ const state = reactive({
       mouth: '11',
       type: 1,
       img: getImgUrl('qy_1'),
-      symptom: '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。'
-    }
-  ]
+      symptom:
+        '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。',
+    },
+  ],
 });
 
 onMounted(() => {
@@ -209,187 +183,22 @@ onMounted(() => {
       },
     });
   });
-  // nextTick(() => {
-  //       setVideo(state.videoData[state.chooseIndex]);
-  //     });
-  // myChart = echarts.init(chartEle.value as HTMLDivElement);
-  // window.addEventListener('resize', () => {
-  //   myChart.resize();
-  // });
 
   getData();
   myChar_zdyz = echarts.init(zdyz.value as HTMLDivElement);
   window.addEventListener('resize', () => {
     myChar_zdyz.resize();
   });
-  znyz(myChar_zdyz)
+  znyz(myChar_zdyz);
 });
 
 const getData = () => {
-  // handleChooseGm(0);
-
-  // weatherNewDataAll().then((res: any) => {
-  //   let arr = [] as any[];
-  //   res.content.map((item: any) => {
-  //     let data = [
-  //       {
-  //         icon: 'wd',
-  //         name: '温度',
-  //         value: item.temp,
-  //         unit: '℃',
-  //       },
-  //       {
-  //         icon: 'sd',
-  //         name: '湿度',
-  //         value: item.humi,
-  //         unit: '%',
-  //       },
-  //       {
-  //         icon: 'yl',
-  //         name: '雨量',
-  //         value: item.rain,
-  //         unit: 'mm',
-  //       },
-  //       {
-  //         icon: 'fs',
-  //         name: '风速',
-  //         value: item.speed,
-  //         unit: 'm/s',
-  //       },
-  //       {
-  //         icon: 'gz',
-  //         name: '光照',
-  //         value: item.raid,
-  //         unit: 'lux',
-  //       },
-  //       {
-  //         icon: 'fx',
-  //         name: '风向',
-  //         value: item.windDirection,
-  //         unit: '',
-  //       },
-  //     ];
-  //     arr.push({ name: item.info, data });
-  //   });
-  //   state.weatherData = arr;
-  //   nextTick(() => {
-  //     new Swiper('.weather', {
-  //       navigation: {
-  //         nextEl: '.weather-next',
-  //         prevEl: '.weather-prev',
-  //         hideOnClick: true,
-  //       },
-  //       autoplay: {
-  //         delay: 4000,
-  //         stopOnLastSlide: false,
-  //         disableOnInteraction: false,
-  //       },
-  //     });
-  //   });
-  // });
-
-  // waterNewDataAll().then((res: any) => {
-  //   let arr = [] as any[];
-  //   res.content.map((item: any) => {
-  //     let data = [
-  //       {
-  //         icon: 'ph',
-  //         name: 'Ph',
-  //         value: item.ph,
-  //       },
-  //       {
-  //         icon: 'ddl',
-  //         name: '电导率',
-  //         value: item.ddl,
-  //         unit: 'ms/cm',
-  //       },
-  //       {
-  //         icon: 'rjy',
-  //         name: '溶解氧',
-  //         value: item.oxy,
-  //         unit: 'mg/L',
-  //       },
-  //       {
-  //         icon: 'zd',
-  //         name: '浊度',
-  //         value: item.zd,
-  //         unit: 'ntu',
-  //       },
-  //       {
-  //         icon: 'wd',
-  //         name: '水温',
-  //         value: item.temp,
-  //         unit: '℃',
-  //       },
-  //     ];
-  //     arr.push({ name: item.info, data });
-  //   });
-  //   state.waterData = arr;
-  // });
-
   getRealTime().then((res: any) => {
     state.videoData = res.content;
     nextTick(() => {
       setVideo(state.videoData[state.chooseIndex]);
     });
   });
-
-  // plantInspect().then((res: any) => {
-  //   state.list = res.content;
-  // });
-
-  configRecords({ warning: 0, size: 50 }).then((res: any) => {
-    state.warnList = res.content;
-  });
-};
-
-const handleChooseGm = (index: number) => {
-  state.yzgmTotal = 0;
-  myChart.clear();
-  gmActive.value = index;
-  plantBaseBreeding({ id: index }).then((res: any) => {
-    res.baseInfo.map((item: any) => {
-      state.yzgmTotal += Number(item.value);
-    });
-    state.yzgmList = res.baseInfo;
-
-    let data = [] as number[],
-      date = [] as string[];
-    res.name.map((item: { sum: number; date: string }) => {
-      data.push(item.sum);
-      date.push(item.date);
-    });
-
-    let name = index === 0 ? '产量' : '产值';
-    let unit = index === 0 ? '吨' : '万元';
-    loadChart(myChart, data, date, name, unit);
-  });
-};
-
-const handleEquipClick = (index: number) => {
-  equipActive.value = index;
-  if (index === 1) {
-    nextTick(() => {
-      new Swiper('.water', {
-        navigation: {
-          nextEl: '.water-next',
-          prevEl: '.water-prev',
-          hideOnClick: true,
-        },
-        autoplay: {
-          delay: 4000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
-      });
-    });
-  } else if (index === 2) {
-    if (state.videoData.length > 0) {
-      nextTick(() => {
-        setVideo(state.videoData[state.chooseIndex]);
-      });
-    }
-  }
 };
 
 const setVideo = (item: any) => {
@@ -414,13 +223,6 @@ const handleVideoClick = (statu: boolean) => {
   }
   setVideo(state.videoData[state.chooseIndex]);
 };
-
-
-onUnmounted(() => {
-  window.removeEventListener('resize', () => {
-    myChart.resize();
-  });
-});
 </script>
 
 <style lang="scss" scoped>
@@ -565,8 +367,6 @@ onUnmounted(() => {
   }
 }
 
-
-
 .swiper-container {
   width: 100%;
 }
@@ -588,63 +388,7 @@ onUnmounted(() => {
   opacity: 0.35;
 }
 
-.warn {
-  position: absolute;
-  left: 27%;
-  bottom: 60px;
-  z-index: 10;
-  .fish {
-    // width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: -40px;
-    left: 0px;
-    transform: rotateY(180deg);
-  }
-
-  .bg {
-    width: 356px;
-  }
-
-  .title {
-    position: absolute;
-    font-size: 16px;
-    top: 5px;
-    left: 6%;
-  }
-
-  .content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%;
-    overflow-y: hidden;
-    height: 210px;
-    .tip {
-      width: 26px;
-      margin-right: 15px;
-    }
-
-    .desc {
-      font-size: 14px;
-    }
-
-    .line {
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent 0,
-        rgba(160, 205, 255, 0.2) 5%,
-        rgba(160, 205, 255, 0.2) 95%,
-        transparent 100%
-      );
-      margin: 10px 0;
-    }
-  }
-}
-
-.video{
+.video {
   width: 100%;
   height: 25%;
   .video-container {
@@ -680,7 +424,7 @@ onUnmounted(() => {
     }
   }
 }
-.yzjs{
+.yzjs {
   height: 170px;
   margin-top: 8px;
   .content {
@@ -716,17 +460,17 @@ onUnmounted(() => {
         background: rgba(0, 0, 0, 0.1);
       }
     }
-    .right{
+    .right {
       width: calc(100% - 98px);
       padding-top: 20px;
-      .titles{
+      .titles {
         margin-bottom: 8px;
         font-size: 16px;
       }
     }
   }
 }
-.xbyf{
+.xbyf {
   width: 100%;
   height: 190px;
   margin-bottom: 16px;
@@ -754,7 +498,7 @@ onUnmounted(() => {
     .swiper-title {
       font-size: 16px;
       font-weight: 800;
-      margin-bottom:8px;
+      margin-bottom: 8px;
     }
     .mb {
       width: 100%;
@@ -822,28 +566,28 @@ onUnmounted(() => {
     }
   }
 }
-.zdyz{
+.zdyz {
   width: 100%;
   height: calc(75% - 488px);
   display: flex;
   padding-top: 10px;
-  .zdyz_left{
+  .zdyz_left {
     width: 60%;
     height: 100%;
-    .chart{
+    .chart {
       width: 100%;
       height: 100%;
     }
   }
-  .zdyz_right{
+  .zdyz_right {
     width: 40%;
     height: calc(100% - 12px);
     display: flex;
     align-items: center;
-    .zdyz_zhongj{
+    .zdyz_zhongj {
       width: 100%;
       height: 50%;
-      .hang{
+      .hang {
         width: 100%;
         height: 50%;
         display: flex;
@@ -851,32 +595,32 @@ onUnmounted(() => {
         // justify-content: center;
         padding-left: 8px;
         font-size: 16px;
-        .ww{
+        .ww {
           width: 70px;
         }
-        .val{
+        .val {
           // margin-left: 8px;
-          .s1{
+          .s1 {
             font-size: 24px;
             margin-right: 6px;
           }
         }
-        .val1{
+        .val1 {
           color: #70f3fc;
         }
-        .val2{
+        .val2 {
           color: #70f3fc;
         }
-        .dian{
+        .dian {
           width: 6px;
           height: 6px;
           border-radius: 50%;
           margin-right: 16px;
         }
-        .dian1{
+        .dian1 {
           background-color: #197dc7;
         }
-        .dian2{
+        .dian2 {
           background-color: #c65e25;
         }
       }

@@ -1,18 +1,14 @@
 <template>
-  <left-drawer />
-  <!-- <data-bar></data-bar> -->
+  <left-drawer v-if="componentName !== 'pond'" />
   <map-view></map-view>
 
   <component :is="currentComponent"></component>
 </template>
 
 <script setup lang="ts">
-import dataBar from './breed/dataBar.vue';
-
 import mapView from './breed/map.vue';
 import emitter from '@/utils/eventbus';
 import { defineAsyncComponent, markRaw, onUnmounted, ref } from 'vue';
-
 
 const leftDrawer = markRaw(defineAsyncComponent(() => import('./breed/leftDrawer.vue')));
 const rightDrawer = markRaw(defineAsyncComponent(() => import('./breed/rightDrawer.vue')));
@@ -21,8 +17,8 @@ const pondDrawer = markRaw(defineAsyncComponent(() => import('./breed/pondDrawer
 const qxzDrawer = markRaw(defineAsyncComponent(() => import('./breed/qxzDrawer.vue')));
 const szDrawer = markRaw(defineAsyncComponent(() => import('./breed/szDrawer.vue')));
 const videoDrawer = markRaw(defineAsyncComponent(() => import('./breed/videoDrawer.vue')));
-const tljDrawer = markRaw(defineAsyncComponent(() => import('./breed/tljDrawer.vue')));
 const currentComponent = ref(rightDrawer);
+const componentName = ref('');
 
 emitter.on('setRightDrawer', (name) => {
   if (name === 'base') {
@@ -35,11 +31,10 @@ emitter.on('setRightDrawer', (name) => {
     currentComponent.value = szDrawer;
   } else if (name === 'sxt') {
     currentComponent.value = videoDrawer;
-  } else if (name === 'tlj') {
-    currentComponent.value = tljDrawer;
   } else {
     currentComponent.value = rightDrawer;
   }
+  componentName.value = name as string;
 });
 
 onUnmounted(() => {

@@ -76,14 +76,33 @@
       </div>
     </v-card>
   </v-drawer>
+
+  <div class="warn">
+    <img src="@/assets/image/xia.png" class="fish" />
+    <img src="@/assets/image/breed/bg.png" class="bg" />
+    <div class="title">智能预警</div>
+    <div class="content">
+      <vue3-seamless-scroll :list="state.warnList" :step="0.3" :hover="true" :limitScrollNum="5">
+        <div v-for="(item, index) in state.warnList" class="">
+          <div class="flex">
+            <img src="@/assets/image/breed/warn.png" class="tip" />
+            <span class="desc">{{ item.exceptionInfo }}</span>
+          </div>
+          <div class="line"></div>
+        </div>
+      </vue3-seamless-scroll>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
+import { nextTick, onMounted, reactive, ref } from 'vue';
+import { loadChart } from './chart/crtChart';
+import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-import { nextTick, onMounted, reactive,ref } from 'vue';
-import { loadChart } from './chart/crtChart'
+import { configRecords } from '@/api/breed';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 let myChar_shangan: echarts.ECharts;
@@ -100,7 +119,7 @@ const state = reactive({
       zyr: '李某某',
       zytime: '2022-11-30 12:34:43',
       zycontent: '人工投海鲈鱼苗12小时',
-      title: '海恒海鲈鱼投苗'
+      title: '海恒海鲈鱼投苗',
     },
   ],
   weatherData: [
@@ -172,6 +191,7 @@ const state = reactive({
       unit: '℃',
     },
   ],
+  warnList: [] as any[],
 });
 
 onMounted(() => {
@@ -193,13 +213,20 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     myChar_shangan.resize();
   });
-  getContent()
+  getContent();
+  getData();
 });
+
+const getData = () => {
+  configRecords({ warning: 0, size: 50 }).then((res: any) => {
+    state.warnList = res.content;
+  });
+};
 
 const getContent = () => {
   let data1 = [50, 30, 20, 160, 60, 70, 100];
   let data2 = [70, 50, 20, 50, 60, 120, 170];
-  let date = ['2017年','2018年','2019年', '2020年', '2021年','2022年'];
+  let date = ['2017年', '2018年', '2019年', '2020年', '2021年', '2022年'];
   let new_datas = [];
   let new_data = [
     {
@@ -258,7 +285,7 @@ const getContent = () => {
     });
   }
   loadChart(myChar_shangan, new_datas, date, '吨');
-}
+};
 const clickImage = (index: number, indexs: number) => {
   state.clickIndex = index * 3 + indexs;
 };
@@ -269,11 +296,10 @@ const clickImage = (index: number, indexs: number) => {
   margin-bottom: 16px;
   height: 160px;
 }
-.bottom_all{
+.bottom_all {
   width: 100%;
   height: calc(100% - 455px);
 }
-
 
 .swiper-box {
   margin-top: 12px;
@@ -314,7 +340,7 @@ const clickImage = (index: number, indexs: number) => {
   right: 0;
 }
 
-.top_o1{
+.top_o1 {
   height: 120px;
   margin-top: 8px;
   .swiper-container {
@@ -351,29 +377,29 @@ const clickImage = (index: number, indexs: number) => {
           height: 98px;
           flex-shrink: 0;
         }
-        .right{
+        .right {
           width: calc(100% - 98px);
           height: 100%;
-          .titels{
+          .titels {
             width: 100%;
             height: 30px;
             line-height: 30px;
             font-size: 15px;
           }
-          .xm{
+          .xm {
             width: 100%;
             height: calc(100% - 30px);
-            .nrs{
+            .nrs {
               display: flex;
               width: 95%;
               text-align: left;
               height: 32%;
               align-items: center;
-              .ls{
+              .ls {
                 width: 35%;
                 font-size: 15px;
               }
-              .r{
+              .r {
                 width: 65%;
                 font-size: 15px;
               }
@@ -384,7 +410,7 @@ const clickImage = (index: number, indexs: number) => {
     }
   }
 }
-.yzhj{
+.yzhj {
   width: 100%;
   height: 150px;
   margin: 16px auto;
@@ -419,7 +445,7 @@ const clickImage = (index: number, indexs: number) => {
     }
   }
 }
-.szhj{
+.szhj {
   width: 100%;
   height: 150px;
   margin: 16px auto;
@@ -454,12 +480,68 @@ const clickImage = (index: number, indexs: number) => {
     }
   }
 }
-.crt{
+.crt {
   width: 100%;
   height: calc(100% - 640px);
-  .chart{
+  .chart {
     width: 100%;
     height: 100%;
+  }
+}
+
+.warn {
+  position: absolute;
+  left: 27%;
+  bottom: 60px;
+  z-index: 10;
+  .fish {
+    // width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: -40px;
+    left: 0px;
+    transform: rotateY(180deg);
+  }
+
+  .bg {
+    width: 356px;
+  }
+
+  .title {
+    position: absolute;
+    font-size: 16px;
+    top: 5px;
+    left: 6%;
+  }
+
+  .content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    overflow-y: hidden;
+    height: 210px;
+    .tip {
+      width: 26px;
+      margin-right: 15px;
+    }
+
+    .desc {
+      font-size: 14px;
+    }
+
+    .line {
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent 0,
+        rgba(160, 205, 255, 0.2) 5%,
+        rgba(160, 205, 255, 0.2) 95%,
+        transparent 100%
+      );
+      margin: 10px 0;
+    }
   }
 }
 </style>

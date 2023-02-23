@@ -72,8 +72,8 @@
                 <p>{{ item.batchNo }}</p>
               </el-tooltip>
 
-              <p>{{ item.productName }}</p>
-              <p>{{ item.plantBreedName }}</p>
+              <p>小虾干</p>
+              <p>罗氏沼虾</p>
               <p>{{ item.plantMassifName }}</p>
             </div>
           </vue3-seamless-scroll>

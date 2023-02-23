@@ -13,41 +13,22 @@ import { defineAsyncComponent, markRaw, onMounted, onUnmounted, ref } from 'vue'
 import mapView from './industrialPark/map.vue';
 
 const leftDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/leftDrawer.vue')));
-const allDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/allDrawer.vue')));
-const parkDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/parkDrawer.vue'))); //园区概况
-const subjectMain = markRaw(defineAsyncComponent(() => import('./industrialPark/subjectMain.vue'))); //实施主体
-const breedBaseMain = markRaw(defineAsyncComponent(() => import('./industrialPark/breedBaseMain.vue'))); //养殖基地
-const projectMain = markRaw(defineAsyncComponent(() => import('./industrialPark/projectMain.vue'))); //养殖基地
-const overallDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/overallDrawer.vue')));
-const subjectDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/subjectDrawer.vue')));
-const breedBase = markRaw(defineAsyncComponent(() => import('./industrialPark/breedBaseDrawer.vue')));
-const projectDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/projectDrawer.vue')));
-let currentComponent = ref(allDrawer);
+const rightDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/rightDrawer.vue')));
+const qxzDrawer = markRaw(defineAsyncComponent(() => import('./breed/qxzDrawer.vue')));
+const szDrawer = markRaw(defineAsyncComponent(() => import('./breed/szDrawer.vue')));
+const videoDrawer = markRaw(defineAsyncComponent(() => import('./breed/videoDrawer.vue')));
+let currentComponent = ref(rightDrawer);
 
 onMounted(() => {
   emitter.on('setRightDrawer', (name) => {
-    if (name === 'subjectMain') {
-      currentComponent.value = subjectMain;
-    } else if (name === 'breedBaseMain') {
-      currentComponent.value = breedBaseMain;
-    } else if (name === 'projectMain') {
-      currentComponent.value = projectMain;
-    } else if (name === 'overall') {
-      currentComponent.value = overallDrawer;
-    } else if (name === 'subject') {
-      // 实施主体
-      currentComponent.value = subjectDrawer;
-    } else if (name === 'breedBase') {
-      // 养殖基地
-      currentComponent.value = breedBase;
-    } else if (name === 'project') {
-      // 建设项目
-      currentComponent.value = projectDrawer;
-    } else if (name === 'park') {
-      // 园区概况
-      currentComponent.value = parkDrawer;
+    if (name === 'qxz') {
+      currentComponent.value = qxzDrawer;
+    } else if (name === 'sz') {
+      currentComponent.value = szDrawer;
+    } else if (name === 'sxt') {
+      currentComponent.value = videoDrawer;
     } else {
-      currentComponent.value = allDrawer;
+      currentComponent.value = rightDrawer;
     }
   });
 });
