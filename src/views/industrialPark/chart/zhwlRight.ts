@@ -138,10 +138,12 @@ export function RightChart(myChart: echarts.ECharts) {
     legend: {
       orient: 'vertical', // 'vertical horizontal'
       icon: 'circle',
-      x: 'right', // 'center' | 'left' | {number},
+      right: '2',
+      itemHeight: 12,
+      // x: "right", // 'center' | 'left' | {number},
       y: 'center', // 'center' | 'bottom' | {number}
       padding: [5, 10, 15, 20], // [5, 10, 15, 20]
-      itemGap: 4,
+      itemGap: 8,
       textStyle: {
         color: '#c3cad9',
         fontSize: 13,

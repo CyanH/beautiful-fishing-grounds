@@ -645,30 +645,30 @@ const getImgUrl = (url: string) => {
   }
   .zhong{
     position: absolute;
-    height: 262px;
+    height: 260px;
     left: 50%;
     top: 43%;
     transform: translate(-50%,-50%);
-    animation: rotate 6s infinite linear;
+    animation: rotate 4s infinite linear;
   }
   @keyframes rotate {
     0% {
-      transform: translate(-50%, -50%) rotate(0deg);
+      transform: translate(-50%, -50%) rotate(360deg);
     }
 
     100% {
-      transform: translate(-50%, -50%) rotate(360deg);
+      transform: translate(-50%, -50%) rotate(0deg);
     }
   }
   @keyframes bounce_down1 {
       25% {
-          transform: translateY(-2px);
+          transform: translateY(-4px);
       }
       50% {
           transform: translateY(0);
       }
       75% {
-          transform: translateY(2px);
+          transform: translateY(4px);
       }
       100% {
           transform: translateY(0);
