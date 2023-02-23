@@ -206,7 +206,6 @@ const clickImage = (index: number, indexs: number) => {
       .one1 {
         position: absolute;
         top: -8px;
-        font-size: 16px;
         .num {
           color: #ffb400;
           font-size: 20px;
@@ -214,6 +213,7 @@ const clickImage = (index: number, indexs: number) => {
       }
       .one2_all {
         position: absolute;
+        font-size: 14px;
         .b_5 {
           margin-bottom: 5px;
         }
@@ -229,24 +229,20 @@ const clickImage = (index: number, indexs: number) => {
         }
       }
       .one2 {
-        font-size: 16px;
         left: -90px;
         top: 29%;
         text-align: right;
       }
       .one3 {
-        font-size: 16px;
         top: 29%;
         right: -79px;
       }
       .one4 {
-        font-size: 16px;
         left: -110px;
         bottom: 6.5%;
         text-align: right;
       }
       .one5 {
-        font-size: 16px;
         right: -100px;
         bottom: 6.5%;
       }

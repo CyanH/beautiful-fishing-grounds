@@ -289,40 +289,35 @@ const createChart = () => {
         height: 80%;
       }
       .one1 {
-        font-size: 16px;
         left: -70px;
         top: 14px;
         text-align: right;
       }
       .one2 {
-        font-size: 16px;
         right: -105px;
         top: 13px;
       }
       .one3 {
-        font-size: 16px;
         left: -70px;
         top: 38%;
         text-align: right;
       }
       .one4 {
-        font-size: 16px;
         right: -90px;
         top: 37.5%;
       }
       .one5 {
-        font-size: 16px;
         left: -85px;
         bottom: 13px;
         text-align: right;
       }
       .one6 {
-        font-size: 16px;
         right: -105px;
         bottom: 13px;
       }
       .one2_all {
         position: absolute;
+        font-size: 14px;
         .b_5 {
           margin-bottom: 5px;
         }

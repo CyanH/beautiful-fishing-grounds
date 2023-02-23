@@ -118,7 +118,7 @@
 
   <div class="warn">
     <img src="@/assets/image/xia.png" class="fish" />
-    <img src="@/assets/image/yj_di.png" class="bg" />
+    <img src="@/assets/image/breed/bg.png" class="bg" />
     <div class="title">智能预警</div>
     <div class="content">
       <vue3-seamless-scroll :list="state.warnList" :step="0.3" :hover="true" :limitScrollNum="5">
@@ -527,22 +527,6 @@ onUnmounted(() => {
       }
     }
   }
-  // /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-  // .progress-container::-webkit-scrollbar {
-  //   width: 2px;
-  // }
-  // /*定义滑块 内阴影+圆角*/
-  // .progress-container::-webkit-scrollbar-thumb {
-  //   border-radius: 2px;
-  //   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-  //   background-color: rgba(29,51,116, 1);
-  // }
-  // /*定义滚动条轨道 内阴影+圆角*/
-  // .progress-container::-webkit-scrollbar-track {
-  //   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-  //   border-radius: 2px;
-  //   // background-color: rgba(255, 255, 255, 0.8);
-  // }
 }
 
 .middle {
@@ -579,96 +563,9 @@ onUnmounted(() => {
   .content {
     height: calc(100% - 100px);
   }
-  .container {
-    height: 100%;
-    box-sizing: border-box;
-
-    .line-bar {
-      background: linear-gradient(to bottom, transparent, #a0d8ff);
-      width: 4px;
-      height: 19px;
-      margin-right: 10px;
-    }
-
-    .equip-name {
-      font-size: 16px;
-    }
-
-    .slide-content {
-      padding-left: 30px;
-      flex-wrap: wrap;
-    }
-
-    .bar {
-      margin-bottom: 1.5vh;
-      width: 33.33%;
-
-      .icon {
-        width: 46px;
-        margin-right: 8px;
-      }
-
-      .name {
-        font-size: 14px;
-        color: #fff;
-      }
-
-      .num {
-        color: #00f6ff;
-        font-size: 28px;
-      }
-
-      .little {
-        font-size: 22px;
-      }
-
-      .unit {
-        font-size: 12px;
-        color: #00f6ff;
-        padding-left: 5px;
-      }
-    }
-  }
-
-  
 }
 
-.bottom {
-  height: 18%;
 
-  .content {
-    margin-top: 10px;
-    height: calc(100% - 48px);
-    font-size: 14px;
-  }
-
-  .head {
-    background: rgba(19, 39, 165, 0.5);
-    display: flex;
-  }
-  .body {
-    display: flex;
-    width: 100%;
-  }
-  .head,
-  .body {
-    p {
-      color: #fff;
-      text-align: center;
-      margin: 9px 0;
-      width: 25%;
-    }
-  }
-
-  .seamless-warp {
-    width: 100%;
-    height: calc(100% - 34px);
-    overflow: hidden;
-    .body:nth-child(even) {
-      background: rgba(19, 39, 165, 0.2);
-    }
-  }
-}
 
 .swiper-container {
   width: 100%;
@@ -694,7 +591,7 @@ onUnmounted(() => {
 .warn {
   position: absolute;
   left: 27%;
-  bottom: 150px;
+  bottom: 60px;
   z-index: 10;
   .fish {
     // width: 80px;
@@ -723,7 +620,7 @@ onUnmounted(() => {
     transform: translate(-50%, -50%);
     width: 85%;
     overflow-y: hidden;
-    height: 70px;
+    height: 210px;
     .tip {
       width: 26px;
       margin-right: 15px;
