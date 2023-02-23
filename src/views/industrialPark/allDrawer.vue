@@ -416,8 +416,8 @@ const createChart = () => {
   }
   .zhwl {
     width: 100%;
-    height: calc(100% - 238px);
-    padding-top: 16px;
+    height: calc(100% - 234px);
+    padding-top: 12px;
     .zhwl_top{
       width: 100%;
       height: 50px;
@@ -429,7 +429,7 @@ const createChart = () => {
         height: 50px;
         text-align: center;
         .name {
-          font-size: 16px;
+          font-size: 14px;
           margin-bottom: 4px;
         }
         .val {
@@ -444,7 +444,7 @@ const createChart = () => {
     }
     .zhwl_bottom {
       width: 100%;
-      height: calc(100% - 75px);
+      height: calc(100% - 68px);
       display: flex;
       .left {
         width: 60%;

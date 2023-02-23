@@ -5,10 +5,10 @@ import router from './router';
 
 import 'normalize.css'; // css初始化
 import 'amfe-flexible/index.js'; //可伸缩布局方案
-import '@/assets/style/index.scss';
 import 'animate.css/animate.min.css'; //动画库
 import 'mars3d-cesium/Build/Cesium/Widgets/widgets.css';
 import 'mars3d/dist/mars3d.css';
+import '@/assets/style/index.scss';
 
 import ElementPlus from 'element-plus';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';

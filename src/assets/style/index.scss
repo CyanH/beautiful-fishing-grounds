@@ -39,6 +39,16 @@ img {
 
 .mars3d-tooltip {
   font-size: 14px;
+  padding: 8px 12px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 5px;
+  font-family: 'PingFangSC-Bold';
+}
+
+.mars3d-tooltip-top:before {
+  border-top-color: #fff;
+  margin-bottom: -10px;
 }
 
 .num {

@@ -50,7 +50,7 @@ function addAnhui() {
   commonStore.map?.addLayer(graphicLayer);
 
   wall = new mars3d.layer.GeoJsonLayer({
-    name: '安徽省边界墙',
+    name: '边界墙',
     url: 'data/441283.json',
     symbol: {
       type: 'wallP',
