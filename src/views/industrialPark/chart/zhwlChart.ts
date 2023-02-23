@@ -52,7 +52,7 @@ export function loadXmChart(myChart: echarts.ECharts, data: any) {
     series: [
       {
         type: 'liquidFill',
-        radius: '75%',
+        radius: '70%',
         center: ['50%', '50%'],
         data: [data / 100, data / 100, data / 100], // data个数代表波浪数
         backgroundStyle: {
@@ -89,7 +89,7 @@ export function loadXmChart(myChart: echarts.ECharts, data: any) {
       {
         type: 'pie',
         center: ['50%', '50%'],
-        radius: ['88%', '83%'],
+        radius: ['83%', '78%'],
         hoverAnimation: false,
         data: [
           {
