@@ -636,7 +636,7 @@ const getImgUrl = (url: string) => {
   padding-top: 20px;
   .img_yuan{
     height: 320px;
-    animation: bounce_down1 4s linear infinite;
+    animation: bounce_down1 3s linear infinite;
   }
   .img_di{
     width: 65%;
