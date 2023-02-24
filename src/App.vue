@@ -4,20 +4,24 @@
     <div class="content">
       <router-view />
     </div>
-    <div id="marsMap" class="mars3d-container" v-show="route.path !== '/digital'"></div>
-    <!-- <footer-view /> -->
+
+    <div v-show="route.path !== '/digital'">
+      <div id="marsMap" class="mars3d-container"></div>
+      <div class="logo">美丽渔场</div>
+    </div>
+    <video-view v-if="route.path === '/digital'" />
   </div>
 </template>
 
 <script setup lang="ts">
 import * as mars3d from 'mars3d';
-import { defineAsyncComponent, markRaw, onMounted } from 'vue';
+import { markRaw, onMounted } from 'vue';
 import { useCommonStore } from './store';
 import headerView from './common/header.vue';
+import videoView from './views/video.vue';
 import { getDefaultContextMenu } from '@/utils/getDefaultContextMenu';
 import { useRoute } from 'vue-router';
 
-const footerView = markRaw(defineAsyncComponent(() => import('./common/footer.vue')));
 const configUrl = 'config/config.json';
 const commonStore = useCommonStore();
 const route = useRoute();
@@ -54,5 +58,9 @@ const initMap = async () => {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.logo {
+  position: absolute;
 }
 </style>

@@ -29,7 +29,7 @@ const list = reactive([
   {
     icon: 'ico_tk',
     name: '塘口',
-    value: 2856,
+    value: 327,
     unit: '个',
   },
   {
@@ -41,7 +41,7 @@ const list = reactive([
   {
     icon: 'ico_qy',
     name: '企业数',
-    value: 6,
+    value: 3,
     unit: '个',
   },
 ]);

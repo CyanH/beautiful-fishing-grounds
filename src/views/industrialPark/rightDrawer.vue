@@ -9,84 +9,47 @@
   <v-drawer direction="right">
     <v-card>
       <div class="top">
-        <v-title title="宣传视频"></v-title>
+        <v-title title="罗氏沼虾大丰收"></v-title>
         <div class="video">
           <video controls autoplay src="@/assets/image/industrialPark/xcsp.mp4"></video>
         </div>
         <div class="esc">
           <div class="esc_con">
-            <img src="@/assets/image/industrialPark/r_esc.png" alt="" />
-            <div class="one1 one2_all">
-              <div class="b_5">产值(亿元)</div>
-              <div class="xian"></div>
-              <div>
-                <span class="num">16.2</span>
-              </div>
-            </div>
+            <img src="@/assets/image/industrialPark/esc.png" alt="" />
+            <div class="one1">产值 <span class="num">13.2</span> (亿元)</div>
             <div class="one2 one2_all">
-              <div class="b_5">养殖产量(万吨)</div>
+              <div class="b_5">加工产量(万吨)</div>
               <div class="xian"></div>
               <div>
-                <span class="num">2.65</span>
+                <span class="num">3.2</span>
               </div>
             </div>
             <div class="one3 one2_all">
-              <div class="b_5">苗种场(家)</div>
-              <div class="xian"></div>
-              <div>
-                <span class="num">5</span>
-              </div>
-            </div>
-            <div class="one4 one2_all">
-              <div class="b_5">养殖厂家(家)</div>
+              <div class="b_5">水产冷库(个)</div>
               <div class="xian"></div>
               <div>
                 <span class="num">4</span>
               </div>
             </div>
-            <div class="one5 one2_all">
-              <div class="b_5">示范基地(个)</div>
+            <div class="one4 one2_all">
+              <div class="b_5">年加工能力(万吨)</div>
               <div class="xian"></div>
               <div>
-                <span class="num">5</span>
+                <span class="num">6.2</span>
               </div>
             </div>
-            <div class="one6 one2_all">
-              <div class="b_5">养殖面积(万亩)</div>
+            <div class="one5 one2_all">
+              <div class="b_5">仓储能力(吨/次)</div>
               <div class="xian"></div>
               <div>
                 <span class="num">3.56</span>
               </div>
             </div>
-            <div class="title">一产</div>
+            <div class="title">二三产</div>
           </div>
         </div>
       </div>
       <div class="bottom">
-        <v-title title="特色产品"></v-title>
-        <div class="chanping flex">
-          <div class="swiper-container swiper-container1">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="(item, index) in state.breedList">
-                <div class="card">
-                  <div class="title">
-                    <span class="num">{{ index + 1 }}</span>
-                    <span>{{ item.breedName }}</span>
-                  </div>
-                  <div class="content flex">
-                    <img :src="getImgUrl(item.img)" style="margin-right: 10px" />
-                    <div class="desc">{{ item.note }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-prev" />
-
-            <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-next" />
-          </div>
-        </div>
         <v-title title="智慧物联"></v-title>
         <div class="zhwl">
           <div class="zhwl_top">
@@ -177,7 +140,7 @@ const state = reactive({
     },
     {
       name: '监测数据',
-      value: 964400,
+      value: 964,
       danwe: '条',
     },
     {
@@ -256,11 +219,10 @@ const createChart = () => {
 }
 .top {
   width: 100%;
-  height: calc(49% - 24px);
-  padding-bottom: 24px;
+  padding-bottom: 15px;
   .video {
     width: 100%;
-    height: calc(100% - 212px);
+    height: 200px;
     margin-top: 8px;
     text-align: center;
     video {
@@ -269,10 +231,11 @@ const createChart = () => {
       object-fit: fill;
     }
   }
+
   .esc {
     // height: calc(100% - 250px);
     height: 200px;
-    // margin-top: 8px;
+    margin-top: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -289,31 +252,12 @@ const createChart = () => {
         height: 80%;
       }
       .one1 {
-        left: -70px;
-        top: 14px;
-        text-align: right;
-      }
-      .one2 {
-        right: -105px;
-        top: 13px;
-      }
-      .one3 {
-        left: -70px;
-        top: 38%;
-        text-align: right;
-      }
-      .one4 {
-        right: -90px;
-        top: 37.5%;
-      }
-      .one5 {
-        left: -85px;
-        bottom: 13px;
-        text-align: right;
-      }
-      .one6 {
-        right: -105px;
-        bottom: 13px;
+        position: absolute;
+        top: -8px;
+        .num {
+          color: #ffb400;
+          font-size: 20px;
+        }
       }
       .one2_all {
         position: absolute;
@@ -332,7 +276,24 @@ const createChart = () => {
           font-size: 20px;
         }
       }
-
+      .one2 {
+        left: -90px;
+        top: 29%;
+        text-align: right;
+      }
+      .one3 {
+        top: 29%;
+        right: -79px;
+      }
+      .one4 {
+        left: -110px;
+        bottom: 6.5%;
+        text-align: right;
+      }
+      .one5 {
+        right: -100px;
+        bottom: 6.5%;
+      }
       .title {
         position: absolute;
         top: 50%;
@@ -347,7 +308,7 @@ const createChart = () => {
 }
 .bottom {
   width: 100%;
-  height: 51%;
+  height: calc(100% - 476px);
   .chanping {
     width: 100%;
     height: 150px;
@@ -415,9 +376,9 @@ const createChart = () => {
     }
   }
   .zhwl {
-    width: 100%;
-    height: calc(100% - 234px);
+    height: calc(100% - 29px);
     padding-top: 12px;
+    box-sizing: border-box;
     .zhwl_top {
       width: 100%;
       height: 50px;

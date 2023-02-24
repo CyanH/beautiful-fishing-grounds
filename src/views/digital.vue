@@ -1,13 +1,11 @@
 <template>
-  <video-view :form="state.form"></video-view>
   <left-drawer :form="state.form"></left-drawer>
   <component :is="currentComponent" :form="state.form"></component>
-  <img class="img_title" src="@/assets/image/qj/title.png" alt="">
+  <img class="img_title" src="@/assets/image/qj/title.png" alt="" />
 </template>
 
 <script setup lang="ts">
 import leftDrawer from './digital/leftDrawer.vue';
-import videoView from './digital/video.vue';
 import emitter from '@/utils/eventbus';
 import { getPlantBase } from '@/api/breed';
 import { defineAsyncComponent, markRaw, onMounted, onUnmounted, reactive, ref } from 'vue';
@@ -44,10 +42,10 @@ onUnmounted(() => {
 });
 </script>
 <style scoped lang="scss">
-.img_title{
+.img_title {
   position: absolute;
   left: 50%;
   bottom: 10px;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 </style>

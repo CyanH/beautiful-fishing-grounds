@@ -1,6 +1,6 @@
 <template>
   <v-drawer direction="left">
-    <v-card>
+    <v-card :background="'rgba(17, 16, 45, 0.6)'">
       <div class="top">
         <v-title title="养殖记录" />
         <div class="top_o1">

@@ -29,39 +29,53 @@
             <img src="@/assets/image/arrow.png" class="swiper-button-next img-next" />
           </div>
         </div>
+
         <div class="esc">
           <div class="esc_con">
-            <img src="@/assets/image/industrialPark/esc.png" alt="" />
-            <div class="one1">产值 <span class="num">16.2</span> (亿元)</div>
+            <img src="@/assets/image/industrialPark/r_esc.png" alt="" />
+            <div class="one1 one2_all">
+              <div class="b_5">产值(亿元)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">8.3</span>
+              </div>
+            </div>
             <div class="one2 one2_all">
-              <div class="b_5">加工产量(万吨)</div>
+              <div class="b_5">养殖产量(万吨)</div>
+              <div class="xian"></div>
+              <div>
+                <span class="num">2.13</span>
+              </div>
+            </div>
+            <div class="one3 one2_all">
+              <div class="b_5">苗种场(家)</div>
               <div class="xian"></div>
               <div>
                 <span class="num">5</span>
               </div>
             </div>
-            <div class="one3 one2_all">
-              <div class="b_5">水产冷库(个)</div>
+            <div class="one4 one2_all">
+              <div class="b_5">养殖厂家(家)</div>
               <div class="xian"></div>
               <div>
                 <span class="num">4</span>
               </div>
             </div>
-            <div class="one4 one2_all">
-              <div class="b_5">年加工能力(万吨)</div>
+            <div class="one5 one2_all">
+              <div class="b_5">示范基地(个)</div>
               <div class="xian"></div>
               <div>
                 <span class="num">5</span>
               </div>
             </div>
-            <div class="one5 one2_all">
-              <div class="b_5">仓储能力(吨/次)</div>
+            <div class="one6 one2_all">
+              <div class="b_5">养殖面积(亩)</div>
               <div class="xian"></div>
               <div>
-                <span class="num">3.56</span>
+                <span class="num">9960</span>
               </div>
             </div>
-            <div class="title">二三产</div>
+            <div class="title">一产</div>
           </div>
         </div>
       </div>
@@ -175,8 +189,7 @@ const clickImage = (index: number, indexs: number) => {
 
 <style lang="scss" scoped>
 .top {
-  margin-bottom: 8px;
-  height: 455px;
+  padding-bottom: 8px;
   .content {
     padding-top: 12px;
     font-size: 14px;
@@ -187,7 +200,7 @@ const clickImage = (index: number, indexs: number) => {
   .esc {
     // height: calc(100% - 250px);
     height: 200px;
-    margin-top: 24px;
+    // margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,12 +217,31 @@ const clickImage = (index: number, indexs: number) => {
         height: 80%;
       }
       .one1 {
-        position: absolute;
-        top: -8px;
-        .num {
-          color: #ffb400;
-          font-size: 20px;
-        }
+        left: -70px;
+        top: 14px;
+        text-align: right;
+      }
+      .one2 {
+        right: -105px;
+        top: 13px;
+      }
+      .one3 {
+        left: -70px;
+        top: 38%;
+        text-align: right;
+      }
+      .one4 {
+        right: -90px;
+        top: 37.5%;
+      }
+      .one5 {
+        left: -85px;
+        bottom: 13px;
+        text-align: right;
+      }
+      .one6 {
+        right: -105px;
+        bottom: 13px;
       }
       .one2_all {
         position: absolute;
@@ -228,24 +260,7 @@ const clickImage = (index: number, indexs: number) => {
           font-size: 20px;
         }
       }
-      .one2 {
-        left: -90px;
-        top: 29%;
-        text-align: right;
-      }
-      .one3 {
-        top: 29%;
-        right: -79px;
-      }
-      .one4 {
-        left: -110px;
-        bottom: 6.5%;
-        text-align: right;
-      }
-      .one5 {
-        right: -100px;
-        bottom: 6.5%;
-      }
+
       .title {
         position: absolute;
         top: 50%;
@@ -259,7 +274,7 @@ const clickImage = (index: number, indexs: number) => {
   }
 }
 .bottom {
-  height: 170px;
+  height: 150px;
   margin-top: 8px;
   .swiper-container {
     height: calc(100% - 53px);
@@ -298,7 +313,7 @@ const clickImage = (index: number, indexs: number) => {
         }
 
         .desc {
-          height: 98px;
+          height: 72px;
           font-size: 13px;
           line-height: 1.3;
           letter-spacing: 2px;
@@ -321,7 +336,7 @@ const clickImage = (index: number, indexs: number) => {
         }
         .right {
           width: calc(100% - 98px);
-          padding-top: 20px;
+
           .titles {
             margin-bottom: 8px;
             font-size: 16px;
@@ -333,11 +348,11 @@ const clickImage = (index: number, indexs: number) => {
 }
 .bottom_all {
   width: 100%;
-  height: calc(100% - 455px);
+  height: calc(100% - 445px);
 }
 
 .middle {
-  height: calc(100% - 180px);
+  height: calc(100% - 158px);
   .nr {
     padding-top: 8px;
     height: calc(100% - 40px);

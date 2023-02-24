@@ -1,6 +1,6 @@
 <template>
   <v-drawer direction="right">
-    <v-card>
+    <v-card :background="'rgba(17, 16, 45, 0.6)'">
       <v-title title="实时塘口" />
       <div class="video">
         <div class="video-container">

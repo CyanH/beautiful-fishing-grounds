@@ -1,12 +1,12 @@
 <template>
   <div class="header">
     <div class="dhl">
-      <div 
-        class="chooseList" 
-        v-for="item,index in chooseList" 
+      <div
+        class="chooseList"
+        v-for="(item, index) in chooseList"
         :key="index"
         @click="handleChoose(item, index)"
-        :class="['chooseList',chooseIndex === index ? 'chooseList_true' : 'chooseList_false']"
+        :class="['chooseList', chooseIndex === index ? 'chooseList_true' : 'chooseList_false']"
       >
         {{ item.name }}
       </div>
@@ -38,7 +38,7 @@ const degree = ref(25);
 const chooseList = [
   {
     icon: 'cyyq',
-    name: '产业园区',
+    name: '总体规划',
     url: '/index',
     bg: 'cyyq_not',
     chooseBg: 'cyyq_c',
@@ -52,7 +52,7 @@ const chooseList = [
   },
   {
     icon: 'szsw',
-    name: '数字塘口',
+    name: 'AR全景',
     url: '/digital',
     bg: 'szsw_not',
     chooseBg: 'szsw_c',
@@ -79,7 +79,6 @@ onMounted(() => {
     degree.value = res.degree;
   });
 });
-
 </script>
 
 <style lang="scss" scoped>
@@ -92,33 +91,33 @@ onMounted(() => {
   margin: auto;
   z-index: 9;
   // 导航栏
-  .dhl{
+  .dhl {
     position: absolute;
     top: 39px;
     transform: translateY(-50%);
     left: 0.5%;
     display: flex;
-    .chooseList{
+    .chooseList {
       width: 122px;
       opacity: 0.8;
       border-radius: 0px 0px 20px 0px;
       margin-right: 4px;
       text-align: center;
       font-size: 16px;
-      color: #E7EEFD;
+      color: #e7eefd;
       cursor: pointer;
     }
-    .chooseList_false{
+    .chooseList_false {
       height: 46px;
       line-height: 46px;
-      background-image: linear-gradient(90deg, rgba(0,15,64,0.1) 10%, #0840A6 90%);
+      background-image: linear-gradient(90deg, rgba(0, 15, 64, 0.1) 10%, #0840a6 90%);
       font-family: Source Han Sans CN;
       font-weight: 400;
     }
-    .chooseList_true{
+    .chooseList_true {
       height: 52px;
       line-height: 52px;
-      background: linear-gradient(90deg, rgba(2,21,82,0.1) 10%, #0D62FF 90%);
+      background: linear-gradient(90deg, rgba(2, 21, 82, 0.1) 10%, #0d62ff 90%);
       font-family: Source Han Sans CN;
       font-weight: 800;
     }

@@ -1,16 +1,22 @@
 <template>
-  <div class="card">
+  <div class="card" :style="{ background }">
     <div class="content">
       <slot></slot>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps({
+  background: {
+    type: String,
+    default: 'rgba(17, 16, 45, 0.2)',
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 .card {
-  background: rgba(17, 16, 45, 0.7);
   height: 100%;
   position: relative;
   padding: 15px 20px;
