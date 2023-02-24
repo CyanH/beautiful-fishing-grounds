@@ -127,35 +127,6 @@ const addMap = () => {
     },
   });
   commonStore.map?.addLayer(wall);
-
-  lineLayer = new mars3d.layer.GeoJsonLayer({
-    name: '高要区边界线',
-    url: 'data/cityName.json',
-    zIndex: 9,
-    symbol: {
-      type: 'polyline',
-      styleOptions: {
-        color: 'white',
-        width: 1,
-        label: {
-          text: '{name}',
-          position: 'center',
-          font_size: 28,
-          color: '#fff',
-          font_family: '楷体',
-
-          // 视距的设置
-          scaleByDistance: true,
-          scaleByDistance_far: 20000000,
-          scaleByDistance_farValue: 0.1,
-          scaleByDistance_near: 1000,
-          scaleByDistance_nearValue: 1,
-        },
-      },
-      styleField: 'name',
-    },
-  });
-  commonStore.map?.addLayer(lineLayer);
 };
 
 const createEquip = () => {

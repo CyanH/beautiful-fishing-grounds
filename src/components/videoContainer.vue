@@ -3,7 +3,7 @@
     <div id="video-container" ref="videoEle" style="height: 100%" />
     <img v-show="!imgFlag" @click="fullScreenClick(true)" class="img_right" src="@/assets/image/fangda.png" />
     <img v-show="imgFlag" @click="fullScreenClick(false)" class="img_sx" src="@/assets/icons/sx.svg" />
-    <div class="ptz">
+    <div class="ptz" v-show="imgFlag">
       <div class="outer-ring">
         <!-- 上 -->
         <svg
@@ -98,6 +98,17 @@ const deviceSerial = ref('');
 
 const getVideo = (token: string, url: string, code: string) => {
   let dom = videoEle.value as HTMLDivElement;
+  let width = 0;
+  let height = 0;
+  if (dom.offsetWidth && dom.offsetHeight) {
+    width = dom.offsetWidth;
+    height = dom.offsetHeight;
+    offset.width = dom.offsetWidth;
+    offset.height = dom.offsetHeight;
+  } else {
+    width = offset.width;
+    height = offset.height;
+  }
 
   deviceSerial.value = code;
   if (dom) {

@@ -34,7 +34,7 @@ import { Close } from '@element-plus/icons-vue';
 const breedStore = useBreedStore();
 
 const handleClose = () => {
-  emitter.emit('setRightDrawer', 'base');
+  emitter.emit('setRightDrawer', '');
 };
 </script>
 

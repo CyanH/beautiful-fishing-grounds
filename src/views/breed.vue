@@ -12,7 +12,6 @@ import { defineAsyncComponent, markRaw, onUnmounted, ref } from 'vue';
 
 const leftDrawer = markRaw(defineAsyncComponent(() => import('./breed/leftDrawer.vue')));
 const rightDrawer = markRaw(defineAsyncComponent(() => import('./breed/rightDrawer.vue')));
-const baseDrawer = markRaw(defineAsyncComponent(() => import('./breed/baseDrawer.vue')));
 const pondDrawer = markRaw(defineAsyncComponent(() => import('./breed/pondDrawer.vue')));
 const qxzDrawer = markRaw(defineAsyncComponent(() => import('./breed/qxzDrawer.vue')));
 const szDrawer = markRaw(defineAsyncComponent(() => import('./breed/szDrawer.vue')));
@@ -21,9 +20,7 @@ const currentComponent = ref(rightDrawer);
 const componentName = ref('');
 
 emitter.on('setRightDrawer', (name) => {
-  if (name === 'base') {
-    currentComponent.value = baseDrawer;
-  } else if (name === 'pond') {
+  if (name === 'pond') {
     currentComponent.value = pondDrawer;
   } else if (name === 'qxz') {
     currentComponent.value = qxzDrawer;

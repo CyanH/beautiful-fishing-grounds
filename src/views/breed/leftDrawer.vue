@@ -26,17 +26,17 @@
                         </div>
                       </div>
                     </div>
-                    <img :src="item.img" style="margin-right: 10px" />
+                    <img :src="getImgUrl(item.img)" style="margin-right: 10px" />
                   </div>
                 </div>
               </div>
             </div>
 
             <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-yzjl-prev" />
+            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-prev" />
 
             <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-yzjl-next" />
+            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
           </div>
         </div>
       </div>
@@ -107,32 +107,50 @@ Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 let myChar_shangan: echarts.ECharts;
 let shangan = ref<HTMLDivElement | null>(null);
-const getImgUrl = (url: string) => {
-  return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
-};
 
 const state = reactive({
   clickIndex: 0,
   breedList: [
     {
-      img: getImgUrl('qy_1'),
-      zyr: '李某某',
-      zytime: '2022-11-30 12:34:43',
-      zycontent: '人工投海鲈鱼苗12小时',
-      title: '海恒海鲈鱼投苗',
+      img: 'sltw',
+      zyr: '李晓武',
+      zytime: '2023-01-30 12:34:43',
+      zycontent: '人工投喂罗氏沼虾4小时',
+      title: '饲料投放',
+    },
+    {
+      img: 'xtql',
+      zyr: '吴波江',
+      zytime: '2023-02-03 16:34:43',
+      zycontent: '人工清理虾塘垃圾',
+      title: '虾塘清理',
+    },
+    {
+      img: 'xbyy',
+      zyr: '王凡',
+      zytime: '2023-02-05 08:23:43',
+      zycontent: '人工巡查虾塘用药',
+      title: '虾病用药',
+    },
+    {
+      img: 'jcsy',
+      zyr: '苏无衣',
+      zytime: '2023-02-07 13:34:22',
+      zycontent: '人工巡查虾塘检查水源',
+      title: '检查水源',
     },
   ],
   weatherData: [
     {
       icon: 'wd',
       name: '温度',
-      value: 0,
+      value: 18,
       unit: '℃',
     },
     {
       icon: 'sd',
       name: '湿度',
-      value: 0,
+      value: 67.7,
       unit: '%',
     },
     {
@@ -144,19 +162,19 @@ const state = reactive({
     {
       icon: 'fs',
       name: '风速',
-      value: 0,
+      value: 1.2,
       unit: 'm/s',
     },
     {
       icon: 'gz',
       name: '光照',
-      value: 0,
+      value: 65864,
       unit: 'lux',
     },
     {
       icon: 'fx',
       name: '风向',
-      value: 0,
+      value: '北',
       unit: '',
     },
   ],
@@ -164,30 +182,30 @@ const state = reactive({
     {
       icon: 'ph',
       name: 'Ph',
-      value: 0,
+      value: 7.66,
     },
     {
       icon: 'ddl',
       name: '电导率',
-      value: 0,
+      value: 4386,
       unit: 'ms/cm',
     },
     {
       icon: 'rjy',
       name: '溶解氧',
-      value: 0,
+      value: 8.27,
       unit: 'mg/L',
     },
     {
       icon: 'zd',
       name: '浊度',
-      value: 0,
+      value: 5.4,
       unit: 'ntu',
     },
     {
       icon: 'wd',
       name: '水温',
-      value: 0,
+      value: 20.6,
       unit: '℃',
     },
   ],
@@ -198,8 +216,8 @@ onMounted(() => {
   nextTick(() => {
     new Swiper('.breed-swiper-yzjl', {
       navigation: {
-        nextEl: '.breed-yzjl-prev',
-        prevEl: '.breed-yzjl-prev',
+        nextEl: '.breed-next',
+        prevEl: '.breed-prev',
         hideOnClick: true,
       },
       autoplay: {
@@ -209,6 +227,7 @@ onMounted(() => {
       },
     });
   });
+
   myChar_shangan = echarts.init(shangan.value as HTMLDivElement);
   window.addEventListener('resize', () => {
     myChar_shangan.resize();
@@ -224,8 +243,8 @@ const getData = () => {
 };
 
 const getContent = () => {
-  let data1 = [50, 30, 20, 160, 60, 70, 100];
-  let data2 = [70, 50, 20, 50, 60, 120, 170];
+  let data1 = [29, 38, 25, 27, 26, 29, 31];
+  let data2 = [23, 28, 32, 24, 28, 23, 36];
   let date = ['2017年', '2018年', '2019年', '2020年', '2021年', '2022年'];
   let new_datas = [];
   let new_data = [
@@ -286,8 +305,9 @@ const getContent = () => {
   }
   loadChart(myChar_shangan, new_datas, date, '吨');
 };
-const clickImage = (index: number, indexs: number) => {
-  state.clickIndex = index * 3 + indexs;
+
+const getImgUrl = (url: string) => {
+  return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
 };
 </script>
 
@@ -296,35 +316,7 @@ const clickImage = (index: number, indexs: number) => {
   margin-bottom: 16px;
   height: 160px;
 }
-.bottom_all {
-  width: 100%;
-  height: calc(100% - 455px);
-}
 
-.swiper-box {
-  margin-top: 12px;
-
-  .swiper-content {
-    padding: 0 30px;
-
-    .border-wrapper {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      border: 1px solid #a0d8ff;
-
-      :deep(.el-image) {
-        width: 100%;
-        height: 100%;
-      }
-
-      :deep(.el-image__placeholder) {
-        background: url('@/assets/image/sl_new.gif') center no-repeat;
-        background-size: 100%;
-      }
-    }
-  }
-}
 .swiper-button-prev,
 .swiper-button-next {
   width: 12px;

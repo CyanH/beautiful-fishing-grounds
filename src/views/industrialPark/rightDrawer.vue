@@ -86,9 +86,7 @@ import { RightChart } from './chart/zhwlRight';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
-const getImgUrl = (url: string) => {
-  return new URL(`../../assets/image/industrialPark/${url}`, import.meta.url).href;
-};
+
 let myChar_xm: echarts.ECharts;
 let chartEle_xm = ref<HTMLDivElement | null>(null);
 let myChar_right: echarts.ECharts;
@@ -116,22 +114,23 @@ const state = reactive({
       name: '渔业发展核心区',
     },
     {
-      icon: 'ico_ly.png',
-      name: '游览观光带',
-    },
-  ],
-  breedList: [
-    {
-      breedName: '盐焗罗氏沼虾',
-      img: 'yjlsx.webp',
-      note: '盐焗罗氏沼虾，新鲜罗氏沼虾晒干，水煮盐炯。去虾线，鲜甜美味。经过加工处理、装罐加入调味料、密封、杀菌等工艺',
+      icon: 'ico_yy.png',
+      name: '渔业示范区',
     },
     {
-      breedName: '油焖罗氏沼虾',
-      img: 'ymlsx.png',
-      note: '油焖罗氏沼虾的做法简单，营养丰富，可以调理身体，促进发育，还可以防治高血压和心肌梗塞，孕产妇吃了还可以催乳，儿童吃了对抵抗力和身体发育都有很好的帮助，而且这道油焖罗氏沼虾外观红亮，味道飘香。',
+      icon: 'ico_st.png',
+      name: '生态循坏发展区',
+    },
+    {
+      icon: 'ico_xd.png',
+      name: '现代渔业发展区',
+    },
+    {
+      icon: 'ico_yg.png',
+      name: '渔耕休闲体验区',
     },
   ],
+
   zhwl: [
     {
       name: '覆盖农户',
@@ -181,6 +180,9 @@ const createChart = () => {
   loadXmChart(myChar_xm, 80);
   RightChart(myChar_right);
 };
+const getImgUrl = (url: string) => {
+  return new URL(`../../assets/image/industrialPark/${url}`, import.meta.url).href;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -207,13 +209,8 @@ const createChart = () => {
   font-size: 14px;
   z-index: 7;
 
-  .row:not(:last-child) {
-    margin-bottom: 12px;
-  }
-
   .icon {
-    width: 22px;
-    height: 26px;
+    width: 32px;
     margin-right: 15px;
   }
 }
@@ -222,7 +219,7 @@ const createChart = () => {
   padding-bottom: 15px;
   .video {
     width: 100%;
-    height: 200px;
+    height: 250px;
     margin-top: 8px;
     text-align: center;
     video {
@@ -308,73 +305,8 @@ const createChart = () => {
 }
 .bottom {
   width: 100%;
-  height: calc(100% - 476px);
-  .chanping {
-    width: 100%;
-    height: 150px;
-    position: relative;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    .swiper-container {
-      height: 100%;
-      .swiper-slide {
-        padding: 0 15px;
-        box-sizing: border-box;
-      }
+  height: calc(100% - 526px);
 
-      .card {
-        height: 100%;
-        background: url('@/assets/image/bg.png') center no-repeat;
-        background-size: 100% 100%;
-
-        .title {
-          position: relative;
-          top: 5px;
-          left: 20px;
-          font-size: 16px;
-          .num {
-            font-size: 18px;
-            margin-right: 8px;
-          }
-        }
-
-        .content {
-          height: calc(100% - 21px);
-          padding: 0px 10px 0;
-          box-sizing: border-box;
-
-          img {
-            width: 98px;
-            height: 98px;
-            flex-shrink: 0;
-          }
-
-          .desc {
-            height: 98px;
-            font-size: 13px;
-            line-height: 1.3;
-            letter-spacing: 2px;
-            color: #fff;
-            overflow-y: auto;
-
-            &::-webkit-scrollbar {
-              width: 4px;
-            }
-            &::-webkit-scrollbar-thumb {
-              border-radius: 10px;
-              box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-              background: #324686;
-            }
-            &::-webkit-scrollbar-track {
-              box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-              border-radius: 0;
-              background: rgba(0, 0, 0, 0.1);
-            }
-          }
-        }
-      }
-    }
-  }
   .zhwl {
     height: calc(100% - 29px);
     padding-top: 12px;

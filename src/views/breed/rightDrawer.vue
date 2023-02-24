@@ -34,7 +34,7 @@
         <v-title title="养殖品种" />
         <div class="card">
           <div class="content flex">
-            <img :src="state.breedList.img" style="margin-right: 10px" />
+            <img :src="getImgUrl(state.breedList.img)" style="margin-right: 10px" />
             <div class="right">
               <div class="desc">{{ state.breedList.note }}</div>
             </div>
@@ -68,7 +68,7 @@
                     <img src="@/assets/image/industrialPark/horn.png" class="top-right" />
                     <img src="@/assets/image/industrialPark/horn.png" class="bottom-left" />
                     <img src="@/assets/image/industrialPark/horn.png" class="bottom-right" />
-                    <img :src="cItem.img" class="img" />
+                    <img :src="getImgUrl(cItem.img)" class="img" />
                   </div>
                 </div>
                 <div class="line"></div>
@@ -98,7 +98,7 @@
               <div class="dian dian1"></div>
               <div class="ww">监测点</div>
               <div class="val val1">
-                <span class="s1 num">21</span>
+                <span class="s1 num">5</span>
                 <span class="s2">个</span>
               </div>
             </div>
@@ -106,7 +106,7 @@
               <div class="dian dian2"></div>
               <div class="ww">报警</div>
               <div class="val val2">
-                <span class="s1 num">5</span>
+                <span class="s1 num">1</span>
                 <span class="s2">个</span>
               </div>
             </div>
@@ -126,10 +126,6 @@ import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation }
 import 'swiper/swiper-bundle.min.css';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
-const getImgUrl = (url: string) => {
-  return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
-};
-
 const hasPlayer = ref(false);
 const videoEle = ref<HTMLDivElement | null>(null);
 
@@ -143,27 +139,35 @@ const state = reactive({
 
   breedList: {
     breedName: '罗氏沼虾',
-    img: getImgUrl('qy_1'),
+    img: 'lszx',
     note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
   },
   new_List: [
     {
-      name: '小瓜虫病',
-      otherName: '白点病',
-      mouth: '11',
-      type: 1,
-      img: getImgUrl('qy_1'),
+      name: '幼体综合征',
+      otherName: '红尾病',
+      mouth: '6',
+      type: 2,
+      img: 'hwb',
       symptom:
-        '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。',
+        '发病幼体的症状主要为摄食减少、反应迟钝、活力弱、身体挂脏、肢体发红、空肠、空胃等，并且出现蜕壳不遂而逐渐死亡的现象。',
     },
     {
-      name: '小瓜虫病',
-      otherName: '白点病',
+      name: '幼体弧菌病',
+      otherName: '哈维氏弧菌',
       mouth: '11',
-      type: 1,
-      img: getImgUrl('qy_1'),
+      type: 2,
+      img: 'hwshj',
+      symptom: '发病幼体的症状主要为摄食减少、反应迟钝、活力弱、肌肉不透明或发白、趋光性降低等，严重时沉底并死亡。',
+    },
+    {
+      name: '滴星病',
+      otherName: '拉网综合症',
+      mouth: '3',
+      type: 2,
+      img: 'dxb',
       symptom:
-        '无特征性临床症状，仅见鱼大量死亡。濒死鱼运动失衡，鳃盖张开，头部四周充血；有的病鱼体色发暗，皮肤、鳍条和鳃损伤坏死。EHNV感染鱼体的肝、脾、肾造血组织和其他组织，主要侵害肝细胞、造血细胞和内皮细胞等，导致组织坏死而使鱼死亡。 组织病理学观察，可见肝、脾、肾造血组织呈急性局灶性、多灶性或局部大量凝结性或液化性坏死，肝和肾坏死灶边缘可见少量嗜碱性包涵体。',
+        '“滴星病”是养殖户对罗氏沼虾零星死亡的俗称，发病症状为虾体节断裂、软壳、腹部肌肉发白坏死，主要危害6厘米以上的成虾。',
     },
   ],
 });
@@ -223,150 +227,13 @@ const handleVideoClick = (statu: boolean) => {
   }
   setVideo(state.videoData[state.chooseIndex]);
 };
+
+const getImgUrl = (url: string) => {
+  return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
+};
 </script>
 
 <style lang="scss" scoped>
-.top {
-  padding-bottom: 12px;
-  height: 44%;
-  box-sizing: border-box;
-  .chart {
-    height: calc(100% - 186px);
-  }
-
-  .legend {
-    justify-content: end;
-  }
-
-  .title {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 16px;
-    padding: 0 8px 8px;
-    cursor: pointer;
-
-    &:not(:nth-of-type(1)) {
-      margin-left: 40px;
-    }
-  }
-
-  .active {
-    position: relative;
-    color: #2fddff;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 2px;
-      width: 100%;
-      background: linear-gradient(to right, transparent 0, #3cf8ff 15%, #3cf8ff 85%, transparent 100%);
-    }
-  }
-
-  .progress-container {
-    height: 120px;
-    // overflow-y: auto;
-    // padding-right: 5px;
-    overflow: hidden;
-    .row {
-      margin-bottom: 10px;
-    }
-
-    .order {
-      color: #00f6ff;
-      font-size: 18px;
-      margin-right: 10px;
-    }
-    .label {
-      color: #fff;
-      font-size: 14px;
-    }
-
-    .value {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.64);
-
-      .num {
-        font-size: 20px;
-        color: #fff;
-        margin-right: 5px;
-      }
-    }
-
-    .progress-bar {
-      width: 100%;
-
-      .el-progress-bar__outer {
-        height: 6px;
-        border-radius: 5px;
-        background-color: rgba(219, 255, 248, 0.12);
-
-        .el-progress-bar__inner {
-          border-radius: 25px;
-          top: 50%;
-          transform: translateY(-50%);
-          background: linear-gradient(90deg, #1c51ea, #11fffc);
-
-          &::after {
-            position: absolute;
-            border-radius: 25px;
-            width: 100%;
-            left: -100%;
-            background: inherit;
-            animation: progress-bar-stripes 3s linear 2s infinite;
-          }
-
-          @keyframes progress-bar-stripes {
-            0% {
-              left: -100%;
-            }
-            to {
-              left: 0;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.middle {
-  height: 38%;
-  .nav {
-    padding: 15px 0;
-    .title {
-      height: 32px;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 18px;
-      padding: 0 8px;
-      cursor: pointer;
-
-      &:not(:nth-of-type(1)) {
-        margin-left: 40px;
-      }
-    }
-
-    .active {
-      position: relative;
-      color: #2fddff;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        width: 100%;
-        background: linear-gradient(to right, transparent 0, #3cf8ff 15%, #3cf8ff 85%, transparent 100%);
-      }
-    }
-  }
-  .content {
-    height: calc(100% - 100px);
-  }
-}
-
 .swiper-container {
   width: 100%;
 }

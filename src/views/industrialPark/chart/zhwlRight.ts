@@ -37,7 +37,7 @@ export function RightChart(myChart: echarts.ECharts) {
     {
       name: '设备',
       type: 'pie',
-      radius: ['66%', '80%'],
+      radius: ['66%', '78%'],
       center: ['30%', '50%'],
       itemStyle: {
         normal: {

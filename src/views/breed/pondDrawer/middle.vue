@@ -39,7 +39,7 @@
                       <img src="@/assets/image/industrialPark/horn.png" class="top-right" />
                       <img src="@/assets/image/industrialPark/horn.png" class="bottom-left" />
                       <img src="@/assets/image/industrialPark/horn.png" class="bottom-right" />
-                      <img :src="returnImgUrl(cItem.picList)" class="img" />
+                      <img :src="getImgUrl(cItem.img)" class="img" />
                     </div>
                   </div>
                   <div class="line"></div>
@@ -87,7 +87,7 @@
             <img src="@/assets/image/industrialPark/horn.png" class="top-right" />
             <img src="@/assets/image/industrialPark/horn.png" class="bottom-left" />
             <img src="@/assets/image/industrialPark/horn.png" class="bottom-right" />
-            <img :src="returnImgUrl(state.form.picList)" class="img" />
+            <img :src="getImgUrl(state.form.img)" class="img" />
           </div>
         </div>
         <div class="line"></div>
@@ -100,7 +100,7 @@
           <span class="value">{{ state.form.reason }}</span>
         </div>
         <div style="margin-top: 15px">
-          <div class="label" style="float: left">治疗方案</div>
+          <div class="label" style="float: left">防控措施</div>
           <span class="value">{{ state.form.preventMethod }}</span>
         </div>
       </card-view>
@@ -113,17 +113,67 @@ import cardView from './card.vue';
 import topView from './middle/top.vue';
 
 import { onMounted, reactive, ref, nextTick } from 'vue';
-import { pondEpidemicKnowledge } from '@/api/breed';
-import { useBreedStore } from '@/store';
 import { Close } from '@element-plus/icons-vue';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
-const breedStore = useBreedStore();
 const bchShow = ref(false);
 const state = reactive({
-  bchList: [] as any[],
+  bchList: [
+    [
+      {
+        name: '幼体综合征',
+        otherName: '红尾病',
+        mouth: '6',
+        type: 2,
+        img: 'hwb',
+        symptom:
+          '发病幼体的症状主要为摄食减少、反应迟钝、活力弱、身体挂脏、肢体发红、空肠、空胃等，并且出现蜕壳不遂而逐渐死亡的现象。',
+        reason: '肠杆菌属和弧菌属等细菌感染引起。',
+        preventMethod:
+          '由于肠杆菌属及弧菌属细菌容易产生耐药性，育苗生产过程应避免滥用药物的现象发生，防止滥用药物导致细菌的耐药性增强，应通过药敏试验筛选药物，科学用药，避免出现耐药菌株。此外，还可以通过泼洒益生菌以及抗菌中草药制剂等抗生素替代品进行防控。',
+      },
+      {
+        name: '幼体弧菌病',
+        otherName: '哈维氏弧菌',
+        mouth: '11',
+        type: 2,
+        img: 'hwshj',
+        symptom: '发病幼体的症状主要为摄食减少、反应迟钝、活力弱、肌肉不透明或发白、趋光性降低等，严重时沉底并死亡。',
+        reason: '哈氏弧菌、溶藻弧菌、副溶血弧菌、非O1霍乱弧菌、创伤弧菌等弧菌属种类感染引起。',
+        preventMethod:
+          '①育苗前用100～200毫克/升的漂白粉彻底消毒育苗池；②密度控制在10万～15万尾/米3 水体，不宜过高；③投喂优质饵料；④育苗期间加强换水，并通过全池泼洒芽孢杆菌、乳酸菌、硝化细菌等益生菌调节水质，控制微生物的含量。',
+      },
+    ],
+    [
+      {
+        name: '滴星病',
+        otherName: '拉网综合症',
+        mouth: '3',
+        type: 2,
+        img: 'dxb',
+        symptom:
+          '“滴星病”是养殖户对罗氏沼虾零星死亡的俗称，发病症状为虾体节断裂、软壳、腹部肌肉发白坏死，主要危害6厘米以上的成虾。',
+        reason:
+          '气单胞菌属的嗜水气单胞菌及维氏气单胞菌等病原感染引起，导致罗氏沼虾体质下降、免疫能力差，并造成散发性死亡。此外，连续阴雨、暴雨、天气闷热、昼夜温差大等气候境恶变引起罗氏沼虾应激，以及养殖塘口底质和恶化等因素，导致病原细菌滋生，从而引发罗氏沼虾散发性死亡。',
+        preventMethod:
+          '①干塘后要清除淤泥，注重晒塘，放苗前使用150千克/亩的生石灰彻底清塘；②选择经过严格检疫且无特定病原的优质虾苗；③罗氏沼虾放苗控制在6万～7万尾/亩；④投喂优质饲料，且蛋白质水平不宜过高；⑤在养殖过程中，定期在饲料中添加中草药制剂、益生菌、抗应激制剂及免疫多糖等，提高罗氏沼虾免疫力与抗病力；⑥交替使用碘制剂、氯制剂等消毒剂；⑦定期使用微生态制剂调节水质，并改善底质；⑧养殖后期可定期使用肥水制剂来保持水体肥、活、嫩、爽；⑨养殖环境发生变化，如恶劣天气，应及时使用抗应激药、消毒剂等。',
+      },
+      {
+        name: '甲壳溃疡病',
+        otherName: '褐斑病',
+        mouth: '8',
+        type: 2,
+        img: 'hbb',
+        symptom:
+          '病虾体表甲壳有斑点状黑褐色的溃疡，溃疡的中部凹陷，边缘呈白色，褐斑大小不定，在虾体的各个部位都可发生，在头胸甲和腹部前三节的背面发生较多，有时触角、尾扇和其他附肢也会出现褐斑和烂断，在断痕处也呈褐斑，同时患病虾游泳和摄食能力下降，严重影响虾的生长蜕壳。',
+        reason:
+          '主要是非O1霍乱弧菌、嗜水气单胞菌、维氏气单胞菌、铜绿假单胞菌、恶臭假单胞菌等具有分解几丁质能力的细菌感染引起。',
+        preventMethod: '①投喂优质饵料以保证营养；②交替使用碘制剂、氯制剂等进行消毒；③全池泼洒维生素C，避免虾出现应激。',
+      },
+    ],
+  ],
   form: {} as any,
 });
 
@@ -132,34 +182,21 @@ onMounted(() => {
 });
 
 const getData = () => {
-  pondEpidemicKnowledge({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
-    state.bchList = splitArray(res, 2);
-
-    nextTick(() => {
-      new Swiper('.bch', {
-        navigation: {
-          nextEl: '.bch-next',
-          prevEl: '.bch-prev',
-          hideOnClick: true,
-        },
-        spaceBetween: 16,
-        autoplay: {
-          delay: 4000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
-      });
+  nextTick(() => {
+    new Swiper('.bch', {
+      navigation: {
+        nextEl: '.bch-next',
+        prevEl: '.bch-prev',
+        hideOnClick: true,
+      },
+      spaceBetween: 16,
+      autoplay: {
+        delay: 4000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      },
     });
   });
-};
-
-//轮播图分组
-const splitArray = (arr: any[], size: number) => {
-  let data = [];
-  for (let i = 0; i < arr.length; i += size) {
-    data.push(arr.slice(i, i + size));
-  }
-  return data;
 };
 
 const handleBchClick = (item: any) => {
@@ -167,10 +204,8 @@ const handleBchClick = (item: any) => {
   bchShow.value = true;
 };
 
-const returnImgUrl = (item: any) => {
-  if (item && item.length > 0) {
-    return import.meta.env.VITE_APP_SERVE_API + '/file' + item[0].address;
-  }
+const getImgUrl = (url: string) => {
+  return new URL(`../../../assets/image/breed/${url}.png`, import.meta.url).href;
 };
 </script>
 
@@ -303,7 +338,7 @@ const returnImgUrl = (item: any) => {
   color: #fff;
   font-size: 14px;
 }
-.values{
+.values {
   // width: calc(100% - 180px);
   overflow: hidden;
   text-overflow: ellipsis;

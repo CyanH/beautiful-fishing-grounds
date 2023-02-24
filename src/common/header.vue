@@ -38,7 +38,7 @@ const degree = ref(25);
 const chooseList = [
   {
     icon: 'cyyq',
-    name: '总体规划',
+    name: '渔场分析',
     url: '/index',
     bg: 'cyyq_not',
     chooseBg: 'cyyq_c',
@@ -52,7 +52,7 @@ const chooseList = [
   },
   {
     icon: 'szsw',
-    name: 'AR全景',
+    name: '智能物联',
     url: '/digital',
     bg: 'szsw_not',
     chooseBg: 'szsw_c',
