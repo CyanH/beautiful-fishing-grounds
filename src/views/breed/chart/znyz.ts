@@ -4,7 +4,7 @@ export function znyz(myChart: echarts.ECharts) {
   const chartData = [
     {
       value: 5,
-      name: '监测点',
+      name: '正常',
     },
     {
       value: 1,

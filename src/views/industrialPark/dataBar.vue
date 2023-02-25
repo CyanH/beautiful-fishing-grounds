@@ -29,8 +29,8 @@ const list = reactive([
   {
     icon: 'ico_tk',
     name: '塘口',
-    value: 327,
-    unit: '个',
+    value: 981,
+    unit: '口',
   },
   {
     icon: 'ico_yz',

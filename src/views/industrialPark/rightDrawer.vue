@@ -98,7 +98,7 @@ const state = reactive({
   list: [
     {
       icon: 'ico_qxz.png',
-      name: '气象设备(3)',
+      name: '气象设备(1)',
     },
     {
       icon: 'ico_sz.png',
@@ -106,7 +106,7 @@ const state = reactive({
     },
     {
       icon: 'ico_sxt.png',
-      name: '摄像头(2)',
+      name: '摄像头(3)',
     },
   ],
 

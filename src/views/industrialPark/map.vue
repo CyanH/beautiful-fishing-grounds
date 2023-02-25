@@ -19,60 +19,52 @@ let lineLayer: mars3d.layer.GeoJsonLayer;
 const state = reactive({
   equip: [
     {
-      name: '气象站一',
-      lng: 112.483902,
-      lat: 22.98053,
+      name: '美丽渔场气象站',
+      lng: 112.450172,
+      lat: 22.918249,
       img: qxzImg,
       type: 'qxz',
-      id: '40214754',
-    },
-    {
-      name: '气象站二',
-      lng: 112.54415,
-      lat: 23.013984,
-      img: qxzImg,
-      type: 'qxz',
-      id: '40214755',
-    },
-    {
-      name: '气象站三',
-      lng: 112.608403,
-      lat: 22.997669,
-      img: qxzImg,
-      type: 'qxz',
-      id: '40236129',
+      id: '40236136',
     },
     {
       name: '水质一',
-      lng: 112.573806,
-      lat: 22.940526,
+      lng: 112.4456,
+      lat: 22.900304,
       img: szImg,
       type: 'sz',
       id: '21048579',
     },
     {
       name: '水质二',
-      lng: 112.52251,
-      lat: 22.94918,
+      lng: 112.470937,
+      lat: 22.914863,
       img: szImg,
       type: 'sz',
       id: '21048581',
     },
     {
       name: '摄像头二',
-      lng: 112.54036,
-      lat: 22.986232,
+      lng: 112.429333,
+      lat: 22.909255,
       img: sxtImg,
       type: 'sxt',
       id: '6ba781c68c87465cbc82852ca4fff7b7',
     },
     {
       name: '摄像头一',
-      lng: 112.595962,
-      lat: 23.001834,
+      lng: 112.472793,
+      lat: 22.874393,
       img: sxtImg,
       type: 'sxt',
       id: '9df56f32710840c1a1ac1121bb5aac48',
+    },
+    {
+      name: '摄像头三',
+      lng: 112.493056,
+      lat: 22.962187,
+      img: sxtImg,
+      type: 'sxt',
+      id: '05c149b797194dc4b0248e6d12a89b2b',
     },
   ],
 });
@@ -187,7 +179,7 @@ const createEquip = () => {
       return attr.name;
     },
     {
-      offsetY: -40,
+      offsetY: -70,
     }
   );
 };

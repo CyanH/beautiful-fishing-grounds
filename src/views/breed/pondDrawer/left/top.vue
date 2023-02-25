@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="flex">
-        <canvas id="qrCode" width="76" height="76" style="margin-right: 10px"></canvas>
+        <img src="@/assets/image/industrialPark/qy_2.png" class="img" />
         <div class="desc">
           罗氏沼虾（学名：Macrobrachium
           rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。
@@ -82,6 +82,11 @@ const createQrCode = () => {
 <style lang="scss" scoped>
 .top {
   height: 32%;
+}
+
+.img {
+  width: 76px;
+  height: 76px;
 }
 
 .bar {

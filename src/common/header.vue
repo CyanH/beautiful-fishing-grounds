@@ -31,7 +31,7 @@ const router = useRouter();
 
 const date = ref(parseTime(new Date(), '{y}年{m}月{d}日'));
 const week = ref(parseTime(new Date(), '{a}'));
-const time = ref(parseTime(new Date(), '{h}:{m}:{s}'));
+const time = ref(parseTime(new Date(), '{h}:{i}:{s}'));
 const weather = ref('');
 const degree = ref(25);
 
@@ -66,7 +66,7 @@ const handleChoose = (item: any, index: number) => {
 
 onMounted(() => {
   setInterval(() => {
-    time.value = parseTime(new Date(), '{h}:{m}:{s}');
+    time.value = parseTime(new Date(), '{h}:{i}:{s}');
   }, 1000);
 
   setInterval(() => {

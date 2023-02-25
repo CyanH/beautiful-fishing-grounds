@@ -23,15 +23,15 @@ const plantStore = useBreedStore();
 let state = reactive({
   weatherData: [
     {
+      icon: 'wd',
+      name: '水温',
+      value: 1,
+      unit: '℃',
+    },
+    {
       icon: 'ph',
       name: 'Ph',
       value: 7,
-    },
-    {
-      icon: 'ddl',
-      name: '电导率',
-      value: 1,
-      unit: 'ms/cm',
     },
     {
       icon: 'rjy',
@@ -40,16 +40,17 @@ let state = reactive({
       unit: 'mg/L',
     },
     {
+      icon: 'ddl',
+      name: '电导率',
+      value: 1,
+      unit: 'ms/cm',
+    },
+
+    {
       icon: 'zd',
       name: '浊度',
       value: 1,
       unit: 'ntu',
-    },
-    {
-      icon: 'wd',
-      name: '水温',
-      value: 1,
-      unit: '℃',
     },
   ],
 });

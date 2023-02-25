@@ -3,20 +3,17 @@
     <v-card>
       <div class="top">
         <v-title title="养殖企业" />
-        <div class="content">
-          肇庆市高要区伟铭养殖专业合作社于2019年4月成立。社员包括陈伟强等17位养殖户，养殖面积1000多亩。合作社位于高要区白土镇六塑，周边交通便利，环境优越。合作社推行标准化养殖，推广科学健康养殖模式，养殖设施完普。
-        </div>
         <div class="swiper-box">
           <div class="swiper-container img-swiper">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="(item, index) in state.picList">
+              <div class="swiper-slide" v-for="(item, index) in state.content">
+                <div class="content">{{ item.desc }}</div>
                 <div class="swiper-content flex-between">
-                  <div class="border-wrapper" v-for="(cItem, indexs) in item">
+                  <div class="border-wrapper" v-for="(cItem, indexs) in item.picList">
                     <el-image
-                      :src="cItem"
+                      :src="getImgUrl(cItem)"
                       preview-teleported
-                      :initial-index="state.clickIndex"
-                      :preview-src-list="state.previewList"
+                      :preview-src-list="[getImgUrl(cItem)]"
                       @click="clickImage(index, indexs)"
                     />
                   </div>
@@ -146,8 +143,17 @@ const getImgUrl = (url: string) => {
 
 const state = reactive({
   clickIndex: 0,
-  picList: [[getImgUrl('qy_1'), getImgUrl('qy_2'), getImgUrl('qy_3')]],
-  previewList: [getImgUrl('qy_1'), getImgUrl('qy_2'), getImgUrl('qy_3')],
+  content: [
+    {
+      desc: '肇庆市高要区伟铭养殖专业合作社于2019年4月成立。社员包括陈伟强等17位养殖户，养殖面积1000多亩。合作社位于高要区白土镇六塱，周边交通便利，环境优越。',
+      picList: ['qy_1', 'qy_2', 'qy_3'],
+    },
+    {
+      desc: '肇庆市伟之铭农业科技有限公司是一家致力于打造罗氏沼虾养殖一体化服务平台的科技企业，专业从事水产动保产品的研发、生产、销售及生态、健康、高效水产养殖技术的推广。由多名资深罗氏沼虾养殖专业出身的人才组成市场服务团队，将围绕对罗氏沼虾品种的水质调节、底质改良、病害防控、促生长保健、品质改善等养殖环节提供专业化服务，为肇庆市高要罗氏沼虾产业养殖健康可持续发展贡献力量。',
+      picList: ['qy_4', 'qy_5', 'qy_6'],
+    },
+  ],
+
   breedList: [
     {
       breedName: '罗氏沼虾',
@@ -183,11 +189,28 @@ const clickImage = (index: number, indexs: number) => {
 .top {
   padding-bottom: 8px;
   .content {
-    padding-top: 12px;
     font-size: 14px;
     letter-spacing: 1px;
     line-height: 18px;
     text-indent: 2em;
+    height: 66px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 0 30px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: #324686;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 0;
+      background: rgba(0, 0, 0, 0.1);
+    }
   }
   .esc {
     height: 200px;
@@ -333,7 +356,7 @@ const clickImage = (index: number, indexs: number) => {
 }
 .bottom_all {
   width: 100%;
-  height: calc(100% - 445px);
+  height: calc(100% - 424px);
 }
 
 .middle {
@@ -397,12 +420,13 @@ const clickImage = (index: number, indexs: number) => {
   margin-top: 12px;
 
   .swiper-content {
+    margin-top: 8px;
     padding: 0 30px;
 
     .border-wrapper {
       position: relative;
-      width: 110px;
-      height: 110px;
+      width: 100px;
+      height: 100px;
       border: 1px solid #a0d8ff;
 
       :deep(.el-image) {

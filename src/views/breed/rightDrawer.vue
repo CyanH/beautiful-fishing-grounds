@@ -87,7 +87,7 @@
           <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
         </div>
       </div>
-      <v-title title="智能养殖分布" />
+      <v-title title="智能设备状态" />
       <div class="zdyz">
         <div class="zdyz_left">
           <div class="chart" ref="zdyz"></div>
@@ -96,7 +96,7 @@
           <div class="zdyz_zhongj">
             <div class="hang">
               <div class="dian dian1"></div>
-              <div class="ww">监测点</div>
+              <div class="ww">正常</div>
               <div class="val val1">
                 <span class="s1 num">5</span>
                 <span class="s2">个</span>

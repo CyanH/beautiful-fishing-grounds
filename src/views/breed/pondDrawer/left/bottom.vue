@@ -33,6 +33,18 @@ const breedStore = useBreedStore();
 const state = reactive({
   waterData: [
     {
+      icon: 'wd',
+      name: '水温',
+      value: 1,
+      unit: '℃',
+    },
+    {
+      icon: 'rjy',
+      name: '溶解氧',
+      value: 1,
+      unit: 'mg/L',
+    },
+    {
       icon: 'ph',
       name: 'Ph',
       value: 7,
@@ -43,23 +55,12 @@ const state = reactive({
       value: 1,
       unit: 'ms/cm',
     },
-    {
-      icon: 'rjy',
-      name: '溶解氧',
-      value: 1,
-      unit: 'mg/L',
-    },
+
     {
       icon: 'zd',
       name: '浊度',
       value: 1,
       unit: 'ntu',
-    },
-    {
-      icon: 'wd',
-      name: '水温',
-      value: 1,
-      unit: '℃',
     },
   ],
 });

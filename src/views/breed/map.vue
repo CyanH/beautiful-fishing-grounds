@@ -41,28 +41,12 @@ const chooseIndex = ref(0);
 const state = reactive({
   she_b: [
     {
-      name: '气象站一',
+      name: '美丽渔场气象站',
       lng: 112.610074,
       lat: 23.010876,
       img: qxzImg,
       type: 'qxz',
-      id: '40214754',
-    },
-    {
-      name: '气象站二',
-      lng: 112.609087,
-      lat: 23.002071,
-      img: qxzImg,
-      type: 'qxz',
-      id: '40214755',
-    },
-    {
-      name: '气象站三',
-      lng: 112.602989,
-      lat: 23.013243,
-      img: qxzImg,
-      type: 'qxz',
-      id: '40236129',
+      id: '40236136',
     },
     {
       name: '水质一',
@@ -105,7 +89,7 @@ const state = reactive({
     {
       icon: 'ico_qxz.png',
       name: '气象设备',
-      value: 3,
+      value: 1,
     },
     {
       icon: 'ico_sz.png',
@@ -115,7 +99,7 @@ const state = reactive({
     {
       icon: 'ico_sxt.png',
       name: '视频监控',
-      value: 2,
+      value: 3,
     },
   ],
 });

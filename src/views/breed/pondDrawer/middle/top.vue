@@ -34,12 +34,6 @@
                 <span class="label">作业内容</span>
                 <span class="value">{{ item.info }}</span>
               </div>
-
-              <div class="flex">
-                <!-- <div class="imgBox" v-for="cItem in item.pidList.slice(0, 2)">
-                  <img :src="returnImgUrl(cItem)" />
-                </div> -->
-              </div>
             </div>
           </el-collapse-item>
         </el-collapse>
@@ -84,15 +78,21 @@ onMounted(() => {
 
 const getData = () => {
   pondGetYzda({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
-    state.list = res;
+    state.list = res.sort(compare);
   });
   pondConfigRecords({ plantMassifId: breedStore.plantMassif.id, size: 50 }).then((res: any) => {
     state.warnList = res.content;
   });
 };
 
-const returnImgUrl = (img: string) => {
-  return import.meta.env.VITE_APP_SERVE_API + '/file' + img;
+const compare = (obj1: any, obj2: any) => {
+  if (obj1.date < obj2.date) {
+    return -1;
+  } else if (obj1.date > obj2.date) {
+    return 1;
+  } else {
+    return 0;
+  }
 };
 </script>
 
