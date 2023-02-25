@@ -9,7 +9,7 @@
         <div style="width: 33%; text-align: center">
           <div class="name" style="margin-bottom: 5px">面积</div>
           <div class="value">
-            <span class="num">{{ state.form.plantMassifArea }}</span>
+            <span class="num">6.8</span>
             <span style="margin-left: 5px">亩</span>
           </div>
         </div>
@@ -17,7 +17,7 @@
         <div style="width: 33%; text-align: center">
           <div class="name" style="margin-bottom: 5px">预估产量</div>
           <div class="value">
-            <span class="num">{{ state.form.ygcl }}</span>
+            <span class="num">2.5</span>
             <span style="margin-left: 5px">吨</span>
           </div>
         </div>

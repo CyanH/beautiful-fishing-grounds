@@ -7,7 +7,7 @@
 
     <div v-show="route.path !== '/digital'">
       <div id="marsMap" class="mars3d-container"></div>
-      <div class="logo">美丽渔场</div>
+      <img class="logo" src="@/assets/image/common/zg.png" />
     </div>
     <video-view v-if="route.path === '/digital'" />
   </div>
@@ -62,7 +62,7 @@ const initMap = async () => {
 
 .logo {
   position: absolute;
-  left: 15px;
-  bottom: 15px;
+  left: 5px;
+  bottom: 5px;
 }
 </style>

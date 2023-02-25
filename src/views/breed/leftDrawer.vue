@@ -78,15 +78,17 @@
   </v-drawer>
 
   <div class="warn">
-    <img src="@/assets/image/xia.png" class="fish" />
     <img src="@/assets/image/breed/bg.png" class="bg" />
+    <img src="@/assets/image/breed/pao.png" class="pao1" />
+    <img src="@/assets/image/breed/pao.png" class="pao2" />
+
     <div class="title">智能预警</div>
     <div class="content">
       <vue3-seamless-scroll :list="state.warnList" :step="0.3" :hover="true" :limitScrollNum="5">
         <div v-for="(item, index) in state.warnList" class="">
           <div class="flex">
             <img src="@/assets/image/breed/warn.png" class="tip" />
-            <span class="desc">{{ item.exceptionInfo }}</span>
+            <span class="desc">{{ item.desc }}</span>
           </div>
           <div class="line"></div>
         </div>
@@ -102,7 +104,6 @@ import { loadChart } from './chart/crtChart';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-import { configRecords } from '@/api/breed';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 let myChar_shangan: echarts.ECharts;
@@ -209,7 +210,17 @@ const state = reactive({
       unit: '℃',
     },
   ],
-  warnList: [] as any[],
+  warnList: [
+    { desc: '塘口16中的水质检测二当前浊度为4.30NTU，低于阀值495.70NTU, 请注意处理!' },
+    { desc: '塘口21中的水质检测四当前电导率为9562.00us/cm，高于阀值9554.00us/cm, 请注意处理!' },
+    { desc: '塘口3中的气象站三当前空气湿度为86.10%, 高于阀值66.10%, 请注意处理!' },
+    { desc: '塘口18中的水质检测二当前溶解氧为19.00mg/L，低于阀值96.09mg/L, 请注意处理!' },
+    { desc: '塘口11中的气象站五当前风速为1.20m/s, 低于阀值48.80m/s, 请注意处理!' },
+    { desc: '塘口4中的水质检测一当前温度为16.20℃, 高于阀值8.20℃, 请注意处理!' },
+    { desc: '塘口13中的气象站二当前温度为18.60℃, 低于阀值31.40℃, 请注意处理!' },
+    { desc: '塘口8中的水质检测三当前ph值为7.96，低于阀值1665.00, 请注意处理!' },
+    { desc: '塘口31中的气象站一当前光照为28694.00lux, 低于阀值1306.00lux, 请注意处理!' },
+  ],
 });
 
 onMounted(() => {
@@ -233,14 +244,7 @@ onMounted(() => {
     myChar_shangan.resize();
   });
   getContent();
-  getData();
 });
-
-const getData = () => {
-  configRecords({ warning: 0, size: 50 }).then((res: any) => {
-    state.warnList = res.content;
-  });
-};
 
 const getContent = () => {
   let data1 = [29, 38, 25, 27, 26, 29, 31];
@@ -404,10 +408,10 @@ const getImgUrl = (url: string) => {
 }
 .yzhj {
   width: 100%;
-  height: 150px;
+  height: 130px;
   margin: 16px auto;
   .container {
-    padding-top: 20px;
+    padding-top: 5px;
     flex-wrap: wrap;
 
     .bar {
@@ -439,10 +443,9 @@ const getImgUrl = (url: string) => {
 }
 .szhj {
   width: 100%;
-  height: 150px;
+  height: 130px;
   margin: 16px auto;
   .container {
-    padding-top: 20px;
     flex-wrap: wrap;
 
     .bar {
@@ -474,7 +477,7 @@ const getImgUrl = (url: string) => {
 }
 .crt {
   width: 100%;
-  height: calc(100% - 640px);
+  height: calc(100% - 590px);
   .chart {
     width: 100%;
     height: 100%;
@@ -484,19 +487,50 @@ const getImgUrl = (url: string) => {
 .warn {
   position: absolute;
   left: 27%;
-  bottom: 60px;
+  bottom: 15px;
   z-index: 10;
-  .fish {
-    // width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: -40px;
-    left: 0px;
-    transform: rotateY(180deg);
-  }
 
   .bg {
     width: 356px;
+  }
+
+  .pao1 {
+    position: absolute;
+    bottom: 42px;
+    left: 58px;
+    animation: up1 3s linear infinite;
+  }
+
+  @keyframes up1 {
+    0% {
+      scale: 0.3;
+    }
+
+    100% {
+      scale: 1;
+      transform: translate(16px, -24px);
+    }
+  }
+
+  .pao2 {
+    position: absolute;
+    bottom: 42px;
+    left: 45px;
+    animation: up2 3s linear infinite;
+    opacity: 0;
+    scale: 0.5;
+  }
+
+  @keyframes up2 {
+    75% {
+      scale: 0.7;
+      opacity: 1;
+    }
+
+    100% {
+      scale: 1;
+      transform: translate(6px, -16px);
+    }
   }
 
   .title {
@@ -509,11 +543,11 @@ const getImgUrl = (url: string) => {
   .content {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 37%;
     transform: translate(-50%, -50%);
     width: 85%;
     overflow-y: hidden;
-    height: 210px;
+    height: 52px;
     .tip {
       width: 26px;
       margin-right: 15px;

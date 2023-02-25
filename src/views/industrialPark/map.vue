@@ -12,8 +12,7 @@ import sxtImg from '@/assets/image/breed/ico_sxt.svg';
 const commonStore = useCommonStore();
 const breedStore = useBreedStore();
 const graphicLayer = new mars3d.layer.GraphicLayer();
-const equipLayer = new mars3d.layer.GraphicLayer();
-const quanLayer = new mars3d.layer.GraphicLayer();
+const equipLayer = new mars3d.layer.GraphicLayer({ show: false });
 let wall: mars3d.layer.GeoJsonLayer;
 let lineLayer: mars3d.layer.GeoJsonLayer;
 
@@ -82,6 +81,11 @@ onMounted(() => {
   mars3d.Util.fetchJson({ url: 'config/config.json' }).then((data: any) => {
     commonStore.map?.setOptions(data.map3d);
     commonStore.map!.fixedLight = false;
+    commonStore.map!.scene.light = new mars3d.Cesium.DirectionalLight({
+      //固定光源，不用太阳光
+      direction: new mars3d.Cesium.Cartesian3(112.595962, 23.001834, 3080),
+      intensity: 0.8,
+    });
 
     createLayer();
   });
@@ -99,8 +103,8 @@ const addMap = () => {
   // 安徽省卫星底图
   const imageGraphic = new mars3d.graphic.RectanglePrimitive({
     positions: [
-      [112.18035, 22.77240718],
-      [112.82898324999999, 23.43693033],
+      [112.18985, 22.76940718],
+      [112.82898324999999, 23.43623033],
     ],
     style: {
       materialType: mars3d.MaterialType.Image2,
@@ -118,9 +122,12 @@ const addMap = () => {
     symbol: {
       type: 'wallP',
       styleOptions: {
+        addHeight: 1000,
         diffHeight: diffHeight, // 墙高
         materialType: mars3d.MaterialType.ODLine,
         materialOptions: {
+          color: '#70f3fc',
+          bgColor: 'rgba(112, 243, 252, 0.3)',
           speed: 2,
         },
       },
@@ -131,7 +138,6 @@ const addMap = () => {
 
 const createEquip = () => {
   commonStore.map?.addLayer(equipLayer);
-  commonStore.map?.addLayer(quanLayer);
   state.equip.map((it) => {
     let pixe = [] as any;
     if (it.type == 'qxz') {
@@ -145,10 +151,11 @@ const createEquip = () => {
     const graphic = new mars3d.graphic.BillboardEntity({
       position: new mars3d.LngLatPoint(it.lng, it.lat, 0), // 经纬度
       attr: it, // 这个图标的信息
+
       style: {
         image: it.img,
-        scale: 0.7,
-
+        scale: 0.8,
+        verticalOrigin: mars3d.Cesium.VerticalOrigin.BOTTOM,
         scaleByDistance: true,
         scaleByDistance_far: 1000000,
         scaleByDistance_near: 1,
@@ -157,25 +164,11 @@ const createEquip = () => {
         highlight: {
           type: mars3d.EventType.click,
           // color: "#ffff00",
-          scale: 1,
+          // scale: 1.5,
         },
       },
     });
-    // 圆 CircleEntity
-    const circle = new mars3d.graphic.CircleEntity({
-      position: new mars3d.LngLatPoint(it.lng, it.lat, 0),
-      attr: it, // 这个图标的信息
-      style: {
-        radius: 900.0, // 大小
-        materialType: mars3d.MaterialType.CircleWave, // 类型：圆形: 波纹扩散
-        materialOptions: {
-          color: 'rgb(0,255,255)',
-          count: 2, // 单个圆圈
-          speed: 8, // 速度，越大越快
-        },
-      },
-    });
-    quanLayer.addGraphic(circle);
+
     equipLayer.addGraphic(graphic);
   });
 
@@ -199,10 +192,17 @@ const createEquip = () => {
   );
 };
 
+emitter.on('chooseEquip', (val) => {
+  if (val) {
+    equipLayer.show = true;
+  } else {
+    equipLayer.show = false;
+  }
+});
+
 onUnmounted(() => {
   commonStore.map?.removeLayer(graphicLayer);
   commonStore.map?.removeLayer(equipLayer);
-  commonStore.map?.removeLayer(quanLayer);
   commonStore.map?.removeLayer(wall);
   commonStore.map?.removeLayer(lineLayer);
 });

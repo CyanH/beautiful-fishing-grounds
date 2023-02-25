@@ -24,7 +24,7 @@
             <div v-for="(item, index) in state.warnList">
               <div class="flex">
                 <img src="@/assets/image/breed/warn.png" class="tip" />
-                <span class="desc">{{ item.exceptionInfo }}</span>
+                <span class="desc">{{ item.desc }}</span>
               </div>
               <div class="line"></div>
             </div>
@@ -36,8 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { configRecords } from '@/api/breed';
-import { onMounted, reactive } from 'vue';
+import { reactive } from 'vue';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 
 const state = reactive({
@@ -73,18 +72,18 @@ const state = reactive({
       unit: 'ntu',
     },
   ],
-  warnList: [] as any[],
+  warnList: [
+    { desc: '塘口16中的水质检测二当前浊度为4.30NTU，低于阀值495.70NTU, 请注意处理!' },
+    { desc: '塘口21中的水质检测四当前电导率为9562.00us/cm，高于阀值9554.00us/cm, 请注意处理!' },
+    { desc: '塘口3中的气象站三当前空气湿度为86.10%, 高于阀值66.10%, 请注意处理!' },
+    { desc: '塘口18中的水质检测二当前溶解氧为19.00mg/L，低于阀值96.09mg/L, 请注意处理!' },
+    { desc: '塘口11中的气象站五当前风速为1.20m/s, 低于阀值48.80m/s, 请注意处理!' },
+    { desc: '塘口4中的水质检测一当前温度为16.20℃, 高于阀值8.20℃, 请注意处理!' },
+    { desc: '塘口13中的气象站二当前温度为18.60℃, 低于阀值31.40℃, 请注意处理!' },
+    { desc: '塘口8中的水质检测三当前ph值为7.96，低于阀值1665.00, 请注意处理!' },
+    { desc: '塘口31中的气象站一当前光照为28694.00lux, 低于阀值1306.00lux, 请注意处理!' },
+  ],
 });
-
-onMounted(() => {
-  getData();
-});
-
-const getData = () => {
-  configRecords({ warning: 0, size: 20 }).then((res: any) => {
-    state.warnList = res.content;
-  });
-};
 
 const setImageUrl = (name: string) => {
   return new URL(`../../assets/image/breed/${name}.png`, import.meta.url).href;

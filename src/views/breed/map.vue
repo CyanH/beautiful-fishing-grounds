@@ -27,6 +27,7 @@ import emitter from '@/utils/eventbus';
 import qxzImg from '@/assets/image/breed/ico_qxz.svg';
 import szImg from '@/assets/image/breed/ico_sz.svg';
 import sxtImg from '@/assets/image/breed/ico_sxt.svg';
+import cfImg from '@/assets/image/breed/store.png';
 import { ArrowUp } from '@element-plus/icons-vue';
 const baseLayer = new mars3d.layer.GraphicLayer();
 const pondLayer = new mars3d.layer.GraphicLayer();
@@ -158,6 +159,18 @@ const createLayer = () => {
       baseLayer.addGraphic(graphic);
     });
   });
+  const cfGraphic = new mars3d.graphic.BillboardEntity({
+    position: new mars3d.LngLatPoint(112.601342, 23.001034, 0), // 经纬度
+    style: {
+      image: cfImg,
+      scale: 0.4,
+      clampToGround: true,
+      scaleByDistance: true,
+      scaleByDistance_far: 1000000,
+      scaleByDistance_near: 1,
+    },
+  });
+  baseLayer.addGraphic(cfGraphic);
 
   //池塘
   commonStore.map?.addLayer(pondLayer);

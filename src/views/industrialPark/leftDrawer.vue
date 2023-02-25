@@ -116,25 +116,17 @@
         <div class="bottom">
           <v-title title="养殖品种" />
           <div class="swiper-container breed-swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="item in state.breedList">
-                <div class="card">
-                  <div class="content flex">
-                    <img :src="item.img" style="margin-right: 10px" />
-                    <div class="right">
-                      <div class="titles">{{ item.breedName }}</div>
-                      <div class="desc">{{ item.note }}</div>
-                    </div>
+            <div class="swiper-slide" v-for="item in state.breedList">
+              <div class="card">
+                <div class="content flex">
+                  <img :src="item.img" style="margin-right: 10px" />
+                  <div class="right">
+                    <div class="titles">{{ item.breedName }}</div>
+                    <div class="desc">{{ item.note }}</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-prev breed-prev" />
-
-            <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <img src="@/assets/image/arrow.png" class="swiper-button-next breed-next" />
           </div>
         </div>
       </div>
@@ -198,9 +190,7 @@ const clickImage = (index: number, indexs: number) => {
     text-indent: 2em;
   }
   .esc {
-    // height: calc(100% - 250px);
     height: 200px;
-    // margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -277,13 +267,8 @@ const clickImage = (index: number, indexs: number) => {
   height: 150px;
   margin-top: 8px;
   .swiper-container {
-    height: calc(100% - 53px);
+    height: calc(100% - 37px);
     margin-top: 8px;
-
-    .swiper-slide {
-      padding: 0 15px;
-      box-sizing: border-box;
-    }
 
     .card {
       height: 100%;

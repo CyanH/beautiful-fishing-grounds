@@ -1,5 +1,6 @@
 <template>
   <div class="legend animate__animated animate__fadeInRight">
+    <el-checkbox v-model="checked" label="智慧物联" size="large" @change="handleChange" />
     <div class="flex row" v-for="item in state.list">
       <img :src="getImgUrl(item.icon)" class="icon" />
       <span>{{ item.name }}</span>
@@ -85,12 +86,14 @@ import { RightChart } from './chart/zhwlRight';
 // 轮播图
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
+import emitter from '@/utils/eventbus';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 let myChar_xm: echarts.ECharts;
-let chartEle_xm = ref<HTMLDivElement | null>(null);
+const chartEle_xm = ref<HTMLDivElement | null>(null);
 let myChar_right: echarts.ECharts;
-let chartEle_right = ref<HTMLDivElement | null>(null);
+const chartEle_right = ref<HTMLDivElement | null>(null);
+const checked = ref(false);
 const state = reactive({
   list: [
     {
@@ -104,30 +107,6 @@ const state = reactive({
     {
       icon: 'ico_sxt.png',
       name: '摄像头(2)',
-    },
-    {
-      icon: 'ico_cx.png',
-      name: '城乡融合发展轴',
-    },
-    {
-      icon: 'ico_hx.png',
-      name: '渔业发展核心区',
-    },
-    {
-      icon: 'ico_yy.png',
-      name: '渔业示范区',
-    },
-    {
-      icon: 'ico_st.png',
-      name: '生态循坏发展区',
-    },
-    {
-      icon: 'ico_xd.png',
-      name: '现代渔业发展区',
-    },
-    {
-      icon: 'ico_yg.png',
-      name: '渔耕休闲体验区',
     },
   ],
 
@@ -180,6 +159,11 @@ const createChart = () => {
   loadXmChart(myChar_xm, 80);
   RightChart(myChar_right);
 };
+
+const handleChange = (val: boolean) => {
+  emitter.emit('chooseEquip', val);
+};
+
 const getImgUrl = (url: string) => {
   return new URL(`../../assets/image/industrialPark/${url}`, import.meta.url).href;
 };
@@ -204,10 +188,31 @@ const getImgUrl = (url: string) => {
   background-color: rgba(17, 16, 45, 0.7);
   border-radius: 2px;
   right: 27%;
-  top: 110px;
+  bottom: 15px;
   color: #fff;
   font-size: 14px;
   z-index: 7;
+
+  :deep(.el-checkbox__input) {
+    padding-left: 8px;
+    .el-checkbox__inner {
+      width: 18px;
+      height: 18px;
+
+      &::after {
+        border-width: 2px;
+        width: 5px;
+        height: 10px;
+        left: 5px;
+        top: 1px;
+      }
+    }
+  }
+
+  :deep(.el-checkbox__label) {
+    color: #fff;
+    padding-left: 21px;
+  }
 
   .icon {
     width: 32px;
@@ -251,6 +256,7 @@ const getImgUrl = (url: string) => {
       .one1 {
         position: absolute;
         top: -8px;
+        font-size: 14px;
         .num {
           color: #ffb400;
           font-size: 20px;

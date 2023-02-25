@@ -15,13 +15,6 @@ export function configRecords(params?: any) {
   });
 }
 
-export function plantInspect() {
-  return request({
-    url: 'plant/plantInspect',
-    method: 'get',
-  });
-}
-
 //qxz start
 //气象站实时数据
 export function weatherNewData(params: { plantWlwId: string }) {
