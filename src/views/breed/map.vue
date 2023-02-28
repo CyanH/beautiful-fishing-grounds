@@ -36,49 +36,75 @@ const quanLayer = new mars3d.layer.GraphicLayer();
 const commonStore = useCommonStore();
 const breedStore = useBreedStore();
 
+let chooseGraphic: mars3d.graphic.BillboardPrimitive;
+
 const legendShow = ref(true);
 const chooseIndex = ref(0);
 const state = reactive({
   she_b: [
     {
       name: '美丽渔场气象站',
-      lng: 112.610074,
-      lat: 23.010876,
+      lng: 112.6010042,
+      lat: 23.0006025,
       img: qxzImg,
       type: 'qxz',
       id: '40236136',
     },
     {
-      name: '水质一',
-      lng: 112.605874,
-      lat: 23.010711,
+      name: '水质一(40241986)',
+      lng: 112.6005131,
+      lat: 22.9996413,
       img: szImg,
       type: 'sz',
-      id: '21048579',
+      id: '40241986',
     },
     {
-      name: '水质二',
-      lng: 112.600226,
-      lat: 22.997402,
+      name: '水质二(40241976)',
+      lng: 112.6010328,
+      lat: 23.0020071,
       img: szImg,
       type: 'sz',
-      id: '21048581',
+      id: '40241976',
     },
     {
-      name: '摄像头二',
-      lng: 112.609981,
-      lat: 23.005686,
+      name: '美丽渔场摄像头一',
+      lng: 112.6010328,
+      lat: 23.0020071,
       img: sxtImg,
       type: 'sxt',
-      id: '6ba781c68c87465cbc82852ca4fff7b7',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac48',
     },
     {
-      name: '摄像头一',
-      lng: 112.595893,
-      lat: 23.000239,
+      name: '美丽渔场摄像头三',
+      lng: 112.6010233,
+      lat: 23.0006552,
       img: sxtImg,
       type: 'sxt',
-      id: '9df56f32710840c1a1ac1121bb5aac48',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac22',
+    },
+    {
+      name: '美丽渔场摄像头二',
+      lng: 112.6005131,
+      lat: 22.9996413,
+      img: sxtImg,
+      type: 'sxt',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac41',
+    },
+    {
+      name: '入口球机',
+      lng: 112.6013618,
+      lat: 23.0010327,
+      img: sxtImg,
+      type: 'sxt',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac41',
+    },
+    {
+      name: '双摄海螺摄像机',
+      lng: 112.6013618,
+      lat: 23.0010327,
+      img: sxtImg,
+      type: 'sxt',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac42',
     },
   ],
   legend: [
@@ -99,7 +125,7 @@ const state = reactive({
     {
       icon: 'ico_sxt.png',
       name: '视频监控',
-      value: 3,
+      value: 5,
     },
   ],
 });
@@ -109,6 +135,12 @@ onMounted(() => {
     commonStore.map?.setOptions(data.map3d);
     commonStore.map!.basemap = 2021;
     createLayer();
+  });
+
+  emitter.on('setRightDrawer', (val) => {
+    if (val === '' && chooseGraphic) {
+      chooseGraphic.closeHighlight();
+    }
   });
 });
 
@@ -198,12 +230,13 @@ const createLayer = () => {
         scaleByDistance: true,
         scaleByDistance_far: 1000000,
         scaleByDistance_near: 1,
-        pixelOffset: pixe, // [] 负左 正右 负上正下
+        verticalOrigin: mars3d.Cesium.VerticalOrigin.BOTTOM,
+        // pixelOffset: pixe, // [] 负左 正右 负上正下
         tooltip: it.name,
         highlight: {
           type: mars3d.EventType.click,
           // color: "#ffff00",
-          scale: 0.7,
+          scale: 0.8,
         },
       },
     });
@@ -212,7 +245,7 @@ const createLayer = () => {
       position: new mars3d.LngLatPoint(it.lng, it.lat, 0),
       attr: it, // 这个图标的信息
       style: {
-        radius: 80.0, // 大小
+        radius: 40.0, // 大小
         materialType: mars3d.MaterialType.CircleWave, // 类型：圆形: 波纹扩散
         materialOptions: {
           color: 'rgb(0,255,255)',
@@ -236,6 +269,7 @@ const createLayer = () => {
     breedStore.setEquipId(attr.id);
     breedStore.setEquipName(attr.name);
     emitter.emit('setRightDrawer', attr.type);
+    chooseGraphic = event.graphic;
   });
 
   // 鼠标移入信息窗

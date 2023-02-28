@@ -36,7 +36,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { waterNewData } from '@/api/breed';
+import { onMounted, reactive } from 'vue';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 
 const state = reactive({
@@ -69,7 +70,19 @@ const state = reactive({
       name: '浊度',
       icon: 'zd',
       value: 257.97,
-      unit: 'ntu',
+      unit: 'NTU',
+    },
+    {
+      name: '总碱度',
+      icon: 'zjd',
+      value: 8.1,
+      unit: 'mmol/L',
+    },
+    {
+      name: '硬度',
+      icon: 'yd',
+      value: 58,
+      unit: 'mg/L',
     },
   ],
   warnList: [
@@ -83,6 +96,20 @@ const state = reactive({
   ],
 });
 
+onMounted(() => {
+  getData();
+});
+
+const getData = () => {
+  waterNewData({ plantWlwId: '40241986' }).then((res: any) => {
+    state.list[0].value = res.content.temp;
+    state.list[1].value = res.content.ph;
+    state.list[2].value = res.content.oxy;
+    state.list[3].value = res.content.ddl;
+    state.list[4].value = res.content.zd;
+  });
+};
+
 const setImageUrl = (name: string) => {
   return new URL(`../../assets/image/breed/${name}.png`, import.meta.url).href;
 };
@@ -93,9 +120,9 @@ const setImageUrl = (name: string) => {
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 90px);
-    grid-gap: 20px 25px;
-    padding: 20px 0;
+    grid-template-rows: repeat(4, 80px);
+    grid-gap: 12px 25px;
+    padding: 15px 0;
   }
 
   .card {
@@ -127,7 +154,7 @@ const setImageUrl = (name: string) => {
 }
 
 .bottom {
-  height: calc(100% - 379px);
+  height: calc(100% - 415px);
 
   .content {
     height: calc(100% - 50px);

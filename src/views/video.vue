@@ -17,7 +17,10 @@ onMounted(() => {
 });
 
 const getData = () => {
-  getVideoData({ plantWlwId: '6ba781c68c87465cbc82852ca4fff7b7' }).then((res: any) => {
+  //lkjs6f32710840c1a1ac1121bb5aac41 虾场一
+  //lkjs6f32710840c1a1ac1121bb5aac22 虾场二
+  //lkjs6f32710840c1a1ac1121bb5aac48 虾场三
+  getVideoData({ plantWlwId: 'lkjs6f32710840c1a1ac1121bb5aac42' }).then((res: any) => {
     if (res.videoData) {
       let dom = videoEle.value as HTMLDivElement;
 

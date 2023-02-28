@@ -10,21 +10,13 @@
         <el-collapse v-model="activeName" accordion>
           <el-collapse-item :name="index" v-for="(item, index) in state.list">
             <template #title>
-              <span>{{ item.info }}</span>
+              <span>{{ item.title }}</span>
               <div class="date num">{{ parseTime(item.date, '{y}-{m}-{d}') }}</div>
             </template>
             <div>
               <div class="mb flex">
                 <span class="label">作业人</span>
-                <!-- <span class="value" v-if="item.inspectPerson">{{ item.inspectPerson }}</span>
-                <span class="value" v-else>{{ item.updateBy }}</span> -->
-                <span
-                  class="value"
-                  v-if="item.by1 == 'SY_CT' || item.by1 == 'SY_ZJ' || item.by1 == 'SY_TL' || item.by1 == 'SY_TM'"
-                  >{{ item.worker }}</span
-                >
-                <span class="value" v-else-if="item.by1 == 'SY_XT'">{{ item.inspectPerson }}</span>
-                <span class="value" v-else-if="item.by1 == 'SY_YB'">{{ item.createBy || item.updateBy }}</span>
+                <span class="value">{{ item.worker }}</span>
               </div>
               <div class="mb flex">
                 <span class="label">作业时间</span>
@@ -51,7 +43,7 @@
           <div v-for="(item, index) in state.warnList">
             <div class="flex">
               <img src="@/assets/image/breed/warn.png" class="tip" />
-              <span class="desc">{{ item.exceptionInfo }}</span>
+              <span class="desc">{{ item.desc }}</span>
             </div>
             <div class="line"></div>
           </div>
@@ -70,19 +62,59 @@ import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 
 const breedStore = useBreedStore();
 const activeName = ref(0);
-const state = reactive({ list: [] as any[], warnList: [] as any[] });
+const state = reactive({
+  list: [
+    {
+      img: 'sltw',
+      worker: '李晓武',
+      date: '2023-01-30 12:34:43',
+      info: '人工投喂罗氏沼虾4小时',
+      title: '饲料投放',
+    },
+    {
+      img: 'xtql',
+      worker: '吴波江',
+      date: '2023-02-03 16:34:43',
+      info: '人工清理虾塘垃圾',
+      title: '虾塘清理',
+    },
+    {
+      img: 'xbyy',
+      worker: '王凡',
+      date: '2023-02-05 08:23:43',
+      info: '人工巡查虾塘用药',
+      title: '虾病用药',
+    },
+    {
+      img: 'jcsy',
+      worker: '苏无衣',
+      date: '2023-02-07 13:34:22',
+      info: '人工巡查虾塘检查水源',
+      title: '检查水源',
+    },
+  ],
+  warnList: [
+    { desc: '塘口21的水质监测四，当前电导率为9562.00us/cm，高于阀值9554.00us/cm, 请注意处理!' },
+    { desc: '塘口3的美丽渔场气象站，当前空气湿度为86.10%, 高于阀值66.10%, 请注意处理!' },
+    { desc: '塘口18的水质监测二，当前溶解氧为2.80mg/L，低于阀值3.00mg/L, 请注意处理!' },
+    { desc: '塘口4的水质监测一，当前温度为16.20℃, 低于阀值18.20℃, 请注意处理!' },
+    { desc: '塘口13的美丽渔场气象站，当前温度为18.60℃, 低于阀值23.40℃, 请注意处理!' },
+    { desc: '塘口8的水质监测三，当前ph值为8.96，高于阀值8.6, 请注意处理!' },
+    { desc: '塘口31的美丽渔场气象站，当前光照为28394.00lux, 高于阀值25000.00lux, 请注意处理!' },
+  ],
+});
 
 onMounted(() => {
   getData();
 });
 
 const getData = () => {
-  pondGetYzda({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
-    state.list = res.sort(compare);
-  });
-  pondConfigRecords({ plantMassifId: breedStore.plantMassif.id, size: 50 }).then((res: any) => {
-    state.warnList = res.content;
-  });
+  // pondGetYzda({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
+  //   state.list = res.sort(compare);
+  // });
+  // pondConfigRecords({ plantMassifId: breedStore.plantMassif.id, size: 50 }).then((res: any) => {
+  //   state.warnList = res.content;
+  // });
 };
 
 const compare = (obj1: any, obj2: any) => {

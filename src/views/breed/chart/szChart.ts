@@ -103,7 +103,7 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
         option.yAxis[0].name = 'mg/L';
         break;
       case '浊度':
-        option.yAxis[0].name = 'ntu';
+        option.yAxis[0].name = 'NTU';
         break;
       case '水温':
         option.yAxis[0].name = '℃';

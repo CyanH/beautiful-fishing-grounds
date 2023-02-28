@@ -96,7 +96,7 @@ const imgFlag = ref(false);
 const videoEle = ref<HTMLDivElement | null>(null);
 const deviceSerial = ref('');
 
-const getVideo = (token: string, url: string, code: string) => {
+const getVideo = (token: string, url: string, code: string, channelNo: number) => {
   let dom = videoEle.value as HTMLDivElement;
   let width = 0;
   let height = 0;
@@ -111,13 +111,14 @@ const getVideo = (token: string, url: string, code: string) => {
   }
 
   deviceSerial.value = code;
+  query.channelNo = channelNo;
   if (dom) {
     player = new EZUIKit.EZUIKitPlayer({
       id: 'video-container', // 视频容器ID
       accessToken: token,
       url: url,
-      width: dom.offsetWidth,
-      height: dom.offsetHeight,
+      width,
+      height,
     });
   }
 };
@@ -193,6 +194,7 @@ const _do = (de: any, position_type: string) => {
 const ptzController = (num: number) => {
   console.log('当前为哪个监控', deviceSerial.value);
   console.log('num', num);
+  console.log('channelNo', query.channelNo);
   query.deviceSerial = deviceSerial.value;
   query.direction = num;
   controlCamera(query).then((res) => {

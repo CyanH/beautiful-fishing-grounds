@@ -26,10 +26,8 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
 import cardView from '../card.vue';
-import { pondWaterData } from '@/api/breed';
-import { useBreedStore } from '@/store';
+import { waterNewData } from '@/api/breed';
 
-const breedStore = useBreedStore();
 const state = reactive({
   waterData: [
     {
@@ -60,7 +58,19 @@ const state = reactive({
       icon: 'zd',
       name: '浊度',
       value: 1,
-      unit: 'ntu',
+      unit: 'NTU',
+    },
+    {
+      name: '总碱度',
+      icon: 'zjd',
+      value: 8.1,
+      unit: 'mmol/L',
+    },
+    {
+      name: '硬度',
+      icon: 'yd',
+      value: 58,
+      unit: 'mg/L',
     },
   ],
 });
@@ -70,12 +80,12 @@ onMounted(() => {
 });
 
 const getData = () => {
-  pondWaterData({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
-    state.waterData[0].value = res.ph;
-    state.waterData[1].value = res.ddl;
-    state.waterData[2].value = res.oxy;
-    state.waterData[3].value = res.zd;
-    state.waterData[4].value = res.temp;
+  waterNewData({ plantWlwId: '40241986' }).then((res: any) => {
+    state.waterData[0].value = res.content.temp;
+    state.waterData[1].value = res.content.ph;
+    state.waterData[2].value = res.content.oxy;
+    state.waterData[3].value = res.content.ddl;
+    state.waterData[4].value = res.content.zd;
   });
 };
 
@@ -99,7 +109,7 @@ const getImgUrl = (url: string) => {
 }
 
 .middle {
-  height: 34%;
+  height: 36%;
   padding-top: 15px;
   box-sizing: border-box;
   .box {
@@ -115,7 +125,7 @@ const getImgUrl = (url: string) => {
   }
 
   .bar {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     width: 33.33%;
 
     .icon {

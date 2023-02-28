@@ -26,10 +26,8 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
 import cardView from '../card.vue';
-import { pondWeatherData } from '@/api/breed';
-import { useBreedStore } from '@/store';
+import { weatherNewData } from '@/api/breed';
 
-const breedStore = useBreedStore();
 const state = reactive({
   weatherData: [
     {
@@ -75,13 +73,13 @@ onMounted(() => {
 });
 
 const getData = () => {
-  pondWeatherData({ plantMassifId: breedStore.plantMassif.id }).then((res: any) => {
-    state.weatherData[0].num = res.temp;
-    state.weatherData[1].num = res.humi;
-    state.weatherData[2].num = res.rain;
-    state.weatherData[3].num = res.speed;
-    state.weatherData[4].num = res.raid;
-    state.weatherData[5].num = res.windDirection;
+  weatherNewData({ plantWlwId: '40236136' }).then((res: any) => {
+    state.weatherData[0].num = res.content.temp;
+    state.weatherData[1].num = res.content.humi;
+    state.weatherData[2].num = res.content.rain;
+    state.weatherData[3].num = res.content.speed;
+    state.weatherData[4].num = res.content.raid;
+    state.weatherData[5].num = res.content.windDirection;
   });
 };
 
@@ -105,12 +103,12 @@ const getImgUrl = (url: string) => {
 }
 
 .middle {
-  height: 34%;
+  height: 32%;
   padding-top: 15px;
   box-sizing: border-box;
   .box {
     height: calc(100% - 21px);
-    padding-top: 25px;
+    padding-top: 20px;
     box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
@@ -121,7 +119,7 @@ const getImgUrl = (url: string) => {
   }
 
   .bar {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     width: 33.33%;
 
     .icon {

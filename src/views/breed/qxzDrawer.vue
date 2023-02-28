@@ -1,6 +1,6 @@
 <template>
   <v-drawer direction="right">
-    <v-card>
+    <v-card :background="'rgba(17, 16, 45, 0.6)'">
       <v-title :title="plantStore.equipName" hasClose>
         <template #right>
           <div class="text">最新上报：{{ upDate }}</div>

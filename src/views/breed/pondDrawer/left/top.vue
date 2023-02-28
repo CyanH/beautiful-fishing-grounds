@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="flex">
-        <img src="@/assets/image/industrialPark/qy_2.png" class="img" />
+        <img src="@/assets/image/breed/tk_2.png" class="img" />
         <div class="desc">
           罗氏沼虾（学名：Macrobrachium
           rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。
@@ -44,7 +44,6 @@
 <script setup lang="ts">
 import cardView from '../card.vue';
 import { onMounted, reactive } from 'vue';
-import QRCode from 'qrcode';
 import { pondMassifInfo } from '@/api/breed';
 import { useBreedStore } from '@/store';
 
@@ -53,28 +52,11 @@ const state = reactive({ form: {} as any });
 
 onMounted(() => {
   getData();
-  createQrCode();
 });
 
 const getData = () => {
   pondMassifInfo({ id: breedStore.plantMassif.id }).then((res: any) => {
     state.form = res.content[0];
-  });
-};
-
-const createQrCode = () => {
-  let dom = document.getElementById('qrCode') as HTMLCanvasElement;
-  let text = 'https://www.gd-jintu.com/lfscservice/lfsc/scan/area?syjlDetailId=' + breedStore.plantMassif.id;
-  QRCode.toDataURL(text, {
-    errorCorrectionLevel: 'H',
-    width: 76,
-  }).then((url: string) => {
-    const ctx = dom.getContext('2d') as CanvasRenderingContext2D;
-    const image = new Image();
-    image.src = url;
-    setTimeout(() => {
-      ctx.drawImage(image, 0, 0, 76, 76);
-    }, 300);
   });
 };
 </script>

@@ -23,7 +23,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('mlyc/screen'),
+  history: createWebHistory('mlyc'),
   routes,
   scrollBehavior: () => ({ top: 0 }),
 });

@@ -98,7 +98,7 @@
               <div class="dian dian1"></div>
               <div class="ww">正常</div>
               <div class="val val1">
-                <span class="s1 num">5</span>
+                <span class="s1 num">7</span>
                 <span class="s2">个</span>
               </div>
             </div>
@@ -211,7 +211,7 @@ const setVideo = (item: any) => {
     hasPlayer.value = true;
     nextTick(() => {
       //@ts-ignore
-      videoEle.value.getVideo(item.token, item.videoData.url, item.deviceSerial);
+      videoEle.value.getVideo(item.token, item.videoData.url, item.deviceSerial, item.channelNo);
     });
   }
 };

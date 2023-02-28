@@ -50,7 +50,7 @@ const setDate = (date: string) => {
 }
 
 .bottom {
-  height: calc(55% - 187px);
+  height: calc(55% - 250px);
   padding-top: 15px;
   box-sizing: border-box;
 }

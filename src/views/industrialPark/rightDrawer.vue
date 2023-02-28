@@ -1,12 +1,4 @@
 <template>
-  <div class="legend animate__animated animate__fadeInRight">
-    <el-checkbox v-model="checked" label="智慧物联" size="large" @change="handleChange" />
-    <div class="flex row" v-for="item in state.list">
-      <img :src="getImgUrl(item.icon)" class="icon" />
-      <span>{{ item.name }}</span>
-    </div>
-  </div>
-
   <v-drawer direction="right">
     <v-card>
       <div class="top">
@@ -64,12 +56,7 @@
           </div>
           <div class="line"></div>
           <div class="zhwl_bottom">
-            <div class="left">
-              <div class="chart" ref="chartEle_right"></div>
-            </div>
-            <div class="right">
-              <div class="chart" ref="chartEle_xm"></div>
-            </div>
+            <div class="chart" ref="chartEle_right"></div>
           </div>
         </div>
       </div>
@@ -81,35 +68,16 @@
 import * as echarts from 'echarts';
 import { reactive, onMounted, nextTick, ref } from 'vue';
 // 项目
-import { loadXmChart } from './chart/zhwlChart';
-import { RightChart } from './chart/zhwlRight';
+import { loadChart } from './chart/zhwlChart';
 // 轮播图
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-import emitter from '@/utils/eventbus';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
-let myChar_xm: echarts.ECharts;
-const chartEle_xm = ref<HTMLDivElement | null>(null);
 let myChar_right: echarts.ECharts;
 const chartEle_right = ref<HTMLDivElement | null>(null);
-const checked = ref(false);
-const state = reactive({
-  list: [
-    {
-      icon: 'ico_qxz.png',
-      name: '气象设备(1)',
-    },
-    {
-      icon: 'ico_sz.png',
-      name: '水质设备(2)',
-    },
-    {
-      icon: 'ico_sxt.png',
-      name: '摄像头(3)',
-    },
-  ],
 
+const state = reactive({
   zhwl: [
     {
       name: '覆盖农户',
@@ -149,23 +117,12 @@ onMounted(() => {
   createChart();
 });
 const createChart = () => {
-  // 项目进度
-  myChar_xm = echarts.init(chartEle_xm.value as HTMLDivElement);
   myChar_right = echarts.init(chartEle_right.value as HTMLDivElement);
   window.addEventListener('resize', () => {
-    myChar_xm.resize();
     myChar_right.resize();
   });
-  loadXmChart(myChar_xm, 80);
-  RightChart(myChar_right);
-};
 
-const handleChange = (val: boolean) => {
-  emitter.emit('chooseEquip', val);
-};
-
-const getImgUrl = (url: string) => {
-  return new URL(`../../assets/image/industrialPark/${url}`, import.meta.url).href;
+  loadChart(myChar_right, 80);
 };
 </script>
 
@@ -182,43 +139,6 @@ const getImgUrl = (url: string) => {
   margin: 8px 0;
 }
 
-.legend {
-  position: absolute;
-  padding: 15px;
-  background-color: rgba(17, 16, 45, 0.7);
-  border-radius: 2px;
-  right: 27%;
-  bottom: 15px;
-  color: #fff;
-  font-size: 14px;
-  z-index: 7;
-
-  :deep(.el-checkbox__input) {
-    padding-left: 8px;
-    .el-checkbox__inner {
-      width: 18px;
-      height: 18px;
-
-      &::after {
-        border-width: 2px;
-        width: 5px;
-        height: 10px;
-        left: 5px;
-        top: 1px;
-      }
-    }
-  }
-
-  :deep(.el-checkbox__label) {
-    color: #fff;
-    padding-left: 21px;
-  }
-
-  .icon {
-    width: 32px;
-    margin-right: 15px;
-  }
-}
 .top {
   width: 100%;
   padding-bottom: 15px;
@@ -345,21 +265,10 @@ const getImgUrl = (url: string) => {
       width: 100%;
       height: calc(100% - 68px);
       display: flex;
-      .left {
-        width: 60%;
+
+      .chart {
+        width: 100%;
         height: 100%;
-        .chart {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .right {
-        width: 40%;
-        height: 100%;
-        .chart {
-          width: 100%;
-          height: 100%;
-        }
       }
     }
   }

@@ -1,23 +1,23 @@
 <template>
-  <left-drawer :form="state.form"></left-drawer>
-  <component :is="currentComponent" :form="state.form"></component>
+  <left-drawer></left-drawer>
+  <component :is="currentComponent"></component>
+  <map-view />
   <img class="img_title" src="@/assets/image/qj/title.png" alt="" />
 </template>
 
 <script setup lang="ts">
 import leftDrawer from './digital/leftDrawer.vue';
 import emitter from '@/utils/eventbus';
-import { getPlantBase } from '@/api/breed';
-import { defineAsyncComponent, markRaw, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { defineAsyncComponent, markRaw, onUnmounted, reactive, ref } from 'vue';
 import { resetDrawerShow } from '@/composables/resetDrawer';
 
 const rightDrawer = markRaw(defineAsyncComponent(() => import('./digital/rightDrawer.vue')));
 const qxzDrawer = markRaw(defineAsyncComponent(() => import('./digital/qxzDrawer.vue')));
 const szDrawer = markRaw(defineAsyncComponent(() => import('./digital/szDrawer.vue')));
+const mapView = markRaw(defineAsyncComponent(() => import('./digital/map.vue')));
 const videoDrawer = markRaw(defineAsyncComponent(() => import('./digital/videoDrawer.vue')));
 
 const currentComponent = ref(rightDrawer);
-const state = reactive({ form: {} as any });
 
 emitter.on('setRightDrawer', (name) => {
   if (name === 'qxz') {
@@ -31,12 +31,6 @@ emitter.on('setRightDrawer', (name) => {
   }
 });
 
-onMounted(() => {
-  getPlantBase({ info: '国泰水产' }).then((res: any) => {
-    state.form = res.content[0];
-  });
-});
-
 onUnmounted(() => {
   resetDrawerShow();
 });
@@ -47,5 +41,6 @@ onUnmounted(() => {
   left: 50%;
   bottom: 10px;
   transform: translate(-50%, -50%);
+  z-index: 9;
 }
 </style>

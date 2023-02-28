@@ -9,12 +9,14 @@ import mapImg from '@/assets/image/industrialPark/map.png';
 import qxzImg from '@/assets/image/breed/ico_qxz.svg';
 import szImg from '@/assets/image/breed/ico_sz.svg';
 import sxtImg from '@/assets/image/breed/ico_sxt.svg';
+
 const commonStore = useCommonStore();
 const breedStore = useBreedStore();
 const graphicLayer = new mars3d.layer.GraphicLayer();
 const equipLayer = new mars3d.layer.GraphicLayer({ show: false });
 let wall: mars3d.layer.GeoJsonLayer;
 let lineLayer: mars3d.layer.GeoJsonLayer;
+let chooseGraphic: mars3d.graphic.BillboardPrimitive;
 
 const state = reactive({
   equip: [
@@ -32,7 +34,7 @@ const state = reactive({
       lat: 22.900304,
       img: szImg,
       type: 'sz',
-      id: '21048579',
+      id: '40241986',
     },
     {
       name: '水质二',
@@ -40,31 +42,47 @@ const state = reactive({
       lat: 22.914863,
       img: szImg,
       type: 'sz',
-      id: '21048581',
+      id: '40241976',
     },
     {
-      name: '摄像头二',
-      lng: 112.429333,
-      lat: 22.909255,
+      name: '高要虾场三',
+      lng: 112.532983,
+      lat: 22.974357,
       img: sxtImg,
       type: 'sxt',
-      id: '6ba781c68c87465cbc82852ca4fff7b7',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac48',
     },
     {
-      name: '摄像头一',
-      lng: 112.472793,
-      lat: 22.874393,
+      name: '高要虾场二',
+      lng: 112.492601,
+      lat: 22.974309,
       img: sxtImg,
       type: 'sxt',
-      id: '9df56f32710840c1a1ac1121bb5aac48',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac22',
     },
     {
-      name: '摄像头三',
-      lng: 112.493056,
-      lat: 22.962187,
+      name: '高要虾场一',
+      lng: 112.419324,
+      lat: 22.916169,
       img: sxtImg,
       type: 'sxt',
-      id: '05c149b797194dc4b0248e6d12a89b2b',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac41',
+    },
+    {
+      name: '双摄海螺摄像机',
+      lng: 112.472578,
+      lat: 22.952487,
+      img: sxtImg,
+      type: 'sxt',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac41',
+    },
+    {
+      name: '入口球机',
+      lng: 112.54144,
+      lat: 22.931336,
+      img: sxtImg,
+      type: 'sxt',
+      id: 'lkjs6f32710840c1a1ac1121bb5aac41',
     },
   ],
 });
@@ -80,6 +98,12 @@ onMounted(() => {
     });
 
     createLayer();
+  });
+
+  emitter.on('setRightDrawer', (val) => {
+    if (val === '' && chooseGraphic) {
+      chooseGraphic.closeHighlight();
+    }
   });
 });
 
@@ -131,14 +155,6 @@ const addMap = () => {
 const createEquip = () => {
   commonStore.map?.addLayer(equipLayer);
   state.equip.map((it) => {
-    let pixe = [] as any;
-    if (it.type == 'qxz') {
-      pixe = [-4, -25];
-    } else if (it.type == 'sz') {
-      pixe = [0, -15];
-    } else if (it.type == 'sxt') {
-      pixe = [5, -25];
-    }
     // 添加图标
     const graphic = new mars3d.graphic.BillboardEntity({
       position: new mars3d.LngLatPoint(it.lng, it.lat, 0), // 经纬度
@@ -151,12 +167,12 @@ const createEquip = () => {
         scaleByDistance: true,
         scaleByDistance_far: 1000000,
         scaleByDistance_near: 1,
-        pixelOffset: pixe, // [] 负左 正右 负上正下
+
         tooltip: it.name,
         highlight: {
           type: mars3d.EventType.click,
           // color: "#ffff00",
-          // scale: 1.5,
+          scale: 1.1,
         },
       },
     });
@@ -170,6 +186,7 @@ const createEquip = () => {
     breedStore.setEquipId(attr.id);
     breedStore.setEquipName(attr.name);
     emitter.emit('setRightDrawer', attr.type);
+    chooseGraphic = event.graphic;
   });
 
   // 鼠标移入信息窗
@@ -179,7 +196,7 @@ const createEquip = () => {
       return attr.name;
     },
     {
-      offsetY: -70,
+      offsetY: -65,
     }
   );
 };

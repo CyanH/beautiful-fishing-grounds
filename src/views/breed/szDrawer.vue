@@ -1,6 +1,6 @@
 <template>
   <v-drawer direction="right">
-    <v-card :title="plantStore.equipName">
+    <v-card :background="'rgba(17, 16, 45, 0.6)'">
       <v-title :title="plantStore.equipName" hasClose>
         <template #right>
           <div class="text">最新上报：{{ upDate }}</div>
@@ -44,7 +44,7 @@ const setDate = (date: string) => {
 }
 
 .bottom {
-  height: calc(55% - 187px);
+  height: calc(55% - 250px);
   padding-top: 15px;
   box-sizing: border-box;
 }

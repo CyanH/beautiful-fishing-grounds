@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 export function znyz(myChart: echarts.ECharts) {
   const chartData = [
     {
-      value: 5,
+      value: 7,
       name: '正常',
     },
     {

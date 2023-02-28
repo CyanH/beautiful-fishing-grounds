@@ -77,42 +77,6 @@ export function getPlantBase(params?: any) {
   });
 }
 
-//根据基地查生产情况
-export function plantAnalyze(params: { id: number; info: string }) {
-  return request({
-    url: 'plant/plantAnalyze',
-    method: 'get',
-    params,
-  });
-}
-
-//根据基地查气象数据
-export function plantWeatherInfo(params: { info: string }) {
-  return request({
-    url: 'plant/plantWeatherInfo',
-    method: 'get',
-    params,
-  });
-}
-
-//根据基地查水质数据
-export function plantWaterInfo(params: { info: string }) {
-  return request({
-    url: 'plant/plantWaterInfo',
-    method: 'get',
-    params,
-  });
-}
-
-//根据基地查摄像头
-export function plantVideoInfo(params: { info: string }) {
-  return request({
-    url: 'plant/plantVideoInfo',
-    method: 'get',
-    params,
-  });
-}
-
 //一塘一码
 //基本信息
 export function pondMassifInfo(params: { id: string }) {
@@ -183,21 +147,5 @@ export function pondSyBatch(params: { plantMassifId: string }) {
     url: 'plant/pondSyBatch',
     method: 'get',
     params,
-  });
-}
-
-//投料机实时数据
-export function baitNewData(params: { plantWlwId: string }) {
-  return request({
-    url: 'plant/baitNewData',
-    method: 'get',
-    params,
-  });
-}
-//投料机实时数据
-export function baitHistory(plantWlwId: string, startDate: string, endDate: string) {
-  return request({
-    url: 'plant/baitHistory?plantWlwId=' + plantWlwId + '&date=' + startDate + '&date=' + endDate,
-    method: 'get',
   });
 }

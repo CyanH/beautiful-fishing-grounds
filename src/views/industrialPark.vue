@@ -14,9 +14,9 @@ import mapView from './industrialPark/map.vue';
 
 const leftDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/leftDrawer.vue')));
 const rightDrawer = markRaw(defineAsyncComponent(() => import('./industrialPark/rightDrawer.vue')));
-const qxzDrawer = markRaw(defineAsyncComponent(() => import('./breed/qxzDrawer.vue')));
-const szDrawer = markRaw(defineAsyncComponent(() => import('./breed/szDrawer.vue')));
-const videoDrawer = markRaw(defineAsyncComponent(() => import('./breed/videoDrawer.vue')));
+const qxzDrawer = markRaw(defineAsyncComponent(() => import('./digital/qxzDrawer.vue')));
+const szDrawer = markRaw(defineAsyncComponent(() => import('./digital/szDrawer.vue')));
+const videoDrawer = markRaw(defineAsyncComponent(() => import('./digital/videoDrawer.vue')));
 let currentComponent = ref(rightDrawer);
 
 onMounted(() => {

@@ -40,36 +40,43 @@
           </div>
         </div>
       </div>
-      <v-title title="养殖环境" />
-      <div class="yzhj">
-        <div class="flex container">
-          <div v-for="item in state.weatherData" class="bar flex">
-            <img :src="getImgUrl(item.icon)" class="icon" />
-            <div>
-              <div class="name">{{ item.name }}</div>
-              <div style="padding-top: 6px">
-                <span class="num">{{ item.value }}</span>
-                <span class="unit">{{ item.unit }}</span>
+
+      <div>
+        <v-title title="养殖环境" />
+        <div class="yzhj">
+          <div class="flex container">
+            <div v-for="item in state.weatherData" class="bar flex">
+              <img :src="getImgUrl(item.icon)" class="icon" />
+              <div>
+                <div class="name">{{ item.name }}</div>
+                <div style="padding-top: 6px">
+                  <span class="num">{{ item.value }}</span>
+                  <span class="unit">{{ item.unit }}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <v-title title="水质环境" />
-      <div class="szhj">
-        <div class="flex container">
-          <div v-for="item in state.waterData" class="bar flex">
-            <img :src="getImgUrl(item.icon)" class="icon" />
-            <div>
-              <div class="name">{{ item.name }}</div>
-              <div style="padding-top: 6px">
-                <span class="num">{{ item.value }}</span>
-                <span class="unit">{{ item.unit }}</span>
+
+      <div>
+        <v-title title="水质环境" />
+        <div class="szhj">
+          <div class="flex container">
+            <div v-for="item in state.waterData" class="bar flex">
+              <img :src="getImgUrl(item.icon)" class="icon" />
+              <div>
+                <div class="name">{{ item.name }}</div>
+                <div style="padding-top: 6px">
+                  <span class="num">{{ item.value }}</span>
+                  <span class="unit">{{ item.unit }}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <v-title title="出入塘统计" />
       <div class="crt">
         <div class="chart" ref="shangan"></div>
@@ -104,6 +111,7 @@ import { loadChart } from './chart/crtChart';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
+import { waterNewData, weatherNewData } from '@/api/breed';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 let myChar_shangan: echarts.ECharts;
@@ -207,7 +215,19 @@ const state = reactive({
       icon: 'zd',
       name: '浊度',
       value: 5.4,
-      unit: 'ntu',
+      unit: 'NTU',
+    },
+    {
+      name: '总碱度',
+      icon: 'zjd',
+      value: 8.1,
+      unit: 'mmol/L',
+    },
+    {
+      name: '硬度',
+      icon: 'yd',
+      value: 58,
+      unit: 'mg/L',
     },
   ],
   warnList: [
@@ -242,7 +262,28 @@ onMounted(() => {
     myChar_shangan.resize();
   });
   getContent();
+
+  getData();
 });
+
+const getData = () => {
+  weatherNewData({ plantWlwId: '40236136' }).then((res: any) => {
+    state.weatherData[0].value = res.content.temp;
+    state.weatherData[1].value = res.content.humi;
+    state.weatherData[2].value = res.content.rain;
+    state.weatherData[3].value = res.content.speed;
+    state.weatherData[4].value = res.content.raid;
+    state.weatherData[5].value = res.content.windDirection;
+  });
+
+  waterNewData({ plantWlwId: '40241986' }).then((res: any) => {
+    state.waterData[0].value = res.content.temp;
+    state.waterData[1].value = res.content.ph;
+    state.waterData[2].value = res.content.oxy;
+    state.waterData[3].value = res.content.ddl;
+    state.waterData[4].value = res.content.zd;
+  });
+};
 
 const getContent = () => {
   let data1 = [7, 9, 9, 6, 7, 5, 8];
@@ -314,11 +355,6 @@ const getImgUrl = (url: string) => {
 </script>
 
 <style lang="scss" scoped>
-.top {
-  margin-bottom: 16px;
-  height: 160px;
-}
-
 .swiper-button-prev,
 .swiper-button-next {
   width: 12px;
@@ -335,11 +371,10 @@ const getImgUrl = (url: string) => {
 }
 
 .top_o1 {
-  height: 120px;
-  margin-top: 8px;
+  height: 115px;
+  margin-top: 5px;
   .swiper-container {
     height: 100%;
-    margin-top: 8px;
 
     .swiper-slide {
       padding: 0 15px;
@@ -363,7 +398,7 @@ const getImgUrl = (url: string) => {
       .contents {
         width: 100%;
         height: calc(100%);
-        padding: 5px 10px 0;
+        padding: 0 10px;
         box-sizing: border-box;
 
         img {
@@ -406,14 +441,12 @@ const getImgUrl = (url: string) => {
 }
 .yzhj {
   width: 100%;
-  height: 130px;
-  margin: 16px auto;
+  margin-top: 12px;
   .container {
-    padding-top: 5px;
     flex-wrap: wrap;
 
     .bar {
-      margin-bottom: 1.5vh;
+      margin-bottom: 12px;
       width: 33.33%;
 
       .icon {
@@ -441,13 +474,12 @@ const getImgUrl = (url: string) => {
 }
 .szhj {
   width: 100%;
-  height: 130px;
-  margin: 16px auto;
+  margin-top: 12px;
   .container {
     flex-wrap: wrap;
 
     .bar {
-      margin-bottom: 1.5vh;
+      margin-bottom: 12px;
       width: 33.33%;
 
       .icon {
@@ -475,7 +507,7 @@ const getImgUrl = (url: string) => {
 }
 .crt {
   width: 100%;
-  height: calc(100% - 590px);
+  height: calc(100% - 591px);
   .chart {
     width: 100%;
     height: 100%;

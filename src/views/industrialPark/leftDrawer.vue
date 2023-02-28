@@ -116,7 +116,7 @@
             <div class="swiper-slide" v-for="item in state.breedList">
               <div class="card">
                 <div class="content flex">
-                  <img :src="item.img" style="margin-right: 10px" />
+                  <img :src="getImgUrl(item.img)" style="margin-right: 10px" />
                   <div class="right">
                     <div class="titles">{{ item.breedName }}</div>
                     <div class="desc">{{ item.note }}</div>
@@ -129,18 +129,24 @@
       </div>
     </v-card>
   </v-drawer>
+
+  <div class="legend animate__animated animate__fadeInRight">
+    <el-checkbox v-model="checked" label="智慧物联" size="large" @change="handleChange" />
+    <div class="flex row" v-for="item in state.list">
+      <img :src="getImgUrl(item.icon)" class="icon" />
+      <span>{{ item.name }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import emitter from '@/utils/eventbus';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-import { nextTick, onMounted, reactive } from 'vue';
+import { nextTick, onMounted, reactive, ref } from 'vue';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
-const getImgUrl = (url: string) => {
-  return new URL(`../../assets/image/industrialPark/${url}.png`, import.meta.url).href;
-};
-
+const checked = ref(false);
 const state = reactive({
   clickIndex: 0,
   content: [
@@ -153,11 +159,24 @@ const state = reactive({
       picList: ['qy_4', 'qy_5', 'qy_6'],
     },
   ],
-
+  list: [
+    {
+      icon: 'ico_qxz',
+      name: '气象设备(1)',
+    },
+    {
+      icon: 'ico_sz',
+      name: '水质设备(2)',
+    },
+    {
+      icon: 'ico_sxt',
+      name: '摄像头(5)',
+    },
+  ],
   breedList: [
     {
       breedName: '罗氏沼虾',
-      img: getImgUrl('lszx'),
+      img: 'lszx',
       note: '罗氏沼虾（学名：Macrobrachium rosenbergii）是长臂虾科、沼虾属动物。体大，最大雄性个体的体长可达400毫米，养殖1年通常可达到150～200毫米。',
     },
   ],
@@ -180,8 +199,16 @@ onMounted(() => {
   });
 });
 
+const handleChange = (val: boolean) => {
+  emitter.emit('chooseEquip', val);
+};
+
 const clickImage = (index: number, indexs: number) => {
   state.clickIndex = index * 3 + indexs;
+};
+
+const getImgUrl = (url: string) => {
+  return new URL(`../../assets/image/industrialPark/${url}.png`, import.meta.url).href;
 };
 </script>
 
@@ -193,7 +220,7 @@ const clickImage = (index: number, indexs: number) => {
     letter-spacing: 1px;
     line-height: 18px;
     text-indent: 2em;
-    height: 66px;
+    height: 80px;
     box-sizing: border-box;
     overflow-y: auto;
     padding: 0 30px;
@@ -356,7 +383,7 @@ const clickImage = (index: number, indexs: number) => {
 }
 .bottom_all {
   width: 100%;
-  height: calc(100% - 424px);
+  height: calc(100% - 439px);
 }
 
 .middle {
@@ -454,5 +481,43 @@ const clickImage = (index: number, indexs: number) => {
 
 .swiper-button-next {
   right: 0;
+}
+
+.legend {
+  position: absolute;
+  padding: 15px;
+  background-color: rgba(17, 16, 45, 0.7);
+  border-radius: 2px;
+  right: 27%;
+  bottom: 15px;
+  color: #fff;
+  font-size: 14px;
+  z-index: 7;
+
+  :deep(.el-checkbox__input) {
+    padding-left: 8px;
+    .el-checkbox__inner {
+      width: 18px;
+      height: 18px;
+
+      &::after {
+        border-width: 2px;
+        width: 5px;
+        height: 10px;
+        left: 5px;
+        top: 1px;
+      }
+    }
+  }
+
+  :deep(.el-checkbox__label) {
+    color: #fff;
+    padding-left: 21px;
+  }
+
+  .icon {
+    width: 32px;
+    margin-right: 15px;
+  }
 }
 </style>

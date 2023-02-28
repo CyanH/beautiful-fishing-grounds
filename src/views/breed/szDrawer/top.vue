@@ -50,7 +50,19 @@ let state = reactive({
       icon: 'zd',
       name: '浊度',
       value: 1,
-      unit: 'ntu',
+      unit: 'NTU',
+    },
+    {
+      name: '总碱度',
+      icon: 'zjd',
+      value: 8.1,
+      unit: 'mmol/L',
+    },
+    {
+      name: '硬度',
+      icon: 'yd',
+      value: 58,
+      unit: 'mg/L',
     },
   ],
 });
@@ -68,11 +80,11 @@ watch(
 
 const getData = () => {
   waterNewData({ plantWlwId: plantStore.equipId }).then((res: any) => {
-    state.weatherData[0].value = res.content && res.content.ph ? res.content.ph : '-';
-    state.weatherData[1].value = res.content && res.content.ddl ? res.content.ddl : '-';
-    state.weatherData[2].value = res.content && res.content.oxy ? res.content.oxy : '-';
-    state.weatherData[3].value = res.content && res.content.zd ? res.content.zd : '-';
-    state.weatherData[4].value = res.content && res.content.temp ? res.content.temp : '-';
+    state.weatherData[0].value = res.content.ph;
+    state.weatherData[1].value = res.content.ddl;
+    state.weatherData[2].value = res.content.oxy;
+    state.weatherData[3].value = res.content.zd;
+    state.weatherData[4].value = res.content.temp;
     emit('setDate', res.content && res.content.date ? res.content.date : '-');
   });
 };

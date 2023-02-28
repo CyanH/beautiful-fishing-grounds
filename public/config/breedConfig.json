@@ -5,7 +5,7 @@
       "gltfServerUrl": "//data.mars3d.cn/gltf"
     },
     "scene": {
-      "center": { "lat": 22.970438, "lng": 112.601146, "alt": 2009.1, "heading": 6.3, "pitch": -31.9 },
+      "center": { "lat": 22.977101, "lng": 112.601467, "alt": 1805.7, "heading": 6.3, "pitch": -31.9 },
       "scene3DOnly": false,
       "shadows": false,
       "removeDblClick": true,
