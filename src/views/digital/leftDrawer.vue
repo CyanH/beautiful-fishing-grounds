@@ -49,7 +49,7 @@ const state = reactive({
       unit: '℃',
     },
     {
-      name: 'pH',
+      name: '值',
       icon: 'ph',
       value: 7.19,
       unit: '',

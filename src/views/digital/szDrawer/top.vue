@@ -30,7 +30,7 @@ let state = reactive({
     },
     {
       icon: 'ph',
-      name: 'Ph',
+      name: 'pH值',
       value: 7,
     },
     {

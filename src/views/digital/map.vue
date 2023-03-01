@@ -73,7 +73,7 @@
 
   <!-- 摄像头 -->
   <!-- <div v-for="item in state.sxtList" class="container" :style="{ left: item.left, top: item.top }">
-    <img src="@/assets/image/breed/ico_sxt.svg" class="icon" @click="handleClick(item)" />
+    <img src="@/assets/image/breed/ico_sxt.svg" class="icon sxt" @click="handleClick(item)" />
   </div> -->
 </template>
 
@@ -132,9 +132,9 @@ const state = reactive({
   qxzList: [
     {
       id: '40236136',
-      name: '美丽渔场气象站',
+      name: '美丽虾场气象站',
       date: '2023-03-27 09:08:56',
-      left: '44%',
+      left: '42%',
       bottom: '28%',
       type: 'qxz',
       weatherData: [
@@ -182,7 +182,7 @@ const state = reactive({
       id: '40241986',
       name: '水质监测',
       date: '2023-03-27 09:08:56',
-      left: '52%',
+      left: '50%',
       top: '39%',
       type: 'sz',
       data: [
@@ -194,7 +194,7 @@ const state = reactive({
         },
         {
           svgname: 'ph',
-          name: 'pH',
+          name: 'pH值',
           value: 75,
           unit: '',
         },
@@ -234,11 +234,17 @@ const state = reactive({
   sxtList: [
     {
       id: 'lkjs6f32710840c1a1ac1121bb5aac22',
+      name: '美丽虾场摄像头二',
       left: '52%',
       top: '39%',
+      type: 'sxt',
     },
     {
       id: 'lkjs6f32710840c1a1ac1121bb5aac41',
+      name: '美丽虾场摄像头三',
+      left: '43%',
+      top: '65%',
+      type: 'sxt',
     },
   ],
 });
@@ -333,7 +339,7 @@ const handleClick = (item: { id: string; name: string; type: string }) => {
   breedStore.setEquipId(item.id);
   breedStore.setEquipName(item.name);
   emitter.emit('setRightDrawer', item.type);
-  document.getElementById(item.id)!.style.display = 'block';
+  if (document.getElementById(item.id)) document.getElementById(item.id)!.style.display = 'block';
 };
 
 const handleClose = (id: string) => {
@@ -360,6 +366,10 @@ const handleClose = (id: string) => {
     transform: translateX(-50%);
     width: 35px;
     cursor: pointer;
+  }
+
+  .sxt {
+    width: 26px;
   }
 
   .card {

@@ -55,7 +55,7 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
     ],
     series: [
       {
-        name: 'Ph',
+        name: 'pH值',
         type: 'line',
         smooth: true,
         areaStyle: {},
@@ -93,7 +93,7 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
     //  legend点击事件
     let option: any = myChart.getOption();
     switch (obj.name) {
-      case 'Ph':
+      case 'pH值':
         option.yAxis[0].name = '';
         break;
       case '电导率':

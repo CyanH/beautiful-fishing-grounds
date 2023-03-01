@@ -37,13 +37,14 @@ const commonStore = useCommonStore();
 const breedStore = useBreedStore();
 
 let chooseGraphic: mars3d.graphic.BillboardPrimitive;
+// let measure: mars3d.thing.Measure;
 
 const legendShow = ref(true);
 const chooseIndex = ref(0);
 const state = reactive({
   she_b: [
     {
-      name: '美丽渔场气象站',
+      name: '美丽虾场气象站',
       lng: 112.6010042,
       lat: 23.0006025,
       img: qxzImg,
@@ -67,7 +68,7 @@ const state = reactive({
       id: '40241976',
     },
     {
-      name: '美丽渔场摄像头一',
+      name: '美丽虾场摄像头一',
       lng: 112.6010328,
       lat: 23.0020071,
       img: sxtImg,
@@ -75,7 +76,7 @@ const state = reactive({
       id: 'lkjs6f32710840c1a1ac1121bb5aac48',
     },
     {
-      name: '美丽渔场摄像头三',
+      name: '美丽虾场摄像头三',
       lng: 112.6010233,
       lat: 23.0006552,
       img: sxtImg,
@@ -83,7 +84,7 @@ const state = reactive({
       id: 'lkjs6f32710840c1a1ac1121bb5aac22',
     },
     {
-      name: '美丽渔场摄像头二',
+      name: '美丽虾场摄像头二',
       lng: 112.6005131,
       lat: 22.9996413,
       img: sxtImg,
@@ -135,6 +136,11 @@ onMounted(() => {
     commonStore.map?.setOptions(data.map3d);
     commonStore.map!.basemap = 2021;
     createLayer();
+
+    // measure = new mars3d.thing.Measure({
+    //   hasEdit: false,
+    // });
+    // commonStore.map!.addThing(measure);
   });
 
   emitter.on('setRightDrawer', (val) => {
@@ -162,10 +168,9 @@ const createLayer = () => {
             text: it.name,
             font_size: 36,
             font_family: '楷体',
-            color: '#f00',
-            outline: true,
-            outlineColor: '#fff',
-            outlineWidth: 1,
+            color: '#FFF',
+            outline: false,
+
             scaleByDistance: true,
             scaleByDistance_far: 30000,
             scaleByDistance_near: 1,
@@ -192,7 +197,7 @@ const createLayer = () => {
   commonStore.map?.addLayer(pondLayer);
   axios.get('data/pond.json').then((res) => {
     res.data.map((it: { positions: any[]; name: string }) => {
-      const graphic = new mars3d.graphic.PolygonEntity({
+      const graphic = new mars3d.graphic.AreaMeasure({
         positions: it.positions,
         style: {
           color: '#3891ff',
@@ -203,6 +208,7 @@ const createLayer = () => {
           outlineOpacity: 0.5,
         },
       });
+
       pondLayer.addGraphic(graphic);
     });
   });
@@ -211,14 +217,14 @@ const createLayer = () => {
   commonStore.map?.addLayer(equipLayer);
   commonStore.map?.addLayer(quanLayer);
   state.she_b.map((it) => {
-    let pixe = [] as any;
-    if (it.type == 'qxz') {
-      pixe = [-4, -25];
-    } else if (it.type == 'sz') {
-      pixe = [0, -15];
-    } else if (it.type == 'sxt') {
-      pixe = [5, -25];
-    }
+    // let pixe = [] as any;
+    // if (it.type == 'qxz') {
+    //   pixe = [-4, -25];
+    // } else if (it.type == 'sz') {
+    //   pixe = [0, -15];
+    // } else if (it.type == 'sxt') {
+    //   pixe = [5, -25];
+    // }
     // 添加图标
     let graphic = new mars3d.graphic.BillboardEntity({
       position: new mars3d.LngLatPoint(it.lng, it.lat, 0), // 经纬度
@@ -325,6 +331,7 @@ onUnmounted(() => {
   commonStore.map?.removeLayer(pondLayer);
   commonStore.map?.removeLayer(equipLayer);
   commonStore.map?.removeLayer(quanLayer);
+  // commonStore.map?.removeThing(measure);
 });
 </script>
 

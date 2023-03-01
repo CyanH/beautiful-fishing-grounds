@@ -21,7 +21,7 @@ let chooseGraphic: mars3d.graphic.BillboardPrimitive;
 const state = reactive({
   equip: [
     {
-      name: '美丽渔场气象站',
+      name: '美丽虾场气象站',
       lng: 112.450172,
       lat: 22.918249,
       img: qxzImg,

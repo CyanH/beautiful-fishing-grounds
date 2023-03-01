@@ -38,7 +38,7 @@ const degree = ref(25);
 const chooseList = [
   {
     icon: 'cyyq',
-    name: '渔场分析',
+    name: '虾场分析',
     url: '/index',
     bg: 'cyyq_not',
     chooseBg: 'cyyq_c',
