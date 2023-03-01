@@ -207,8 +207,21 @@ const createLayer = () => {
           outlineColor: '#3891ff',
           outlineOpacity: 0.5,
         },
+        // label: {
+        //   // 自定义显示label的graphic类型
+        //   type: 'div',
+        //   updateText: function (text: any, graphic: { html: string }) {
+        //     text = text.replace('面积:', '');
+        //     // updateText是必须，用于动态更新 text
+        //     graphic.html = `<div class="marsGreenGradientPnl" >${text}</div>`;
+        //   },
+        //   // 下面是graphic对应类型本身的参数
+        //   html: `<div class="marsGreenGradientPnl" ></div>`,
+        //   horizontalOrigin: mars3d.Cesium.HorizontalOrigin.CENTER,
+        //   verticalOrigin: mars3d.Cesium.VerticalOrigin.CENTER,
+        // },
       });
-
+      // measure.graphicLayer.addGraphic(graphic);
       pondLayer.addGraphic(graphic);
     });
   });
