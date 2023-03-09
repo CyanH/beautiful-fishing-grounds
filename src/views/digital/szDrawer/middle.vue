@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import * as echarts from 'echarts';
-import { loadChart } from '../chart/szChart';
+import { loadChart, clearTimer } from '../chart/szChart';
 import { parseTime } from '@/utils/parseTime';
 import { waterHistory } from '@/api/breed';
 import { useBreedStore } from '@/store';
@@ -38,6 +38,7 @@ watch(
 );
 
 const getData = () => {
+  clearTimer();
   myChart.clear();
   let startDate, endDate;
   if (chooseIndex.value === 0) {
@@ -77,6 +78,7 @@ const handleClick = (index: number) => {
 };
 
 onUnmounted(() => {
+  clearTimer();
   window.removeEventListener('resize', () => {
     myChart.resize();
   });

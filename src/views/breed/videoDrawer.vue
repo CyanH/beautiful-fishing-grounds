@@ -21,7 +21,7 @@
         <div class="content">
           <div v-for="(item, index) in state.list" class="bar">
             <el-image
-              style="width: 130px; height: 130px"
+              style="width: 125px; height: 125px"
               :src="setImageUrl(item.address)"
               :preview-src-list="state.srcList"
               :initial-index="clickIndex"
@@ -65,7 +65,7 @@ const getData = () => {
       hasPlayer.value = true;
       nextTick(() => {
         //@ts-ignore
-        videoEle.value.getVideo(res.token, res.videoData.url, res.deviceSerial);
+        videoEle.value.getVideo(res.token, res.videoData.url, res.deviceSerial,res.channelNo);
       });
     }
 
@@ -143,10 +143,10 @@ const setImageUrl = (url: string) => {
 .content {
   height: calc(100% - 60px);
   margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -154,7 +154,7 @@ const setImageUrl = (url: string) => {
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    background: #1327a5;
+    background: #2a3aa1;
   }
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
@@ -163,7 +163,8 @@ const setImageUrl = (url: string) => {
   }
 
   .bar {
-    width: 32%;
+ 
+
     text-align: center;
     color: #fff;
     margin-bottom: 10px;

@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <v-title title="出入塘统计" />
+      <v-title title="出塘统计" />
       <div class="crt">
         <div class="chart" ref="shangan"></div>
       </div>
@@ -106,8 +106,8 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
-import { nextTick, onMounted, reactive, ref } from 'vue';
-import { loadChart } from './chart/crtChart';
+import { nextTick, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { loadChart, clearTimer } from './chart/crtChart';
 import { Vue3SeamlessScroll } from 'vue3-seamless-scroll';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
@@ -286,18 +286,10 @@ const getData = () => {
 };
 
 const getContent = () => {
-  let data1 = [7, 9, 9, 6, 7, 5, 8];
-  let data2 = [23, 28, 32, 24, 28, 23, 36];
+  let data2 = [3000, 3400, 3750, 3900, 4000, 4250];
   let date = ['2017年', '2018年', '2019年', '2020年', '2021年', '2022年'];
   let new_datas = [];
   let new_data = [
-    {
-      name: '入塘',
-      color: '#11FCFF',
-      o1_color: 'rgba(17, 252, 255,1)',
-      o2_color: 'rgba(17, 252, 255,0)',
-      data: data1,
-    },
     {
       name: '出塘',
       color: '#37f197',
@@ -352,6 +344,10 @@ const getContent = () => {
 const getImgUrl = (url: string) => {
   return new URL(`../../assets/image/breed/${url}.png`, import.meta.url).href;
 };
+
+onUnmounted(() => {
+  clearTimer();
+});
 </script>
 
 <style lang="scss" scoped>

@@ -37,8 +37,8 @@ export function loadChart(myChart: echarts.ECharts, dataValue: any) {
     {
       name: '设备',
       type: 'pie',
-      radius: ['50%', '60%'],
-      center: ['28%', '50%'],
+      radius: ['46%', '56%'],
+      center: ['26%', '50%'],
       itemStyle: {
         normal: {
           label: {
@@ -50,8 +50,8 @@ export function loadChart(myChart: echarts.ECharts, dataValue: any) {
     },
     {
       type: 'pie',
-      radius: ['0', '42%'],
-      center: ['28%', '50%'],
+      radius: ['0', '38%'],
+      center: ['26%', '50%'],
       z: 4,
       hoverAnimation: false,
       data: [
@@ -99,36 +99,10 @@ export function loadChart(myChart: echarts.ECharts, dataValue: any) {
         },
       ],
     },
-    {
-      name: '外边框',
-      type: 'pie',
-      z: 5,
-      clockWise: false, //顺时加载
-      hoverAnimation: false, //鼠标移入变大
-      center: ['28%', '50%'],
-      radius: ['50%', '50%'],
-      label: {
-        normal: {
-          show: false,
-        },
-      },
-      data: [
-        {
-          value: 9,
-          name: '',
-          itemStyle: {
-            normal: {
-              borderWidth: 1,
-              borderColor: 'rgba(193,216,255,0.08)',
-            },
-          },
-        },
-      ],
-    },
 
     {
       type: 'liquidFill',
-      radius: '48%',
+      radius: '46%',
       center: ['76%', '50%'],
       data: [dataValue / 100, dataValue / 100, dataValue / 100], // data个数代表波浪数
       backgroundStyle: {
@@ -165,7 +139,7 @@ export function loadChart(myChart: echarts.ECharts, dataValue: any) {
     {
       type: 'pie',
       center: ['76%', '50%'],
-      radius: ['55%', '60%'],
+      radius: ['52%', '56%'],
       hoverAnimation: false,
       data: [
         {

@@ -1,6 +1,8 @@
 import * as echarts from 'echarts';
+let timer: any;
 
 export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateDate: string[]) {
+  let i = 0;
   myChart.setOption({
     tooltip: {
       trigger: 'axis',
@@ -55,11 +57,23 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
     ],
     series: [
       {
+        name: '水温',
+        type: 'line',
+        areaStyle: {},
+        data: chartData[4],
+      },
+      {
         name: 'pH值',
         type: 'line',
         smooth: true,
         areaStyle: {},
         data: chartData[0],
+      },
+      {
+        name: '溶解氧',
+        type: 'line',
+        areaStyle: {},
+        data: chartData[2],
       },
       {
         name: '电导率',
@@ -69,22 +83,10 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
         data: chartData[1],
       },
       {
-        name: '溶解氧',
-        type: 'line',
-        areaStyle: {},
-        data: chartData[2],
-      },
-      {
         name: '浊度',
         type: 'line',
         areaStyle: {},
         data: chartData[3],
-      },
-      {
-        name: '水温',
-        type: 'line',
-        areaStyle: {},
-        data: chartData[4],
       },
     ],
   });
@@ -93,22 +95,46 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
     //  legend点击事件
     let option: any = myChart.getOption();
     switch (obj.name) {
+      case '水温':
+        option.yAxis[0].name = '℃';
+        i = 0;
+        break;
       case 'pH值':
         option.yAxis[0].name = '';
-        break;
-      case '电导率':
-        option.yAxis[0].name = 'ms/cm';
+        i = 1;
         break;
       case '溶解氧':
         option.yAxis[0].name = 'mg/L';
+        i = 2;
+        break;
+      case '电导率':
+        option.yAxis[0].name = 'ms/cm';
+        i = 3;
         break;
       case '浊度':
         option.yAxis[0].name = 'NTU';
-        break;
-      case '水温':
-        option.yAxis[0].name = '℃';
+        i = 4;
         break;
     }
     myChart.setOption(option);
   });
+
+  timer = setInterval(() => {
+    i++;
+    if (i === 5) {
+      i = 0;
+    }
+    let obj = {
+      0: '水温',
+      1: 'pH值',
+      2: '溶解氧',
+      3: '电导率',
+      4: '浊度',
+    };
+    myChart.dispatchAction({ type: 'legendToggleSelect', name: obj[i as keyof typeof obj] });
+  }, 5000);
+}
+
+export function clearTimer() {
+  clearInterval(timer);
 }

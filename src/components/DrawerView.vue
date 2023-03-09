@@ -1,5 +1,5 @@
 <template>
-  <div class="side animate__animated" :class="[direction, animate]" :style="{ width }" v-show="!hidden">
+  <div class="side animate__animated" :class="[direction, animate]" :style="{ width, top }" v-show="!hidden">
     <slot></slot>
   </div>
   <div class="arrow animate__animated" :class="[animate, direction, hidden]" @click="handleClick" v-if="hasArrow">
@@ -20,7 +20,11 @@ const props = defineProps({
   },
   width: {
     type: String,
-    default: '25%',
+    default: '23%',
+  },
+  top: {
+    type: String,
+    default: '12px',
   },
   hasArrow: {
     type: Boolean,
@@ -45,7 +49,6 @@ const handleClick = () => {
 .side {
   position: absolute;
   bottom: 12px;
-  top: 12px;
   z-index: 9;
 }
 
@@ -67,11 +70,11 @@ const handleClick = () => {
 }
 
 .arrow.right {
-  right: 26%;
+  right: 21%;
 }
 
 .arrow.left {
-  left: 26%;
+  left: 21%;
   img {
     transform: translateY(-50%) rotate(180deg);
   }

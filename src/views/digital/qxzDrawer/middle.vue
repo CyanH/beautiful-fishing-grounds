@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import * as echarts from 'echarts';
-import { loadChart } from '../chart/qxzChart';
+import { loadChart, clearTimer } from '../chart/qxzChart';
 import { parseTime } from '@/utils/parseTime';
 import { weatherHistory } from '@/api/breed';
 import { useBreedStore } from '@/store';
@@ -72,10 +72,12 @@ const getData = () => {
 
 const handleClick = (index: number) => {
   chooseIndex.value = index;
+  clearTimer();
   getData();
 };
 
 onUnmounted(() => {
+  clearTimer();
   window.removeEventListener('resize', () => {
     myChart.resize();
   });

@@ -69,7 +69,7 @@
               <div class="b_5">养殖面积(亩)</div>
               <div class="xian"></div>
               <div>
-                <span class="num">9960</span>
+                <span class="num">10000</span>
               </div>
             </div>
             <div class="title">一产</div>
@@ -84,7 +84,7 @@
             <div class="box">
               <img src="@/assets/image/industrialPark/pie.png" class="pie" />
               <div class="box-content">
-                <div class="num">9960</div>
+                <div class="num">10000</div>
                 <div>总面积</div>
               </div>
             </div>
@@ -93,18 +93,18 @@
                 <span class="icon" style="background-color: #30d8fb" />
 
                 <div class="name">白土镇</div>
-                <div class="value"><span class="num">7185</span><span style="margin-left: 3px">亩</span></div>
+                <div class="value"><span class="num">8000</span><span style="margin-left: 3px">亩</span></div>
               </div>
               <div class="flex" style="margin-bottom: 15px">
                 <span class="icon" style="background-color: #1ae496" />
 
                 <div class="name">莲塘镇</div>
-                <div class="value"><span class="num">1425</span><span style="margin-left: 3px">亩</span></div>
+                <div class="value"><span class="num">1000</span><span style="margin-left: 3px">亩</span></div>
               </div>
               <div class="flex">
                 <span class="icon" style="background-color: #ff5e6a" />
                 <div class="name">蛟塘镇</div>
-                <div class="value"><span class="num">1350</span><span style="margin-left: 3px">亩</span></div>
+                <div class="value"><span class="num">1000</span><span style="margin-left: 3px">亩</span></div>
               </div>
             </div>
           </div>
@@ -220,7 +220,7 @@ const getImgUrl = (url: string) => {
     letter-spacing: 1px;
     line-height: 18px;
     text-indent: 2em;
-    height: 80px;
+    height: 91px;
     box-sizing: border-box;
     overflow-y: auto;
     padding: 0 30px;
@@ -383,7 +383,7 @@ const getImgUrl = (url: string) => {
 }
 .bottom_all {
   width: 100%;
-  height: calc(100% - 439px);
+  height: calc(100% - 450px);
 }
 
 .middle {

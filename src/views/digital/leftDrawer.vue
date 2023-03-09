@@ -1,8 +1,8 @@
 <template>
-  <v-drawer direction="left" hasArrow>
+  <v-drawer direction="left" width="20%" top="400px">
     <v-card>
       <div class="top">
-        <v-title title="水质监测" />
+        <v-title title="水质环境" />
         <div class="grid">
           <div class="card flex" v-for="item in state.list">
             <img :src="setImageUrl(item.icon)" class="icon" />
@@ -49,7 +49,7 @@ const state = reactive({
       unit: '℃',
     },
     {
-      name: '值',
+      name: 'pH值',
       icon: 'ph',
       value: 7.19,
       unit: '',
@@ -121,12 +121,12 @@ const setImageUrl = (name: string) => {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 80px);
-    grid-gap: 12px 25px;
+    grid-gap: 12px 15px;
     padding: 15px 0;
   }
 
   .card {
-    padding-left: 25px;
+    padding-left: 15px;
     height: 100%;
     background: url('@/assets/image/digital/bg.png') center no-repeat;
     background-size: 100% 100%;

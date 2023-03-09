@@ -59,47 +59,11 @@ export function getVideoData(params: { plantWlwId: string }) {
   });
 }
 
-//获取基地所有设备
-export function plantBaseAllWlw(params?: { plantBaseId: string }) {
-  return request({
-    url: 'plant/plantBaseAllWlw',
-    method: 'get',
-    params,
-  });
-}
-
-//基地详情
-export function getPlantBase(params?: any) {
-  return request({
-    url: 'plant/plantBase',
-    method: 'get',
-    params,
-  });
-}
-
 //一塘一码
 //基本信息
 export function pondMassifInfo(params: { id: string }) {
   return request({
     url: 'plant/pondMassifInfo',
-    method: 'get',
-    params,
-  });
-}
-
-//养殖环境
-export function pondWeatherData(params: { plantMassifId: string }) {
-  return request({
-    url: 'plant/pondWeatherData',
-    method: 'get',
-    params,
-  });
-}
-
-//水质环境
-export function pondWaterData(params: { plantMassifId: string }) {
-  return request({
-    url: 'plant/pondWaterData',
     method: 'get',
     params,
   });
@@ -118,15 +82,6 @@ export function pondGetYzda(params: { plantMassifId: string }) {
 export function pondConfigRecords(params: { plantMassifId: string; size: number }) {
   return request({
     url: 'plant/pondConfigRecords',
-    method: 'get',
-    params,
-  });
-}
-
-//近期疫病防护
-export function pondEpidemicKnowledge(params: { plantMassifId: string }) {
-  return request({
-    url: 'plant/pondEpidemicKnowledge',
     method: 'get',
     params,
   });

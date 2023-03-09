@@ -12,9 +12,16 @@
         <span v-if="item.value">({{ item.value }})</span>
       </div>
     </div>
+
+    <el-checkbox v-model="checked" label="塘口名称" size="large" @change="handleChange" />
     <div style="text-align: center">
       <el-icon style="cursor: pointer" @click="legendShow = false"><ArrowUp /></el-icon>
     </div>
+  </div>
+
+  <div class="mini" v-show="!legendShow" @click="legendShow = true">
+    <img src="@/assets/icons/tl.svg" />
+    <div>图例</div>
   </div>
 </template>
 
@@ -37,8 +44,8 @@ const commonStore = useCommonStore();
 const breedStore = useBreedStore();
 
 let chooseGraphic: mars3d.graphic.BillboardPrimitive;
-// let measure: mars3d.thing.Measure;
 
+const checked = ref(true);
 const legendShow = ref(true);
 const chooseIndex = ref(0);
 const state = reactive({
@@ -136,11 +143,6 @@ onMounted(() => {
     commonStore.map?.setOptions(data.map3d);
     commonStore.map!.basemap = 2021;
     createLayer();
-
-    // measure = new mars3d.thing.Measure({
-    //   hasEdit: false,
-    // });
-    // commonStore.map!.addThing(measure);
   });
 
   emitter.on('setRightDrawer', (val) => {
@@ -180,24 +182,12 @@ const createLayer = () => {
       baseLayer.addGraphic(graphic);
     });
   });
-  const cfGraphic = new mars3d.graphic.BillboardEntity({
-    position: new mars3d.LngLatPoint(112.601342, 23.001034, 0), // 经纬度
-    style: {
-      image: cfImg,
-      scale: 0.4,
-      clampToGround: true,
-      scaleByDistance: true,
-      scaleByDistance_far: 1000000,
-      scaleByDistance_near: 1,
-    },
-  });
-  baseLayer.addGraphic(cfGraphic);
 
   //池塘
   commonStore.map?.addLayer(pondLayer);
   axios.get('data/pond.json').then((res) => {
     res.data.map((it: { positions: any[]; name: string }) => {
-      const graphic = new mars3d.graphic.AreaMeasure({
+      const graphic = new mars3d.graphic.PolygonEntity({
         positions: it.positions,
         style: {
           color: '#3891ff',
@@ -207,21 +197,35 @@ const createLayer = () => {
           outlineColor: '#3891ff',
           outlineOpacity: 0.5,
         },
-        // label: {
-        //   // 自定义显示label的graphic类型
-        //   type: 'div',
-        //   updateText: function (text: any, graphic: { html: string }) {
-        //     text = text.replace('面积:', '');
-        //     // updateText是必须，用于动态更新 text
-        //     graphic.html = `<div class="marsGreenGradientPnl" >${text}</div>`;
-        //   },
-        //   // 下面是graphic对应类型本身的参数
-        //   html: `<div class="marsGreenGradientPnl" ></div>`,
-        //   horizontalOrigin: mars3d.Cesium.HorizontalOrigin.CENTER,
-        //   verticalOrigin: mars3d.Cesium.VerticalOrigin.CENTER,
-        // },
       });
-      // measure.graphicLayer.addGraphic(graphic);
+
+      pondLayer.addGraphic(graphic);
+    });
+  });
+  axios.get('data/namePond.json').then((res) => {
+    res.data.map((it: { positions: any[]; name: string }, index: number) => {
+      const graphic = new mars3d.graphic.PolygonEntity({
+        positions: it.positions,
+        style: {
+          color: '#3891ff',
+          opacity: 0.2,
+          outline: true,
+          outlineWidth: 2,
+          outlineColor: '#3891ff',
+          outlineOpacity: 0.5,
+          label: {
+            text: '虾塘' + index + 1,
+            font_size: 24,
+            font_family: '楷体',
+            color: '#FFF',
+            outline: false,
+            scaleByDistance: true,
+            scaleByDistance_far: 30000,
+            scaleByDistance_near: 1,
+          },
+        },
+      });
+
       pondLayer.addGraphic(graphic);
     });
   });
@@ -276,6 +280,19 @@ const createLayer = () => {
     quanLayer.addGraphic(circle);
     equipLayer.addGraphic(graphic);
   });
+
+  const cfGraphic = new mars3d.graphic.BillboardEntity({
+    position: new mars3d.LngLatPoint(112.601342, 23.001034, 0), // 经纬度
+    style: {
+      image: cfImg,
+      scale: 0.4,
+      clampToGround: true,
+      scaleByDistance: true,
+      scaleByDistance_far: 1000000,
+      scaleByDistance_near: 1,
+    },
+  });
+  baseLayer.addGraphic(cfGraphic);
 
   //塘口点击
   pondLayer.on(mars3d.EventType.click, (event) => {
@@ -335,6 +352,12 @@ const handleClick = (index: number) => {
   });
 };
 
+const handleChange = (val: boolean) => {
+  pondLayer.getGraphics().map((graphic) => {
+    graphic.label.show = !graphic.label.show;
+  });
+};
+
 const getImgUrl = (url: string) => {
   return new URL(`../../assets/image/breed/${url}`, import.meta.url).href;
 };
@@ -344,7 +367,6 @@ onUnmounted(() => {
   commonStore.map?.removeLayer(pondLayer);
   commonStore.map?.removeLayer(equipLayer);
   commonStore.map?.removeLayer(quanLayer);
-  // commonStore.map?.removeThing(measure);
 });
 </script>
 
@@ -370,5 +392,39 @@ onUnmounted(() => {
     width: 20px;
     margin-right: 12px;
   }
+
+  :deep(.el-checkbox__input) {
+    padding-left: 8px;
+    .el-checkbox__inner {
+      width: 18px;
+      height: 18px;
+
+      &::after {
+        border-width: 2px;
+        width: 5px;
+        height: 10px;
+        left: 5px;
+        top: 1px;
+      }
+    }
+  }
+
+  :deep(.el-checkbox__label) {
+    color: #fff;
+    padding-left: 21px;
+  }
+}
+
+.mini {
+  position: absolute;
+  right: 27%;
+  bottom: 10px;
+  background-color: rgba(17, 16, 45, 0.6);
+  border-radius: 2px;
+  text-align: center;
+  font-size: 12px;
+  padding: 0 6px 6px;
+  cursor: pointer;
+  z-index: 9;
 }
 </style>

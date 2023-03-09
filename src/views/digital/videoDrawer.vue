@@ -71,7 +71,7 @@ const getData = () => {
       hasPlayer.value = true;
       nextTick(() => {
         //@ts-ignore
-        videoEle.value.getVideo(res.token, res.videoData.url, res.deviceSerial);
+        videoEle.value.getVideo(res.token, res.videoData.url, res.deviceSerial,res.channelNo);
       });
     }
 
@@ -153,6 +153,7 @@ const setImageUrl = (url: string) => {
   flex-wrap: wrap;
   justify-content: space-between;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 4px;

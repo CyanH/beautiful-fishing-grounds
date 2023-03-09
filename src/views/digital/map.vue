@@ -1,7 +1,7 @@
 <template>
   <!-- 池塘 -->
   <div class="canvas-box" id="canvasBox">
-    <canvas id="myCanvas" ref="myCanvas" @mousedown="mousedown" @mouseup="mouseup" @mousemove="mousemove"> </canvas>
+    <canvas id="myCanvas" ref="myCanvas"> </canvas>
   </div>
 
   <div class="pond" v-for="item in state.pondList" :style="{ left: item.left, bottom: item.bottom }">

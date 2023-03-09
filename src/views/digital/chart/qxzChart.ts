@@ -1,6 +1,8 @@
 import * as echarts from 'echarts';
+let timer: any;
 
 export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateDate: string[]) {
+  let i = 0;
   myChart.setOption({
     tooltip: {
       trigger: 'axis',
@@ -98,20 +100,44 @@ export function loadChart(myChart: echarts.ECharts, chartData: number[][], dateD
     switch (obj.name) {
       case '温度':
         option.yAxis[0].name = '℃';
+        i = 0;
         break;
       case '湿度':
         option.yAxis[0].name = '%';
+        i = 1;
         break;
       case '雨量':
         option.yAxis[0].name = 'mm';
+        i = 2;
         break;
       case '风速':
         option.yAxis[0].name = 'm/s';
+        i = 3;
         break;
       case '光照':
         option.yAxis[0].name = 'lux';
+        i = 4;
         break;
     }
     myChart.setOption(option);
   });
+
+  timer = setInterval(() => {
+    i++;
+    if (i === 5) {
+      i = 0;
+    }
+    let obj = {
+      0: '温度',
+      1: '湿度',
+      2: '雨量',
+      3: '风速',
+      4: '光照',
+    };
+    myChart.dispatchAction({ type: 'legendToggleSelect', name: obj[i as keyof typeof obj] });
+  }, 5000);
+}
+
+export function clearTimer() {
+  clearInterval(timer);
 }

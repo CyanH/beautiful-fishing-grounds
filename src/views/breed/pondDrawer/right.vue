@@ -24,7 +24,7 @@
           <div class="title">塘口图册</div>
         </div>
         <div class="swiper-box">
-          <div class="swiper-container img-swiper" v-if="state.picList.length > 0" style="height: 120px">
+          <div class="swiper-container img-swiper" v-if="state.picList.length > 0" style="height: 100%">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item, index) in state.picList">
                 <div class="swiper-content flex">
@@ -36,6 +36,7 @@
                       :preview-src-list="state.previewList"
                       @click="clickImage(index, indexs)"
                     />
+                    <div style="margin-top: 5px" class="date">{{ cItem.createTime }}</div>
                   </div>
                 </div>
               </div>
@@ -238,6 +239,11 @@ const returnImgUrl = (img: string) => {
         :deep(.el-image__placeholder) {
           background: url('@/assets/image/sl_new.gif') center no-repeat;
           background-size: 100%;
+        }
+
+        .date {
+          color: #fff;
+          font-size: 12px;
         }
       }
     }

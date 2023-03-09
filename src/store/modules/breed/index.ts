@@ -12,7 +12,6 @@ export const useBreedStore = defineStore('plant', {
       createBy: 'yszh',
       createTime: '2022-11-22 09:38:08',
       id: '34ec254d02774d17aaef0a849a7435e8',
-      info: '鲈鱼体扁侧而长，背厚，肚小，口大，下颌长于上颌，鳃盖骨后缘有细锯齿，体背为青灰色，腹为白色，背和背鳍上有小黑斑点，鳞小，背鳍两个，稍分离，前背鳍为硬棘，后背鳍为较条，尾鳍叉形，鲈鱼肉坚实呈蒜瓣状，鱼刺较少，味道鲜美。',
       isDelete: 0,
       ord: 4,
       plantBaseCode: 'ZZJD-202211-0008',

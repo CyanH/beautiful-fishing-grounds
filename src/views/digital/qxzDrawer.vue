@@ -1,5 +1,5 @@
 <template>
-  <v-drawer direction="right" hasArrow>
+  <v-drawer direction="right">
     <v-card>
       <v-title :title="plantStore.equipName" hasClose>
         <template #right>

@@ -1,7 +1,7 @@
 <template>
-  <v-drawer direction="right" hasArrow>
+  <v-drawer direction="right" width="20%">
     <v-card>
-      <v-title title="气象监测" />
+      <v-title title="养殖环境" />
       <div class="qxjc">
         <div class="yjdj">预警等级</div>
         <div class="xian_all">
@@ -29,7 +29,7 @@
         <img class="img_yuan" src="@/assets/image/qj/yuan.png" alt="" />
         <img class="img_di" src="@/assets/image/qj/di.png" alt="" />
         <div class="img_title">
-          <div class="num value">80.56%</div>
+          <div class="num value">93.56%</div>
           <div>养殖指数</div>
         </div>
         <img class="zhong" src="@/assets/image/qj/zhong.png" alt="" />
